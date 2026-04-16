@@ -50,32 +50,38 @@ router.get('/staff-latest/applications/new/confirmation', function (req, res) {
 })
 
 router.post('/staff-latest/applications/view/app/messages', function (req, res) {
-  const newComment = req.body.newComment
+  const newMessage = req.body.newMessage
+  const visibleTo = req.body.visibleTo || 'Staff only'
+  const appId = req.query.url_id
 
-  if (!req.session.data.staffComments) {
-    req.session.data.staffComments = []
+  if (!req.session.data.staffMessages) {
+    req.session.data.staffMessages = {}
   }
 
-  if (newComment && newComment.trim() !== '') {
+  if (!req.session.data.staffMessages[appId]) {
+    req.session.data.staffMessages[appId] = []
+  }
+
+  if (newMessage && newMessage.trim() !== '') {
     const now = new Date()
 
     const formattedDate = now.toLocaleString('en-GB', {
       day: 'numeric',
       month: 'long',
+      year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
       hour12: false
     }).replace(',', ' at')
 
-    req.session.data.staffComments.push({
+    req.session.data.staffMessages[appId].push({
       from: 'J. Smith',
-      text: newComment.trim(),
+      text: newMessage.trim(),
+      visible_to: visibleTo,
       date: formattedDate
     })
   }
 
-  res.redirect('/staff-latest/applications/view/app/messages?url_id=' + req.query.url_id)
+  res.redirect('/staff-latest/applications/view/app/messages?url_id=' + appId)
 })
-
-
 }

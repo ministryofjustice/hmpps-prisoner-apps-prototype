@@ -173,10 +173,12 @@ $(document).ready(function () {
             html += '</td>';
             html += '<td class="govuk-table__cell">';
             var messageCount = 0;
-            for (var i = 1; i <= 5; i++) {
-                if (item['message_' + i]) messageCount++;
+            if (item.messages && item.messages.length) {
+                messageCount = item.messages.length;
             }
-            if (messageCount > 0) {
+            if (window.staffMessages && window.staffMessages[item.app_id]) {
+                messageCount += window.staffMessages[item.app_id].length;
+            } if (messageCount > 0) {
                 html += '<span class="moj-notification-badge">';
                 html += '<span aria-hidden="true">' + messageCount + '</span>';
                 html += '<span class="govuk-visually-hidden">' + messageCount + ' messages</span>';
@@ -823,21 +825,6 @@ $(document).ready(function () {
             displayResults(filteredData);
         }
     }
-
- addFilter('formatDateTime', (isoString) => {
-    if (!isoString) return '—';
-    const date = new Date(isoString);
-    const months = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    return `${day} ${month} ${year} ${hours}.${minutes}`;
-});   
 
 });
 

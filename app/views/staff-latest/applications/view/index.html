@@ -70,20 +70,23 @@
 
 {% block pageScripts %}
 <script>
-  // Set session data and homeurl globally before other scripts load
   {% if sessionApplications | length %}
   window.sessionApplications = {{ sessionApplications | dump | safe }};
   {% else %}
   window.sessionApplications = [];
   {% endif %}
 
-  // Add homeurl to JavaScript
   window.homeurl = "{{ homeurl }}";
+
+  {% if data.staffMessages %}
+  window.staffMessages = {{ data.staffMessages | dump | safe }};
+  {% else %}
+  window.staffMessages = {};
+  {% endif %}
 
   console.log('Session data loaded:', window.sessionApplications.length, 'applications');
   console.log('Home URL set:', window.homeurl);
 </script>
-
 <!-- Load the filters JavaScript -->
 <script src="/public/javascripts/filters.js"></script>
 

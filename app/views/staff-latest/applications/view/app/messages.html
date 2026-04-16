@@ -103,30 +103,28 @@
             </thead>
             <tbody class="govuk-table__body">
               {% for app in data['appsDB'] %}
-              {% if app.app_id == appID %}
-              {% for i in range(1, 6) %}
-              {% if app['message_' + i] %}
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">{{ app['message_' + i] }}</td>
-                <td class="govuk-table__cell">{{ app['message_' + i + '_sender'] if app['message_' + i + '_sender'] else
-                  '—' }}</td>
-                <td class="govuk-table__cell">Prisoner and Staff</td>
-                <td class="govuk-table__cell">{{ app['message_' + i + '_datetime'] if app['message_' + i + '_datetime']
-                  else '—' }}</td>
-              </tr>
-              {% endif %}
+                {% if app.app_id == appID %}
+                  {% if app.messages | length %}
+                    {% for msg in app.messages %}
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell">{{ msg.text }}</td>
+                      <td class="govuk-table__cell">{{ msg.sender if msg.sender else '—' }}</td>
+                      <td class="govuk-table__cell">{{ msg.visible_to if msg.visible_to else '—' }}</td>
+                      <td class="govuk-table__cell">{{ msg.datetime | formatDateTime }}</td>
+                    </tr>
+                    {% endfor %}
+                  {% endif %}
+                {% endif %}
               {% endfor %}
-              {% endif %}
-              {% endfor %}
-              {% if data.staffComments | length %}
-              {% for comment in data.staffComments %}
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">{{ comment.text }}</td>
-                <td class="govuk-table__cell">{{ comment.from }}</td>
-                <td class="govuk-table__cell">{{ comment.visible_to }}</td>
-                <td class="govuk-table__cell">{{ comment.date }}</td>
-              </tr>
-              {% endfor %}
+              {% if data.staffMessages[appID] | length %}
+                {% for msg in data.staffMessages[appID] %}
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell">{{ msg.text }}</td>
+                  <td class="govuk-table__cell">{{ msg.from }}</td>
+                  <td class="govuk-table__cell">{{ msg.visible_to }}</td>
+                  <td class="govuk-table__cell">{{ msg.date }}</td>
+                </tr>
+                {% endfor %}
               {% endif %}
             </tbody>
           </table>
@@ -138,22 +136,45 @@
 
           {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
           {% else %}
-          <form method="post" action="/staff-latest/applications/view/app/comments?url_id={{ appID }}"
+          <form method="post" action="/staff-latest/applications/view/app/messages?url_id={{ appID }}"
             class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
             <div class="govuk-form-group">
-              <label class="govuk-label govuk-label--s" for="newComment">
-                Add a comment
+              <label class="govuk-label govuk-label--s" for="newMessage">
+                Add a message
               </label>
-              <textarea class="govuk-textarea" id="newComment" name="newComment" rows="5"></textarea>
+              <textarea class="govuk-textarea" id="newMessage" name="newMessage" rows="5"></textarea>
+            </div>
+
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                  Who can see this message?
+                </legend>
+                <div class="govuk-radios govuk-radios--small">
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="visible-to-staff" name="visibleTo" type="radio" value="Staff only" checked>
+                    <label class="govuk-label govuk-radios__label" for="visible-to-staff">
+                      Staff only
+                    </label>
+                  </div>
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="visible-to-both" name="visibleTo" type="radio" value="Prisoner and Staff">
+                    <label class="govuk-label govuk-radios__label" for="visible-to-both">
+                      Prisoner and Staff
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
             </div>
 
             <div class="moj-button-action">
               <button type="submit" class="govuk-button" data-module="govuk-button">
-                Save comment
+                Send message
               </button>
             </div>
 
           </form>
+          
           {% endif %}
 
         </div>
