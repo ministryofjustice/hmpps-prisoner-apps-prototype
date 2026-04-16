@@ -1,0 +1,34 @@
+.events-summary {
+    border: 5px solid govuk-colour("blue");
+
+    @media(min-width: 40em) {
+        > *:first-child {
+            background-image: url('/public/images/icons/icon-calendar.svg');
+            background-repeat: no-repeat;
+        }
+
+        h2,
+        #no-events-text,
+        #view-timetable-link {
+            padding-left: govuk-spacing(8);
+        }
+    }
+    
+    .event-details {
+        display: flex;
+        @media(max-width: 40em) {
+            display: block;
+        }
+        @media(min-width: 40em) {
+        padding-left: govuk-spacing(8);
+        }
+        flex-direction: column;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        .time {
+                min-width: 28%;
+                padding-right: 1em;
+        }
+    }
+}

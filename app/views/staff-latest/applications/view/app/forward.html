@@ -1,0 +1,137 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Forward this application" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+{% set appID = data['url_id'] %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+    <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <form class="form" action="{{homeurl}}applications/view/app/application?url_id={{appID}}">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="changedDept-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <span class="govuk-caption-xl">
+              {% set appID = data['url_id'] %}
+              {% for app in data['allMVP2Apps'] %}
+              {% if app.app_id == appID  %}
+              {{ app.app_type }}
+              {% endif  %}
+              {% endfor  %}
+                  </span>
+            <h1 class="govuk-fieldset__heading">
+              {{pageName}}
+            </h1>
+          </legend>
+          <div class="govuk-form-group" style="display: none;">
+            <label class="govuk-label" for="width-10">
+              Application ID
+            </label>
+            <input class="govuk-input govuk-input--width-10" id="url_id" name="url_id" type="text" value="{{ data['url_id'] }}">
+          </div>
+
+          <div id="changedDept-hint" class="govuk-hint">
+            Send to:
+          </div>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept" name="appDept" type="radio" value="Activities">
+              <label class="govuk-label govuk-radios__label" for="appDept">
+                Activities
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept-2" name="appDept" type="radio" value="Business Hub">
+              <label class="govuk-label govuk-radios__label" for="appDept-2">
+                Business Hub
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept-3" name="appDept" type="radio" value="Chaplaincy">
+              <label class="govuk-label govuk-radios__label" for="appDept-3">
+                Chaplaincy
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept-4" name="appDept" type="radio" value="Education">
+              <label class="govuk-label govuk-radios__label" for="appDept-4">
+                Education
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept-5" name="appDept" type="radio" value="Healthcare">
+              <label class="govuk-label govuk-radios__label" for="appDept-5">
+                Healthcare
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept-6" name="appDept" type="radio" value="OMU">
+              <label class="govuk-label govuk-radios__label" for="appDept-6">
+                OMU
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept-7" name="appDept" type="radio" value="Safer Custody">
+              <label class="govuk-label govuk-radios__label" for="appDept-7">
+                Safer custody
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="appDept-8" name="appDept" type="radio" value="Security">
+              <label class="govuk-label govuk-radios__label" for="appDept-8">
+                Security
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="more-detail">
+          Reason for forwarding (optional)
+        </label>
+        <div id="more-detail-hint" class="govuk-hint">
+          This is added to the comments section for other staff to see
+        </div>
+        <textarea class="govuk-textarea" id="forwardReasons" name="forwardReasons" rows="5"></textarea>
+      </div>
+
+      <div class="moj-button-action">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#my-autocomplete')
+  })
+</script>
+
+{% endblock %}

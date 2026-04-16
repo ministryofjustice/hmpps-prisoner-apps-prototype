@@ -1,0 +1,219 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="New PIN phone contact" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+  			<div class="govuk-breadcrumbs">
+  				<ol class="govuk-breadcrumbs__list">
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/view/">View applications</a>
+  					</li>
+  				</ol>
+  			</div>
+  		</nav>
+
+      <span class="govuk-caption-xl">PIN phones</span>
+      <h1 class="govuk-heading-xl">
+        Supply list of PIN phone contacts
+      </h1>
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page" href="./index.html">Application</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./comments.html">
+              Comments
+            </a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./action.html">Action and reply</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./history.html">History</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-m">Application details</h2>
+
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Status
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if data['pin_06_actionRespond'] == "Approved" or data['pin_06_actionRespond'] == "Declined"  %}
+                  Closed
+                {% else %}
+                  Pending
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Department
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if data['pin_06_appDept'] %}
+                  {{ data['pin_06_appDept'] }}
+                {% else %}
+                  Business Hub
+                {% endif %}
+              </dd>
+              {% if data['pin_06_actionRespond'] !== "Approved" and data['pin_06_actionRespond'] !== "Declined"  %}
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="forward.html">Forward<span class="govuk-visually-hidden"> department</span></a>
+              </dd>
+              {% endif %}              
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Application group
+              </dt>
+              <dd class="govuk-summary-list__value">
+                PIN phones
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Application type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                Supply list of PIN phone contacts
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <p class="govuk-body ">{{ 0 | getDate }}</p>
+              </dd>
+            </div>
+            <!--
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Application ID
+              </dt>
+              <dd class="govuk-summary-list__value">
+                3453546
+              </dd>
+            </div>-->
+            </div>
+          </dl>
+
+
+          <h2 class="govuk-heading-m">Prisoner details</h2>
+          <dl class="govuk-summary-list  govuk-!-margin-bottom-9">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Prisoner
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if (data['pin_06_prisonerName']) and (data['pin_06_prisonNumber']) %}
+                  {{ data['pin_06_prisonerName'] }} ({{ data['pin_06_prisonNumber'] }})
+                {% else %}
+                  Patel, Taj (AB1234C)
+                {% endif %}
+              </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">View profile</a>
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Location
+              </dt>
+              <dd class="govuk-summary-list__value">
+                C-2-013
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Alerts
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <p class="govuk-body">5</p>
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">View alerts</a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Incentive level
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <p class="govuk-body">Enhanced</p>
+              </dd>
+            </div>
+          </dl>
+
+
+          <div class="govuk-summary-list--header">
+            <h2 class="govuk-heading-m">Supply contact list</h2>
+            {% if data['pin_06_actionRespond'] !== "Approved" and data['pin_06_actionRespond'] !== "Declined"  %}
+            <a href="#" class="govuk-body">Change <span class="govuk-visually-hidden"> visiting orders</span></a>
+            {% endif %}
+          </div>
+          <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Details
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if data['pin_06_detail'] %}
+                  {{ data['pin_06_detail'] }}
+                {% else %}
+                  Print all contacts inclusing deactivated ones.
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+    
+             </div>
+      </div>
+
+      </div>
+
+    </div>
+
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}

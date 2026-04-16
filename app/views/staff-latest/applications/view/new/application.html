@@ -1,0 +1,228 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Application details" %}
+{% set version="latest" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+{% set selectedAppId = data['appType'] %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+  			<div class="govuk-breadcrumbs">
+  				<ol class="govuk-breadcrumbs__list">
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+  					</li>
+            <li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/view/">View all applications</a>
+  					</li>
+  				</ol>
+  			</div>
+  		</nav>
+      {% for group, details in data['groupsAndGeneralApps'] %}
+        {% for app in details.apps %}
+          {% if app.app_id == data['appType'] %}
+      <span class="govuk-caption-xl">{{ details.name }}</span>
+      <h1 class="govuk-heading-xl">
+        {{ app.app_type }}
+      </h1>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page" href="./details">
+              Application 
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./comments">
+              Comments
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./action">
+              Action and reply
+              </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./history">
+              History
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      {% for group, details in data['groupsAndGeneralApps'] %}
+        {% for app in details.apps %}
+          {% if app.app_id == data['appType'] %}
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-m">Application details</h2>
+
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Status
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+                  Closed
+                {% else %}
+                  Pending
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Department
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['appDept'] }}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+                {% else %}
+                  <a class="govuk-link" href="forward">Forward<span class="govuk-visually-hidden"> department</span></a>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Application type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['checkappType'] }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Application group
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data['checkAppGroup'] }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date
+              </dt>
+              <dd class="govuk-summary-list__value reldate">
+                {{ app.date_received }}
+              </dd>
+            </div>
+            <!--
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Application ID
+              </dt>
+              <dd class="govuk-summary-list__value">
+                3453546
+              </dd>
+            </div>-->
+          </dl>
+
+
+          <h2 class="govuk-heading-m">Prisoner details</h2>
+          <dl class="govuk-summary-list  govuk-!-margin-bottom-9">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Prisoner
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if data['app_prisonNumber'] %}
+                  Patel, Taj ({{ data['app_prisonNumber'] }})
+                {% else %}
+                  Patel, Taj (A1234BC)
+                {% endif %}
+              </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">View profile</a>
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Location
+              </dt>
+              <dd class="govuk-summary-list__value">
+                A-1234
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Alerts
+              </dt>
+              <dd class="govuk-summary-list__value">
+                5
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">View alerts</a>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Incentive level
+              </dt>
+              <dd class="govuk-summary-list__value">
+                Advanced
+              </dd>
+            </div>
+          </dl>
+
+      <div class="govuk-summary-list--header">
+        <h2 class="govuk-heading-m">Action and department</h2>
+        {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+        {% else %}
+        <a href="#" class="govuk-body">Change <span class="govuk-visually-hidden"> Visiting orders</span></a>
+        {% endif  %}
+      </div>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Details
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if data['app_detail'] %}
+              {{ data['app_detail'] }}
+            {% else %}
+              Request to swap all VOs from last month
+            {% endif %}
+          </dd>
+        </div>
+      </dl>
+      </div>
+
+      {% endif  %}
+      {% endfor  %}
+      {% endfor  %}
+
+      </div>
+
+    </div>
+
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}

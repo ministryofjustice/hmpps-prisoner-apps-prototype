@@ -1,0 +1,18 @@
+<div class="govuk-summary-list--header">
+  <h2 class="govuk-heading-m">VOs to swap</h2>
+</div>
+<dl class="govuk-summary-list govuk-!-margin-bottom-9">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Details
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% set appID = data['url_id'] %}
+      {% for app in data['pin05data'] %}
+      {% if app.app_id == appID  %}
+      {{ app.details }}
+      {% endif  %}
+      {% endfor  %}
+    </dd>
+  </div>
+</dl>

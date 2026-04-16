@@ -1,0 +1,165 @@
+{% extends "layouts/launchpad.html" %}
+{% set pageName="John's Profile" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-latest/" %}
+{% set appID = data['url_id'] %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row" id="main-content">
+    <div class="govuk-width-container">
+      <div class="govuk-grid-column-two-thirds">
+
+        <nav aria-label="breadcrumb">
+        <div class="govuk-breadcrumbs">
+          <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeURL}}">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeURL}}/applications/">Apps</a>
+            </li>
+          </ol>
+        </div>
+      </nav>
+      {% for app in data['appsDB'] %}
+      {% if app.app_id == appID %}
+
+        {% if app.status !== "Closed" %}
+
+          {% call govukInsetText({ classes: "govuk-!-margin-0 guidance-panel" }) %}
+            <p>You have already sent this app and it is being processed.</p>
+          {% endcall %}
+
+      {% endif %}
+
+
+      <h1 class="govuk-heading-xl">
+          {{ app.app_type }}
+      </h1>
+
+    <dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Status
+      </dt>
+      <dd class="govuk-summary-list__value">
+            {% if app.status == "New" %}
+              <strong class="govuk-tag govuk-tag--light-blue">{{ app.status }}</strong>
+            {% elif app.status == "In progress" %}
+              <strong class="govuk-tag govuk-tag--yellow">{{ app.status }}</strong>
+            {% elif app.status == "Closed" %}
+              {% if app.decision == "Approved" %}
+              <strong class="govuk-tag govuk-tag--green">{{ app.decision }}</strong>
+              {% elif app.decision == "Declined" %}
+              <strong class="govuk-tag govuk-tag--red">{{ app.decision }}</strong>
+            {% endif %}
+            {% endif %}
+
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Date
+      </dt>
+      <dd class="govuk-summary-list__value">
+      <p class="govuk-body reldate">{{ app.date_received }}</p>
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Type
+      </dt>
+      <dd class="govuk-summary-list__value">
+      {{ app.app_type }}
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Details
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {% if data['app_detail'] %}
+          {{ data['app_detail'] }}
+        {% else %}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fringilla lectus sit amet aliquam euismod. 
+        {% endif %}
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+  </dl>
+  </div>
+
+  <div class="govuk-grid-column-full">
+
+  <h2 class="govuk-heading-m">Messages</h2>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">Your chat</th>
+        <th class="govuk-table__header">From</th>
+        <th class="govuk-table__header">Date</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+
+      {% if data.messages %}
+        {% for message in data.messages %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">{{ message.text }}</td>
+          <td class="govuk-table__cell">{{ message.from }}</td>
+          <td class="govuk-table__cell">{{ message.date }}</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">No messages yet</td>
+          <td class="govuk-table__cell">—</td>
+          <td class="govuk-table__cell">—</td>
+        </tr>
+      {% endif %}
+
+    </tbody>
+  </table>
+
+  </div>
+
+  <div class="govuk-grid-column-two-thirds">
+
+
+  <h2 class="govuk-heading-m">Send a reply</h2>
+
+  <form method="post" action="/prisoner-latest/applications/view/app?url_id={{ appID }}">  {{ govukTextarea({
+      name: "message",
+      id: "message",
+      label: {
+        text: "Message",
+        classes: "govuk-visually-hidden"
+      }
+    }) }}
+
+    {{ govukButton({
+      text: "Send"
+    }) }}
+  </form>
+
+    {% endif %}
+  {% endfor %}
+
+    </div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}

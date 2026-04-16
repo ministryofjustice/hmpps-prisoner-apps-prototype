@@ -1,0 +1,130 @@
+{% extends "layouts/launchpad.html" %}
+{% set bodyClasses = 'launchpad' %}
+
+{% set pageName="Check details" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set homeurl="/prisoner-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+    <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds-from-desktop">
+        <span class="govuk-caption-xl">
+          Add new official PIN phone contact
+        </span>
+
+        <h1 class="govuk-heading-xl">Check details</h1>
+
+        <div class="govuk-summary-card">
+          <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">New official contact to add</h2>
+            <a href="javascript:window.history.go(-1)" class="govuk-body">Change <span class="govuk-visually-hidden">official PIN phone contact details</span></a>
+          </div>
+
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              First name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['pin_02_officialFirstName'] }}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Last name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['pin_02_officialLastName'] }}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Organisation
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['pin_02_companyName'] }}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Relationship
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ data['pin_02_contactRelationship'] }}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+               Telephone number 1
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['pin_02_contactTel1'] %}
+              <p>{{ data['pin_02_contactTel1'] }}</p>
+              {% endif %}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+               Telephone number 2
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if data['pin_02_contactTel2'] %}
+              <p>{{ data['pin_02_contactTel2'] }}</p>
+              {% endif %}
+            </dd>
+          </div>
+
+        </dl>
+          </div>
+          </div>
+
+        <form class="form" action="/prisoner-latest/applications/new/confirmation">
+        
+          <!-- Note: This element is to be used in prototype only. It is there to confirm the submission of the form and allow multiple apps to be submitted in one session-->
+  
+          <div class="govuk-form-group govuk-visually-hidden">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend">
+                  PIN 02 submitted
+              </legend>
+              <div class="govuk-radios--small" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="pin_02_submitted" name="pin_02_submitted" type="radio" value="submitted" checked="checked" />
+                  <label class="govuk-label govuk-radios__label" for="pin_02_submitted">
+                    submitted
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+  
+          <!-- /end note -->
+  
+          <div class="moj-button-action">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+              Continue
+            </button>
+          </div>
+  
+        </form>
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+  </div> <!-- end main content  -->
+{% endblock %}
+

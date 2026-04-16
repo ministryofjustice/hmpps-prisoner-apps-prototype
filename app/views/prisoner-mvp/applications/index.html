@@ -1,0 +1,139 @@
+{% extends "layouts/launchpad.html" %}
+{% set pageName="John's Profile" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-mvp/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row" id="main-content">
+
+  <div class="govuk-grid-column-full">
+
+    <div class="govuk-width-container">
+      <nav aria-label="breadcrumb">
+        <div class="govuk-breadcrumbs">
+          <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeURL}}">Home</a>
+            </li>
+          </ol>
+        </div>
+      </nav>
+      <h1 class="govuk-heading-xl">
+        Apps
+      </h1>
+
+      <a href="./new/" class="govuk-button" data-module="govuk-button">
+        New application
+      </a>
+
+
+      <table class="govuk-table" data-module="">
+      <caption class="govuk-table__caption">Applications submitted</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" aria-sort="none">Date</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">App</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Department</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
+          <th scope="col" class="govuk-table__header" aria-sort="none">Action</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+				{% if data['general_app'] === 'submitted' %}
+				<tr class="govuk-table__row "
+					data-tags="Patel, Taj {{ data['pin_07_prisonNumber'] }} ">
+					<td class=" govuk-table__cell nowrap reldate date">{{ 0 | govDate }}</td>
+					<td class="govuk-table__cell">
+					  {{ data['checkappType'] }}
+					</td>
+					<td class="govuk-table__cell">
+						{% if data['app_dept'] %}
+						{{ data['app_dept'] }}
+						{% else %}
+						Business Hub
+						{% endif %}
+					</td>
+					<td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+					</td>
+					<td class="govuk-table__cell"><a href="view/new">View</a>
+					</td>
+				</tr>
+				{% endif %}
+
+
+        {% for app in data['appsDB'] %}
+        {% if app.prisoner_name == 'Craig, Ivor' %}
+        <tr class="govuk-table__row">
+          <td class=" govuk-table__cell nowrap reldate">
+            {{ app.date_received }}
+          </td>
+          <td class="govuk-table__cell">
+            {{ app.app_type }}
+          </td>
+          <td class="govuk-table__cell">
+            {{ app.owner }}
+          </td>
+          <td class="govuk-table__cell">
+            {% if app.status == "New" %}
+              <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+            {% elif app.status == "In progress" %}
+              <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+            {% elif app.status == "Closed" %}
+              {% if app.decision == "Approved" %}
+              <strong class="govuk-tag govuk-tag--green">{{ app.decision }}</strong>
+              {% elif app.decision == "Declined" %}
+              <strong class="govuk-tag govuk-tag--red">{{ app.decision }}</strong>
+            {% endif %}
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell"><a href="./view/app?url_id={{ app.app_id }}">View</a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <div class="moj-pagination">
+      <nav class="govuk-pagination moj-pagination__pagination " aria-label="Pagination">
+        <ul class="govuk-pagination__list">
+          <li class="govuk-pagination__item govuk-pagination__item--current">
+            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+              1
+            </a>
+          </li>
+          <li class="govuk-pagination__item">
+            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+              2
+            </a>
+          </li>
+          <li class="govuk-pagination__item">
+            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+              3
+            </a>
+          </li>
+        </ul>
+        <div class="govuk-pagination__next">
+          <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+            <span class="govuk-pagination__link-title">
+              Next
+            </span>
+            <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+              <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+            </svg>
+          </a>
+        </div>
+      </nav>
+      <p class="moj-pagination__results">Showing 1 to 10 of 34 total results</p>
+    </div>
+    
+
+    </div>
+
+</div>
+</div>
+
+
+{% endblock %}

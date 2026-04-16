@@ -1,0 +1,59 @@
+.transactions__selection__form {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  align-items: flex-end;
+  background: #f3f2f1;
+  padding: 15px;
+  margin-bottom: 25px;
+
+  .govuk-form-group {
+    margin-right: 15px;
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  button {
+    align-self: flex-end;
+    margin-bottom: 2px;
+    width: auto;
+  }
+}
+
+.govuk-tabs__panel {
+  margin-bottom: govuk-spacing(9) !important;
+}
+
+@media (max-width: 60.625em) {
+
+#damage-obligations {
+  thead {
+    display: none;
+  }
+  td {
+    display: flex;
+  }
+
+  tr {
+
+    td {
+      padding: 10px;
+      &:first-child {
+        background-color: #f3f2f1;
+      }
+      &:last-child {
+        padding-bottom: 40px;
+      }
+      &::before {
+        content: attr(data-damage);
+        font-weight: bold;
+        width: 45%;
+        min-width: 45%;
+      }
+
+    }
+
+  }
+}
+}
+

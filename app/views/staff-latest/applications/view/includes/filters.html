@@ -1,0 +1,131 @@
+<!-- Filter sidebar -->
+<div class="moj-filter-layout__filter govuk-!-margin-bottom-9">
+    <div class="moj-filter filter-container" data-module="moj-filter">
+        <div class="moj-filter__header">
+            <div class="moj-filter__header-title">
+                <h2 class="govuk-heading-m">Filters</h2>
+            </div>
+        </div>
+        
+        <div class="moj-filter__content">
+            <!-- Selected filters section at top (MoJ Pattern) -->
+            <div class="moj-filter__selected selected-filters" style="display: none;">
+                <div class="moj-filter__selected-heading">
+                    <div class="moj-filter__heading-title">
+                        <h2 class="govuk-heading-m">Selected filters</h2>
+                    </div>
+                    <div class="moj-filter__heading-action">
+                        <p><a class="govuk-link govuk-link--no-visited-state clear-filters" href="#">Clear filters</a></p>
+                    </div>
+                </div>
+                <div class="selected-tags">
+                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Status</h3>
+                    <ul class="moj-filter-tags">
+                        <li><a class="moj-filter__tag" href="#" data-value="pending" data-type="status"><span class="govuk-visually-hidden">Remove this filter</span> Pending</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Filter options -->
+            <div class="moj-filter__options">
+                <button type="button" class="govuk-button apply-filters">
+                    Apply filters
+                </button>
+                
+                <!-- Status filter with conditional reveal -->
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset" aria-describedby="status-hint">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            <h1 class="govuk-fieldset__heading">Status</h1>
+                        </legend>
+                        <div class="govuk-checkboxes govuk-checkboxes--small govuk-checkboxes--conditional" data-module="govuk-checkboxes">
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" id="status-new" name="status" type="checkbox" value="new" checked>
+                                <label class="govuk-label govuk-checkboxes__label" for="status-new">
+                                    New
+                                </label>
+                            </div>
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" id="status-in-progress" name="status" type="checkbox" value="in-progress">
+                                <label class="govuk-label govuk-checkboxes__label" for="status-in-progress">
+                                    In progress
+                                </label>
+                            </div>
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" id="status-closed" name="status" type="checkbox" value="closed" data-aria-controls="conditional-closed">
+                                <label class="govuk-label govuk-checkboxes__label" for="status-closed">
+                                    Closed
+                                </label>
+                            </div>
+                            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-closed" aria-hidden="true">
+                                <div class="govuk-checkboxes govuk-checkboxes--small">
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="status-approved" name="closed-status" type="checkbox" value="approved" checked>
+                                        <label class="govuk-label govuk-checkboxes__label" for="status-approved">
+                                            Approved
+                                        </label>
+                                    </div>
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="status-declined" name="closed-status" type="checkbox" value="declined" checked>
+                                        <label class="govuk-label govuk-checkboxes__label" for="status-declined">
+                                            Declined
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <!-- Prisoner name or number search -->
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-label--s" for="prisoner-search">
+                        Prisoner name or number
+                    </label>
+                    <input class="govuk-input prisoner-search" id="prisoner-search" name="prisoner-search" type="text">
+
+                    <div class="govuk-checkboxes govuk-checkboxes--small govuk-!-margin-top-3">
+                        <div class="govuk-checkboxes__item priority-item">
+                            <input class="govuk-checkboxes__input" id="first-night" name="priority" type="checkbox" value="first-night">
+                            <label class="govuk-label govuk-checkboxes__label" for="first-night">
+                                First night or early days centre
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Department checkboxes -->
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset" aria-describedby="department-hint">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            <h1 class="govuk-fieldset__heading">Department</h1>
+                        </legend>
+                        <div class="govuk-checkboxes govuk-checkboxes--small department-list">
+                            <!-- Departments will be populated by JavaScript -->
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <!-- Application type checkboxes -->
+                <div id="filters--app-type" class="govuk-form-group govuk-!-margin-bottom-5">
+                    <fieldset class="govuk-fieldset" aria-describedby="application-type-hint">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            <h1 class="govuk-fieldset__heading">Application type</h1>
+                        </legend>
+                        <input class="govuk-input application-type-search govuk-!-margin-bottom-3" type="text">
+                        <div class="govuk-checkboxes govuk-checkboxes--small application-type-list">
+                            <!-- Application types will be populated by JavaScript -->
+                        </div>
+                        <div class="no-application-type-results" style="display: none;">
+                            No application types found matching your search.
+                        </div>
+                    </fieldset>
+                </div>
+
+                <button type="button" class="govuk-button apply-filters govuk-!-margin-bottom-0">
+                    Apply filters
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

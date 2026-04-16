@@ -1,0 +1,71 @@
+<div class="panel-header">
+	<h2 class="govuk-heading-m">Closed applications</h2>
+  </div>
+  <div class="panel-content">
+
+	<div id="noResults2" style="display:none;">
+		<p>No results found.</p>
+	  </div>
+	
+	<div id="results2">
+		<table id="dataTable2" class="govuk-table apps-list" data-module="moj-sortable-table">
+			<thead class="govuk-table__head">
+				<tr class="govuk-table__row">
+				  <th scope="col" class="govuk-table__header nowrap" aria-sort="descending">Date</th>
+				  <th scope="col" class="govuk-table__header">Application type</th>
+				  <th scope="col" class="govuk-table__header">From</th>
+				  <th scope="col" class="govuk-table__header">Department</th>
+				  <th scope="col" class="govuk-table__header" >Decision</th>
+				  <th scope="col" class="govuk-table__header" ></th>
+				</tr>
+			</thead>
+			<tbody class="govuk-table__body">
+				{% for app in data['allMVP2Apps'] %}
+				{% if app.decision == "Approved" or app.decision == "Declined" %}
+		        <tr class="govuk-table__row" data-tags="{{ app.prisoner_name }} ({{ app.prisoner_number }}) {{ app.current_dept }} {{ app.app_type }}"">
+					<td class="govuk-table__cell nowrap reldate">{{ app.date_received }}</td>
+					<td class="govuk-table__cell">
+						{{ app.app_type }}
+						<span class="govuk-table__subtext govuk-body-s">
+					  {{ app.app_group }}
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+					  {{ app.prisoner_name }}
+					  <span class="govuk-table__subtext govuk-body-s">{{ app.prisoner_number }}</span>
+					</td>
+					<td class="govuk-table__cell">{{ app.current_dept }}</td>
+					<td class="govuk-table__cell">{{ app.decision }}</td>
+					<td class="govuk-table__cell"><a href="./app/application?url_id={{ app.app_id }}">View<span class="govuk-visually-hidden"> {{ app.app_type }} for {{ app.prisoner_name }} from {{ app.date_received }}</span></a></td>
+				  </tr>
+				{% endif %}
+				{% endfor %}
+		</tbody>
+		</table>
+		{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+	
+		{{ govukPagination({
+		  next: {
+			href: "#"
+		  },
+		  items: [
+			{
+			  number: 1,
+			  current: true,
+			  href: "#"
+			},
+			{
+			  number: 2,
+			  href: "#"
+			},
+			{
+			  number: 3,
+			  href: "#"
+			}
+		  ]
+		}) }}
+
+	</div>
+
+</div>
+	

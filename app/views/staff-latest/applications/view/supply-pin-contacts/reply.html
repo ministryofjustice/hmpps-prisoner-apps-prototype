@@ -1,0 +1,127 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{% block pageTitle %}
+  Application response – Wright, Ethan
+{% endblock %}
+
+{% set bodyClasses = 'print' %}
+{% set appID = data['url_id'] %}
+
+
+{% block content %}
+
+        <div id="actionBar">
+          <a href="#" target="_blank" class="govuk-button govuk-button--secondary"  onclick="window.print();">
+            Print
+          </a>
+        </div>
+         
+        <img src="/public/images/HMPPS-Logo-Black.svg" alt="HM Prison & Probation Service" width="200px" class="govuk-!-margin-bottom-7">
+ 
+        {% for app in data['allMVP2Apps'] %}
+        {% if app.app_id == appID  %}
+      
+          <p class="govuk-body govuk-!-margin-bottom-0">{{ app.prisoner_name }}</p>
+          <p class="govuk-body govuk-!-margin-bottom-0">{{ app.prisoner_location }}</p>
+          <p class="govuk-body">HMP Kirkham</p>
+          <p class="govuk-body">{{ 0 | getDate }}</p>
+
+          <h1 class="govuk-heading-m">
+            Your application has been
+            {% if (data['actionRespond'] == 'Declined') or (app.decision == "Declined") %}
+              declined.
+            {% elseif (data['actionRespond'] == 'Approved') or (app.decision == "Approved") %}
+              approved.
+            {% endif %}
+          </h1>
+
+          <div id="response-approved" class="response-toggle form">
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Application type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ app.app_type }}
+                </dd>
+              </div>
+          {% if app.app_type_id == "pin_01"  %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Contact name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  Leila Patel
+                </dd>
+              </div>
+          {% elseif app.app_type_id == "pin_02"   %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Contact name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  Vicky Smith
+                </dd>
+              </div>
+          {% elseif app.app_type_id == "pin_03"   %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Amount
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  £5
+                </dd>
+              </div>
+          {% elseif app.app_type_id == "pin_04"   %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Contact name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  Vincent Di Marco
+                </dd>
+              </div>
+          {% endif %}
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Date logged
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <p class="govuk-body">{{ -3 | getDate }}</p>
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Action
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {% if (data['actionRespond'] == 'Declined') or (app.decision == "Declined") %}
+                  Declined
+                {% elseif (data['actionRespond'] == 'Approved') or (app.decision == "Approved") %}
+                  Approved
+                {% endif %}
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Reason
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if data['decisionReason'] %}
+                    {{ data['decisionReason'] }}
+                  {% else %}
+                    {{ app.decision_reason }}
+                  {% endif %}
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <p class="govuk-body govuk-!-margin-bottom-0">Business Hub</p>
+          <p class="govuk-body govuk-!-margin-bottom-0">HMP Kirkham</p>
+
+        {% endif  %}
+        {% endfor  %}
+
+{% endblock %}

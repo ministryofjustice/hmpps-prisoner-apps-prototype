@@ -1,0 +1,142 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+//
+
+// List of apps
+
+.moj-filter {
+  .govuk-checkboxes--small .govuk-checkboxes__label {
+  }
+  .govuk-radios__item {
+  .govuk-label {
+    max-width: 100% !important;
+  }
+  .govuk-checkboxes {
+    margin-left: -24px;
+    padding-left: 22px;;
+  }
+}
+}
+
+table {
+  th.govuk-table__cell-checkboxes {
+  }
+  .govuk-checkboxes__item {
+    padding-left: 0px !important;
+  .govuk-checkboxes__input {
+    left: 0px;
+    margin-left: 0px;
+    width: 24px;
+    height: 24px;
+  }
+}
+}
+
+.govuk-table__subtext {
+  display: block;
+  margin-bottom: 0;
+  color: #505a5f;
+}
+
+.app-message {
+  padding: 15px 0;
+  border-top: 1px solid	#b1b4b6;
+  border-bottom: 1px solid 	#b1b4b6;
+  margin-bottom: -1px;
+  &:last-of-type {
+    border-bottom: 1px solid 	#b1b4b6;
+  }
+  .app-messages-metadata {
+    color: #505a5f;
+  }
+}
+
+.notify-group {
+  #my-autocomplete-wrapper {
+    float: left;
+    font-family: "GDS Transport", arial, sans-serif;
+    width: 85%;
+    margin-right: 10px;
+  }
+  a.govuk-button {
+    float: right;
+    text-decoration: none;
+  }
+    clear: both;
+}
+
+.apps-header-search {
+  a.govuk-button { float: right; margin-bottom: 0; margin-top: 1.5em;}
+  input {margin-bottom: 1.5em;}
+}
+
+.govuk-summary-list--header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #b1b4b6;
+}
+
+p.none {margin-bottom: 0;}
+
+.nowrap {white-space: nowrap;}
+
+.govuk-form-group--error .autocomplete__input {
+  border-color:#d4351c !important;
+}
+
+.govuk-checkboxes__children {
+  padding-left: 2.25em;
+  display: none;;
+}
+
+.govuk-breadcrumbs, .moj-sub-navigation, .govuk-footer__inline-list, .govuk-phase-banner {
+  @media print {
+    display: none;
+  }
+}
+
+span.lowercase {text-transform: lowercase;}
+
+
+
+.print {
+
+  background-color: #f3f2f1;;
+
+  #actionBar {
+    background-color: #1d70b8;
+    position: fixed;
+    width: 100%;
+    top: 0; 
+    left: 0;
+    text-align: right;
+    a {
+      margin: 1em;;
+
+    }
+  }
+  #main-content {
+    padding: 100px 2em 2em 2em;
+    background-color: white;
+    margin: auto;
+    max-width: 800px;
+    dl {
+      max-width: 600px;
+    }
+  }
+
+}
+
+@media print {
+  /* All your print styles go here */
+  .print {
+    #actionBar { display: none;}
+     #main-content {
+      padding: inherit;
+      p, dl, h1 {
+        font-size: 16px !important;
+      }
+   }
+  }
+}

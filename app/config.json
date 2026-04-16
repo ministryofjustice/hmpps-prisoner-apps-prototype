@@ -1,0 +1,8 @@
+{
+  "serviceName": "Launchpad and Manage Applications",
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}

@@ -1,0 +1,255 @@
+{% extends "layouts/launchpad.html" %}
+{% set bodyClasses = 'launchpad' %}
+
+{% set pageName="Log details" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set homeURL="/prisoner-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <span class="govuk-caption-xl">
+        Add new social PIN phone contact
+      </span>
+      <h1 class="govuk-heading-xl">Log details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+             <form class="form" action="/prisoner-latest/applications/new/new-social-pin-contact/check-details">
+
+                <h2 class="govuk-heading-m">New social contact to add</h2>
+  
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-label--s" for="pin_01_socialContactFirstName">
+                    First name
+                  </label>
+                  <input class="govuk-input" id="socialContactFirstName" name="pin_01_socialContactFirstName" type="text" value="{{ data['pin_01_socialContactFirstName'] }}">
+                </div>
+  
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-label--s" for="pin_01_socialContactLastName">
+                    Last name
+                  </label>
+                  <input class="govuk-input" id="socialContactLastName" name="pin_01_socialContactLastName" type="text" value="{{ data['pin_01_socialContactLastName'] }}">
+                </div>
+  
+                <div class="govuk-form-group">
+                  <fieldset class="govuk-fieldset" aria-describedby="agedob-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                      Date of birth or age
+                    </legend>
+                    <div id="agedob-hint" class="govuk-hint">
+                      Select one option
+                    </div>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="dob" name="pin_01_agedob" type="radio" data-aria-controls="conditional-agedob" value="DOB" {{ checked("pin_01_agedob", "DOB") }} >
+                        <label class="govuk-label govuk-radios__label" for="dob">
+                          Date of birth
+                        </label>
+                      </div>
+                      <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-agedob">
+                        <div class="govuk-form-group">
+                          <fieldset class="govuk-fieldset" role="group">
+                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-visually-hidden">
+                              Date of birth
+                            </legend>
+                            <div class="govuk-date-input" id="contact-dob">
+                              <div class="govuk-date-input__item">
+                                <div class="govuk-form-group">
+                                  <label class="govuk-label govuk-date-input__label" for="contact-dob-day">
+                                    Day
+                                  </label>
+                                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="contact-dob-day" name="pin_01_contact-dob-day" type="text" inputmode="numeric" value="{{ data['pin_01_contact-dob-day'] }}">
+                                </div>
+                              </div>
+                              <div class="govuk-date-input__item">
+                                <div class="govuk-form-group">
+                                  <label class="govuk-label govuk-date-input__label" for="contact-dob-month">
+                                    Month
+                                  </label>
+                                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="contact-dob-month" name="pin_01_contact-dob-month" type="text" inputmode="numeric" value="{{ data['pin_01_contact-dob-month'] }}">
+                                </div>
+                              </div>
+                              <div class="govuk-date-input__item">
+                                <div class="govuk-form-group">
+                                  <label class="govuk-label govuk-date-input__label" for="contact-dob-year">
+                                    Year
+                                  </label>
+                                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="contact-dob-year" name="pin_01_contact-dob-year" type="text" inputmode="numeric" value="{{ data['pin_01_contact-dob-year'] }}">
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="contact-age" name="pin_01_agedob" type="radio" data-aria-controls="conditional-agedob-2" value="Age" {{ checked("pin_01_agedob", "Age") }} >
+                        <label class="govuk-label govuk-radios__label" for="contact-age">
+                          Age
+                        </label>
+                      </div>
+                      <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-agedob-2">
+                        <div class="govuk-form-group">
+                          <label class="govuk-label" for="contact-approx-age govuk-visually-hidden">
+                            Age
+                          </label>
+                          <input class="govuk-input govuk-!-width-one-third" id="contact-approx-age" name="pin_01_contact-approx-age" value="{{ data['pin_01_contact-approx-age'] }}"  >
+                        </div>
+                      </div>
+                      <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="no-agedob" name="pin_01_agedob" type="radio" value="NoAgeDOB" {{ checked("pin_01_agedob", "NoAgeDOB") }} >
+                        <label class="govuk-label govuk-radios__label" for="no-agedob">
+                          I do not know their age or date of birth
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+  
+
+                  <div class="govuk-form-group govuk-!-margin-bottom-5">
+                  <label class="govuk-label govuk-label--s" for="contactRelationship">
+                    Relationship
+                  </label>
+                  <select class="govuk-select" id="contactRelationship" name="pin_01_contactRelationship">
+                    <option value="" selected disabled hidden>Select a relationship</option>
+                    {% for relationship in data['socialRelationships'] %}
+                    <option value="{{ relationship.social_rel }}">{{ relationship.social_rel }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+    
+                <h2 class="govuk-heading-m  govuk-!-margin-bottom-1 govuk-!-margin-top-9">Address</h2>
+                <div class="govuk-hint govuk-!-margin-bottom-5">
+                  Fill this in if your establishment requires it
+                </div>
+                  <div class="govuk-form-group address-lookup">
+                  <label for="address-picker" class="govuk-label  govuk-label--s">Find address</label>
+                  <div id="address-picker-hint" class="govuk-hint">
+                    Type part of address or postcode to begin
+                  </div>
+                  <div id="my-autocomplete-wrapper">
+                    <select id="address-picker" class="govuk-select">
+                      <option value="" selected disabled hidden></option>
+                      {% for address in data['addresses'] %}
+                      <option value="{{ address.id }}">{{ address.line_1 }}, {% if data['address.line_2'] %}{{ address.line_2 }}, {% endif %}{{ address.town }}, {{ address.postcode }}, {{ address.country }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+  
+  
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                  <label class="govuk-label govuk-label--s" for="contactAddress1">
+                    Address line 1
+                  </label>
+                  <input class="govuk-input" id="contactAddress1" name="pin_01_contactAddress1" type="text" value="{{ data['pin_01_contactAddress1'] }}">
+                </div>
+  
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                  <label class="govuk-label govuk-label--s" for="contactAddress2">
+                    Address line 2 (optional)
+                  </label>
+                  <input class="govuk-input" id="contactAddress2" name="pin_01_contactAddress2" type="text" value="{{ data['pin_01_contactAddress2'] }}">
+                </div>
+  
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                  <label class="govuk-label govuk-label--s" for="contactTowncity">
+                    Town or city
+                  </label>
+                  <input class="govuk-input" id="contactTowncity" name="pin_01_contactTowncity" type="text" value="{{ data['pin_01_contactTowncity'] }}">
+                </div>
+  
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                  <label class="govuk-label govuk-label--s" for="contactPostcode">
+                    Postcode
+                  </label>
+                  <input class="govuk-input govuk-input--width-10" id="contactPostcode" name="pin_01_contactPostcode" type="text" value="{{ data['pin_01_contactPostcode'] }}">
+                </div>
+  
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                  <label class="govuk-label govuk-label--s" for="contactCountry">
+                    Country
+                  </label>
+                  <select class="govuk-select" id="contactCountry" name="pin_01_country">
+                    <option value="" selected disabled hidden></option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Ireland">Ireland</option>
+                    <option disabled="">──────────</option>
+                    {% for country in data['countries'] %}
+                    <option value="{{ data['country'] }}">{{ country }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+  
+                <a href="#" id="lookup-address" class="govuk-body govuk-link">Lookup address</a>
+                <a href="#" id="enter-manually" class="govuk-body govuk-link">Enter address manually</a>
+
+                
+                <fieldset class="govuk-fieldset govuk-!-margin-top-9">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                    <h2 class="govuk-fieldset__heading">
+                      Telephone numbers
+                    </h2>
+                  </legend>
+                  <div id="telephoneNumbers-hint" class="govuk-hint">
+                    Enter a phone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192. Include area code or international code, if overseas.
+                  </div>
+
+                  <div class="govuk-form-group govuk-form-group govuk-!-margin-top-5  govuk-!-margin-bottom-5 ">
+                    <label class="govuk-label govuk-label--s" for="contactTel1" aria-describedby="contactTel1-hint">
+                      Telephone number 1
+                    </label>
+                    <input class="govuk-input govuk-!-margin-bottom-2" id="contactTel1" name="pin_01_contactTel1" type="text" value="{{ data['pin_01_contactTel1'] }}">
+                   </div>
+
+                   <div class="govuk-form-group govuk-form-group govuk-!-margin-bottom-5">
+                    <label class="govuk-label govuk-label--s" for="contactTel2" aria-describedby="contactTel1-hint">
+                      Telephone number 2 (optional)
+                    </label>
+                    <input class="govuk-input govuk-!-margin-bottom-2" id="contactTel2" name="pin_01_contactTel2" type="text" value="{{ data['pin_01_contactTel2'] }}">
+                  </div>
+                </fieldset>
+
+                <div class="moj-button-action">
+                  {% from "govuk/components/button/macro.njk" import govukButton %}
+                  {{ govukButton({
+                    text: "Continue"
+                  }) }}
+                </div>
+  
+              </form>
+  
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#address-picker')
+  })
+</script>
+
+{% endblock %}

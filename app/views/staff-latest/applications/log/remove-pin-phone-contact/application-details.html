@@ -1,0 +1,94 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Log details" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <span class="govuk-caption-xl">
+        Remove PIN phone contact
+      </span>
+      <h1 class="govuk-heading-xl">Log details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+
+            <form class="form" action="/application-tool/latest/applications/log/remove-pin-phone-contact/check-details">
+
+              <div class="govuk-form-group govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="officialFirstName">
+                  First name
+                </label>
+                <input class="govuk-input" id="officialFirstName" name="pin_04_officialFirstName" type="text" value="{{ data['pin_04_officialFirstName'] }}">
+              </div>
+  
+              <div class="govuk-form-group govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="officialLastName">
+                  Last name
+                </label>
+                <input class="govuk-input" id="officialLastName" name="pin_04_officialLastName" type="text" value="{{ data['pin_04_officialLastName'] }}">
+              </div>
+    
+              <div class="govuk-form-group  govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="officialContactTel1" aria-describedby="officialContactTel1-hint">
+                  Telephone number 1
+                </label>
+                <div id="officialContactTel1-hint" class="govuk-hint">
+                  Include area code or international code, if overseas
+                </div>
+                <input class="govuk-input govuk-!-margin-bottom-2" id="officialContactTel1" name="pin_04_officialContactTel1" type="tel" value="{{ data['pin_04_officialContactTel1'] }}">
+                </div>
+
+              <div class="govuk-form-group  govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="officialContactTel2" aria-describedby="officialContactTel2-hint">
+                  Telephone number 2
+                </label>
+                <div id="officialContactTel2-hint" class="govuk-hint">
+                  Include area code or international code, if overseas
+                </div>
+                <input class="govuk-input govuk-!-margin-bottom-2" id="officialContactTel2" name="pin_04_officialContactTel2" type="tel" value="{{ data['pin_04_officialContactTel2'] }}">
+              </div>
+
+              <div class="govuk-form-group  govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="relationship" aria-describedby="relationship-hint">
+                  Relationship to prisoner (optional)
+                </label>
+                <input class="govuk-input govuk-!-margin-bottom-2" id="relationship" name="pin_04_relationship" type="tel" value="{{ data['pin_04_relationship'] }}">
+              </div>
+
+
+
+              <div class="moj-button-action">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                  Continue
+                </button>
+              </div>
+  
+              </form>
+    
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "layouts/launchpad.html" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-mvp/" %}
+{% set appGroup = data['appGroup'] %}
+{% set appType = data['appType'] %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+      {% for group, details in data['appGroupsTypes'] %}
+        {% for app in details.apps %}
+          {% if app.app_id == data['appType'] %}
+
+      <span class="govuk-caption-xl">{{ app.app_type }}</span>
+      <h1 class="govuk-heading-xl">Log details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+          <form class="form" action="/prisoner-mvp/applications/new/check-details">
+
+              {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+
+              {{ govukCharacterCount({
+                name: "app_detail",
+                id: "app_detail",
+                maxlength: 1000,
+                threshold: 75,
+                rows: "8",
+                value:  data['app_detail'] ,
+                label: {
+                  text: "Details",
+                  classes: "govuk-label--s"
+                },
+                hint: {
+                  text: "Add a brief summary"
+                }
+              }) }}       
+
+              <div class="govuk-form-group" style="display: none;">
+                <label class="govuk-label" for="width-10">
+                  Application name
+                </label>
+                <input class="govuk-input govuk-input--width-10" id="appType" name="appType" type="text" value="{{ data['appType'] }}">
+              </div>
+    
+            <div class="moj-button-action">
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+              </button>
+            </div>
+
+            </form>
+
+          </div>
+
+      </div>
+
+      </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+</div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+{% endblock %}

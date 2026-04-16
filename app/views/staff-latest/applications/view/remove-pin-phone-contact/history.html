@@ -1,0 +1,123 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="History" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+  			<div class="govuk-breadcrumbs">
+  				<ol class="govuk-breadcrumbs__list">
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/view/">View applications</a>
+  					</li>
+  				</ol>
+  			</div>
+  		</nav>
+
+      <span class="govuk-caption-xl">Remove PIN phone contact</span>
+      <h1 class="govuk-heading-xl">
+      	History
+      </h1>
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./application.html">Application</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./comments.html">
+              Comments
+            </a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./action.html">Action and reply</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page"  href="./history.html">History</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <h2 class="govuk-heading-m">History of this application</h2>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <div class="app-message govuk-body">
+            <div class="app-messages-metadata">
+              Logged by J. Smith | {{ 0 | getDate }} at 09:18
+            </div>
+            <div class="app-messages-content">
+              Assigned to Business Hub.
+            </div>
+          </div>
+          {% if data['appDept'] == "OMU" %}
+      <div class="app-message govuk-body">
+        <div class="app-messages-metadata">
+          Forwarded to OMU by J. Smith | {{ 0 | getDate }} at 12:04
+        </div>
+        <div class="app-messages-content">
+          Duis congue eros a justo fringilla consequat.
+        </div>
+      </div>
+      {% endif %}
+      {% if data['actionRespond'] == "Approved" %}
+      <div class="app-message govuk-body">
+        <div class="app-messages-metadata">
+          Marked as approved by S. Henderson | {{ 0 | getDate }} at 16:52
+        </div>
+        <div class="app-messages-content">
+          {% if data['decisionReason'] %}
+          {{ data['decisionReason'] }}
+        {% endif %}        </div>
+      </div>
+      {% elseif data['actionRespond'] == "Declined" %}
+      <div class="app-message govuk-body">
+        <div class="app-messages-metadata">
+          Marked as declined by S. Henderson | {{ 0 | getDate }} at 16:52
+        </div>
+        <div class="app-messages-content">
+          {% if data['decisionReason'] %}
+          {{ data['decisionReason'] }}
+        {% endif %}        </div>
+      </div>
+      {% endif %}
+      </div>
+      </div>
+
+      </div>
+
+    </div>
+
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}

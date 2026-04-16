@@ -1,0 +1,111 @@
+{% extends "layouts/launchpad.html" %}
+{% set bodyClasses = 'launchpad' %}
+
+{% set pageName="Log details" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set homeurl="/prisoner-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <span class="govuk-caption-xl">
+        Add new official PIN phone contact
+      </span>
+      <h1 class="govuk-heading-xl">Log details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+
+            <form class="form" action="/prisoner-latest/applications/new/new-official-pin-contact/check-details">
+
+              <div class="govuk-form-group govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="officialFirstName">
+                  First name
+                </label>
+                <input class="govuk-input" id="officialFirstName" name="pin_02_officialFirstName" type="text" value="{{ data['pin_02_officialFirstName'] }}">
+              </div>
+  
+              <div class="govuk-form-group govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="officialLastName">
+                  Last name
+                </label>
+                <input class="govuk-input" id="officialLastName" name="pin_02_officialLastName" type="text" value="{{ data['pin_02_officialLastName'] }}">
+              </div>
+  
+              <div class="govuk-form-group  govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="companyName">
+                  Organisation
+                </label>
+                <input class="govuk-input" id="companyName" name="pin_02_companyName" type="text" value="{{ data['pin_02_companyName'] }}">
+              </div>
+
+              <div class="govuk-form-group govuk-!-margin-bottom-5">
+              <label class="govuk-label govuk-label--s" for="contactRelationship">
+                Relationship
+              </label>
+              <select class="govuk-select" id="contactRelationship" name="pin_02_contactRelationship">
+                <option value="" selected disabled hidden>Select a relationship</option>
+                {% for relationship in data['officialRelationships'] %}
+                <option value="{{ relationship.official_rel }}">{{ relationship.official_rel }}</option>
+                {% endfor %}
+              </select>
+            </div>
+              
+
+            <fieldset class="govuk-fieldset govuk-!-margin-top-5">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                <h2 class="govuk-fieldset__heading">
+                  Telephone numbers
+                </h2>
+              </legend>
+              <div id="telephoneNumbers-hint" class="govuk-hint">
+                Enter a phone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192. Include area code or international code, if overseas.
+              </div>
+
+              <div class="govuk-form-group govuk-form-group govuk-!-margin-top-5  govuk-!-margin-bottom-5 ">
+                <label class="govuk-label govuk-label--s" for="contactTel1" aria-describedby="contactTel1-hint">
+                  Telephone number 1
+                </label>
+                <input class="govuk-input govuk-!-margin-bottom-2" id="contactTel1" name="pin_02_contactTel1" type="text" value="{{ data['pin_02_contactTel1'] }}">
+                </div>
+
+                <div class="govuk-form-group govuk-form-group govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="contactTel2" aria-describedby="contactTel1-hint">
+                  Telephone number 2 (optional)
+                </label>
+                <input class="govuk-input govuk-!-margin-bottom-2" id="contactTel2" name="pin_02_contactTel2" type="text" value="{{ data['pin_02_contactTel2'] }}">
+              </div>
+            </fieldset>
+          
+
+              <div class="moj-button-action">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                  Continue
+                </button>
+              </div>
+  
+              </form>
+    
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}

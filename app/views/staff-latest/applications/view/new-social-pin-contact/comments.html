@@ -1,0 +1,149 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Comments" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+  			<div class="govuk-breadcrumbs">
+  				<ol class="govuk-breadcrumbs__list">
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/view/">View applications</a>
+  					</li>
+  				</ol>
+  			</div>
+  		</nav>
+
+      <span class="govuk-caption-xl">Add new social PIN phone contact</span>
+      <h1 class="govuk-heading-xl">
+      	Comments
+      </h1>
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./application.html">Application</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page"  href="./comments.html">
+              Comments
+            </a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./action.html">Action and reply</a>
+          </li>
+
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./history.html">History</a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <h2 class="govuk-heading-m">Comments about this application</h2>
+      <p class="govuk-body">Only staff will see these comments</h2>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+          {% if data['pin_06_newComment'] or data['pin_06_forwardReasons'] %}
+
+            {% if data['pin_06_newComment'] %}
+              <div class="app-message govuk-body">
+                <div class="app-messages-metadata">
+                  Comment by J. Smith | {{ 0 | getDate }} at 16:52
+                </div>
+                <div class="app-messages-content">
+                  {{ data['pin_06_newComment'] }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% if data['pin_06_forwardReasons'] %}
+              <div class="app-message govuk-body">
+                <div class="app-messages-metadata">
+                  Forwarded to {{ data['pin_06_appDept'] }} by J. Smith | {{ 0 | getDate }} at 16:52
+                </div>
+                <div class="app-messages-content">
+                  {{ data['pin_06_forwardReasons'] }}
+                </div>
+              </div>
+            {% endif %}
+
+            {% else %}
+              <div class="app-message govuk-body">
+                <div class="app-messages-content">
+                  <p class="none">No comments yet</p>
+                </div>
+              </div>
+          {% endif %}
+
+
+
+        {% if data['pin_06_actionRespond'] == "Approved" or data['pin_06_actionRespond'] == "Declined"  %}
+        {% else %}
+
+      <form class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="pin_06_newComment">
+            Add a comment
+          </label>
+          <textarea class="govuk-textarea" id="pin_06_newComment" name="pin_06_newComment" rows="5"></textarea>
+        </div>
+
+        <div class="moj-button-action">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Save comment
+          </button>
+        </div>
+
+      </form>
+      {% endif %}
+
+      </div>
+      </div>
+
+      </div>
+
+    </div>
+
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#my-autocomplete')
+  })
+</script>
+
+{% endblock %}

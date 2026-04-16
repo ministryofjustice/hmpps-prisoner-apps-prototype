@@ -1,0 +1,118 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Forward this application " %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+    <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <form class="form" action="{{homeurl}}applications/view/swap-vos-pin-credit/application.html">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="changedDept-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <span class="govuk-caption-xl">
+              Supply list of PIN phone contacts
+            </span>
+            <h1 class="govuk-fieldset__heading">
+              {{pageName}}
+            </h1>
+          </legend>
+          <div id="changedDept-hint" class="govuk-hint">
+            Send this application to:
+          </div>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pin_06_appDept" name="pin_06_appDept" type="radio" value="Activities">
+              <label class="govuk-label govuk-radios__label" for="pin_06_appDept">
+                Activities
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pin_06_appDept-2" name="pin_06_appDept" type="radio" value="Chaplaincy">
+              <label class="govuk-label govuk-radios__label" for="pin_06_appDept-2">
+                Chaplaincy
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pin_06_appDept-3" name="pin_06_appDept" type="radio" value="Education">
+              <label class="govuk-label govuk-radios__label" for="pin_06_appDept-3">
+                Education
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pin_06_appDept-4" name="pin_06_appDept" type="radio" value="Healthcare">
+              <label class="govuk-label govuk-radios__label" for="pin_06_appDept-4">
+                Healthcare
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pin_06_appDept-4" name="pin_06_appDept" type="radio" value="OMU">
+              <label class="govuk-label govuk-radios__label" for="pin_06_appDept-6">
+                OMU
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pin_06_appDept-4" name="pin_06_appDept" type="radio" value="Safer Custody">
+              <label class="govuk-label govuk-radios__label" for="pin_06_appDept-7">
+                Safer custody
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="pin_06_appDept-4" name="pin_06_appDept" type="radio" value="Security">
+              <label class="govuk-label govuk-radios__label" for="pin_06_appDept-7">
+                Security
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="more-detail">
+          Reason for forwarding this application (optional)
+        </label>
+        <div id="more-detail-hint" class="govuk-hint">
+          This is added to the comments for other staff to see
+        </div>
+        <textarea class="govuk-textarea" id="pin_06_forwardReasons" name="pin_06_forwardReasons" rows="5"></textarea>
+      </div>
+
+      <div class="moj-button-action">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#my-autocomplete')
+  })
+</script>
+
+{% endblock %}

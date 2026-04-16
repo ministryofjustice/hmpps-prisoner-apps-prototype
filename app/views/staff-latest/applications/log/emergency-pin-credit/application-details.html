@@ -1,0 +1,85 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Log details" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <span class="govuk-caption-xl">Add emergency PIN phone credit</span>
+      <h1 class="govuk-heading-xl">Log details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+
+            <form class="form" action="/staff-latest/applications/log/emergency-pin-credit/check-details">
+
+              {% from "govuk/components/input/macro.njk" import govukInput %}
+
+              {{ govukInput({
+                id: "pin_03_amount",
+                name: "pin_03_amount",
+                label: {
+                  text: "Amount",
+                  classes: "govuk-label--s",
+                  isPageHeading: false
+                },
+                value:  data['pin_03_amount'] ,
+                prefix: {
+                  text: "£"
+                },
+                classes: "govuk-input--width-5",
+                hint: {
+                  text: "Use only multiples of £1, with a limit of £5"
+                }
+              }) }}
+
+              {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+
+              {{ govukCharacterCount({
+                name: "pin_03_reason",
+                id: "pin_03_reason",
+                maxlength: 1000,
+                threshold: 75,
+                value:  data['pin_03_reason'] ,
+                label: {
+                  text: "Reason",
+                  classes: "govuk-label--s"
+                },
+                hint: {
+                  text: "Add a brief summary"
+                }
+              }) }}      
+
+            <div class="moj-button-action">
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+              </button>
+            </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "layouts/launchpad.html" %}
+{% set pageName="John's Profile" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-latest/" %}
+{% set appID = data['url_id'] %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper govuk-!-padding-top-9" id="main-content" role="main">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+            <div class="govuk-panel govuk-panel--confirmation">
+              <h1 class="govuk-panel__title ">
+                You have sent the app
+              </h1>
+              <div class="govuk-panel__body">
+                {% for group, details in data['appGroupsTypes'] %}
+                {% for app in details.apps %}
+                {% if app.app_id == data['appType'] %}
+                {{ app.app_type }}
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+              </div>
+            </div>
+            <p class="govuk-body-l">
+              {# Expecting:
+                - data.appType            -> the selected app_id (e.g. "app_0102")
+                - data.appGroupsTypes     -> an object like { "group_01": { name, apps: [...] }, ... }
+              #}
+
+              {% set groupName = "" %}
+
+              {% for groupKey, details in data.appGroupsTypes %}
+                {% for app in details.apps %}
+                  {% if app.app_id == data.appType %}
+                    {% set groupName = details.name %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+
+              {# Render the group name (or a fallback if not found) #}
+              {{ groupName | default('Unknown group') }}
+
+              now has this application.</p>
+            <p class="govuk-body">You can now log:</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li><a href="/prisoner-latest/applications/new/clear-and-send-new-app">send a new app</a></li>
+            </ul>
+
+            <p class="govuk-body">Or you can view:</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li><a href="{{homeURL}}applications/view/new/">this app</a></li>
+              <li><a href="{{homeURL}}/applications/">all apps</a></li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+{% endblock %}

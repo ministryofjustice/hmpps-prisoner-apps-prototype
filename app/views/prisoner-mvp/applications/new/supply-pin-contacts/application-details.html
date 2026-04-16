@@ -1,0 +1,65 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Log details" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/prisoner-mvp/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <span class="govuk-caption-xl">Supply list of PIN phone contacts</span>
+      <h1 class="govuk-heading-xl">Log details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+
+            <form class="form" action="/application-tool/prisoner-mvp/applications/log/supply-pin-contacts/check-details">
+
+              {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+
+              {{ govukCharacterCount({
+                name: "pin_06_detail",
+                id: "vos-detail",
+                maxlength: 1000,
+                threshold: 75,
+                value:  data['pin_06_detail'] ,
+                label: {
+                  text: "Details (optional)",
+                  classes: "govuk-label--s"
+                },
+                hint: {
+                  text: "Add a brief summary"
+                }
+              }) }}      
+
+            <div class="moj-button-action">
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+              </button>
+            </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}

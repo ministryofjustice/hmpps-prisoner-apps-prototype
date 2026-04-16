@@ -1,0 +1,180 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Messages" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+        <div class="govuk-breadcrumbs">
+          <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/view/">View all applications</a>
+            </li>
+          </ol>
+        </div>
+      </nav>
+
+      <span class="govuk-caption-xl">
+        {% set appID = data['url_id'] %}
+        {% for app in data['appsDB'] %}
+        {% if app.app_id == appID %}
+        {{ app.app_type }}
+        {% endif %}
+        {% endfor %}
+      </span>
+      {% for app in data['appsDB'] %}
+      {% if app.app_id == appID %}
+      <h1 class="govuk-heading-xl">
+        {{ app.app_type }}
+      </h1>
+
+      {% if app.status == "New" %}
+      <strong class="govuk-tag">New</strong>
+      {% endif %}
+
+      {% if app.status == "In progress" %}
+      <strong class="govuk-tag">In progress</strong>
+      {% endif %}
+
+      {% if app.status == "Closed" %}
+      <strong class="govuk-tag">Closed</strong>
+      {% endif %}
+
+      {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+      {% include "./includes/actions.html" %}
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./application?url_id={{appID}}">
+              Application
+            </a>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page" href="./messages?url_id={{appID}}">
+              Messages
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./history?url_id={{appID}}">
+              History
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+
+      <h2 class="govuk-heading-m">Messages and replies</h2>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header">Message</th>
+                <th class="govuk-table__header">From</th>
+                <th class="govuk-table__header">Visible to</th>
+                <th class="govuk-table__header">Date</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              {% for app in data['appsDB'] %}
+              {% if app.app_id == appID %}
+              {% for i in range(1, 6) %}
+              {% if app['message_' + i] %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{ app['message_' + i] }}</td>
+                <td class="govuk-table__cell">{{ app['message_' + i + '_sender'] if app['message_' + i + '_sender'] else
+                  '—' }}</td>
+                <td class="govuk-table__cell">Prisoner and Staff</td>
+                <td class="govuk-table__cell">{{ app['message_' + i + '_datetime'] if app['message_' + i + '_datetime']
+                  else '—' }}</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+              {% endfor %}
+              {% if data.staffComments | length %}
+              {% for comment in data.staffComments %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{ comment.text }}</td>
+                <td class="govuk-table__cell">{{ comment.from }}</td>
+                <td class="govuk-table__cell">{{ comment.visible_to }}</td>
+                <td class="govuk-table__cell">{{ comment.date }}</td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="govuk-grid-column-two-thirds">
+
+
+          {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+          {% else %}
+          <form method="post" action="/staff-latest/applications/view/app/comments?url_id={{ appID }}"
+            class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-label--s" for="newComment">
+                Add a comment
+              </label>
+              <textarea class="govuk-textarea" id="newComment" name="newComment" rows="5"></textarea>
+            </div>
+
+            <div class="moj-button-action">
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                Save comment
+              </button>
+            </div>
+
+          </form>
+          {% endif %}
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#my-autocomplete')
+  })
+</script>
+
+{% endblock %}

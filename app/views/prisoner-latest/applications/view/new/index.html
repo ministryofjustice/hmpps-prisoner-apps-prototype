@@ -1,0 +1,111 @@
+{% extends "layouts/launchpad.html" %}
+{% set pageName="John's Profile" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-latest/" %}
+{% set appID = data['url_id'] %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row" id="main-content">
+
+    <div class="govuk-width-container">
+      <div class="govuk-grid-column-two-thirds">
+      <nav aria-label="breadcrumb">
+        <div class="govuk-breadcrumbs">
+          <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeURL}}">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeURL}}/applications/">Apps</a>
+            </li>
+          </ol>
+        </div>
+      </nav>
+
+
+      {% call govukInsetText({ classes: "govuk-!-margin-0 guidance-panel" }) %}
+        <p>You have already sent this app and it is being processed.</p>
+      {% endcall %}
+    
+      <h1 class="govuk-heading-xl">
+      {% for group, details in data['appGroupsTypes'] %}
+      {% for app in details.apps %}
+      {% if app.app_id == data['appType'] %}
+      {{ app.app_type }}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      </h1>
+
+    <dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Status
+      </dt>
+      <dd class="govuk-summary-list__value">
+
+      <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Date
+      </dt>
+      <dd class="govuk-summary-list__value">
+      <p class="govuk-body">{{ 0 | govDate }}</p>
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Type
+      </dt>
+      <dd class="govuk-summary-list__value">
+      {% for group, details in data['appGroupsTypes'] %}
+      {% for app in details.apps %}
+      {% if app.app_id == data['appType'] %}
+      {{ app.app_type }}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Details
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {% if data['app_detail'] %}
+          {{ data['app_detail'] }}
+        {% else %}
+          Request to swap all VOs from last month
+        {% endif %}
+    </dd>
+      <dd class="govuk-summary-list__actions">
+      </dd>
+    </div>
+  </dl>
+
+  
+    
+
+      <a class="govuk-button govuk-button--secondary" href="{{homeURL}}/applications/">Back to the Apps home page</a>
+    </div>
+
+
+    </div>
+
+</div>
+</div>
+
+
+
+{% endblock %}

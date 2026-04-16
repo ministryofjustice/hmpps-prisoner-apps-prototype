@@ -1,0 +1,84 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Log prisoner details" %}
+{% set version="latest" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+{% set appDept = data['appDept'] %}
+{% set appType = data['appType'] %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <span class="govuk-caption-xl">Log an application</span>
+      <h1 class="govuk-heading-xl">Log prisoner details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+
+            <form class="form" action="{{homeurl}}applications/log/select-app-group.html">
+
+              <div class="govuk-form-group govuk-!-margin-bottom-0">
+                <label class="govuk-label govuk-label--s" for="prisonNumber">
+                  Prison number
+                </label>
+                <input class="govuk-input govuk-input--width-10" id="prisonNumber" name="prisonNumber" type="text" value="{{ data['prisonNumber'] }}">
+                <a href="#" id="prisonNumber-lookup" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                  Find prisoner
+                </a>
+              </div>
+
+              <div class="govuk-form-group govuk-!-margin-bottom-0" style="display: none;">
+                <label class="govuk-label govuk-label--s" for="prisonerName">
+                  Prisoner name
+                </label>
+                <input class="govuk-input govuk-input--width-10" id="prisonerName" name="prisonerName" type="text" value="{{ data['prisonerName'] }}">
+              </div>
+              
+              <div id="prisoner-name-check" class="govuk-inset-text govuk-!-margin-top-0">
+                <p id="prisoner-name-row">Prisoner name: Patel, Taj</p>
+                <p>Alerts: 5 <a href="#">View</a></p>
+              </div>
+
+            <div class="moj-button-action">
+              {% from "govuk/components/button/macro.njk" import govukButton %}
+              {{ govukButton({
+                text: "Continue"
+              }) }}
+            </div>
+
+            </form>
+
+          </div>
+
+          {% include "./data-playback.html" %}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+{% endblock %}
+
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#address-picker')
+  })
+</script>
+
+{% endblock %}

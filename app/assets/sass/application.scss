@@ -1,0 +1,49 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+// 
+
+// Add extra styles here
+
+$govuk-global-styles: true;
+$path: "/public/images/";
+$moj-images-path: "/public/images/";
+
+$moj-page-width: 1170px;
+$govuk-page-width: $moj-page-width;
+
+
+@import './components/accessible-autocomplete';
+@import './components/header-bar';
+@import './components/events-summary';
+@import './components/tiles-panel';
+@import './components/link-tile';
+@import './components/internal-link-tile';
+@import './components/timetable';
+@import './components/timetable-day-row';
+@import './components/card';
+@import './components/transactions';
+@import './components/inset-text';
+
+@import './pages/homepage';
+@import './pages/settings';
+
+@import './local';
+
+
+// -- DPS STYLES 
+
+// App Masthead
+@import './components/app-masthead';
+
+// DPS styles
+@import "./dps/dps.scss";
+@import "./dps/dps-header-bar.scss";
+
+// Managing Apps
+@import "./dps/managing-apps.scss";
+@import "./dps/accessible-autocomplete.scss";
+@import "./dps/filters.scss";
+
+// Admin screens
+@import "./dps/admin.scss"; 

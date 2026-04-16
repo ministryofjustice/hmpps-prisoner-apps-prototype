@@ -1,0 +1,423 @@
+{
+  "group_01": {
+    "name": "Faith and worship",
+    "apps": [
+      {
+        "app_id": "app_0101",
+        "app_type": "Request to see chaplaincy"
+      },
+      {
+        "app_id": "app_0102",
+        "app_type": "Make a general chaplaincy enquiry"
+      },
+      {
+        "app_id": "app_0103",
+        "app_type": "Request to visit dying relative "
+      },
+      {
+        "app_id": "app_0104",
+        "app_type": "Request transfer on compassionate grounds  "
+      }
+    ]
+  },
+  "group_02": {
+    "name": "Finance",
+    "apps": [
+      {
+        "app_id": "app_0201",
+        "app_type": "Apply for a canteen refund"
+      },
+      {
+        "app_id": "app_0202",
+        "app_type": "Donate to charity"
+      },
+      {
+        "app_id": "app_0203",
+        "app_type": "Enquire about account"
+      },
+      {
+        "app_id": "app_0204",
+        "app_type": "Enquire about pay"
+      },
+      {
+        "app_id": "app_0205",
+        "app_type": "Move money from private or spends to savings"
+      },
+      {
+        "app_id": "app_0206",
+        "app_type": "Make a cash disbursement"
+      },
+      {
+        "app_id": "app_0207",
+        "app_type": "Request account balance"
+      },
+      {
+        "app_id": "app_0208",
+        "app_type": "Make a general finance enquiry"
+      }
+    ]
+  },
+  "group_03": {
+    "name": "Governor",
+    "apps": [
+      {
+        "app_id": "app_0301",
+        "app_type": "Make a general governor enquiry"
+      }
+    ]
+  },
+  "group_04": {
+    "name": "Gym",
+    "apps": [
+      {
+        "app_id": "app_0401",
+        "app_type": "Book a gym session"
+      },
+      {
+        "app_id": "app_0402",
+        "app_type": "Enquire about courses"
+      },
+      {
+        "app_id": "app_0403",
+        "app_type": "Join the gym"
+      },
+      {
+        "app_id": "app_0404",
+        "app_type": "Make a general gym enquiry"
+      }
+    ]
+  },
+  "group_05": {
+    "name": "Healthcare",
+    "apps": [
+      {
+        "app_id": "app_0501",
+        "app_type": "Request a healthcare appointment"
+      },
+      {
+        "app_id": "app_0502",
+        "app_type": "Ask to see an optician"
+      },
+      {
+        "app_id": "app_0503",
+        "app_type": "Ask to see a dentist"
+      },
+      {
+        "app_id": "app_0504",
+        "app_type": "Request a repeat prescription"
+      },
+      {
+        "app_id": "app_0505",
+        "app_type": "Make a general healthcare enquiry"
+      }
+    ]
+  },
+  "group_06": {
+    "name": "Incentives",
+    "apps": [
+      {
+        "app_id": "app_0601",
+        "app_type": "Appeal an incentives decision"
+      },
+      {
+        "app_id": "app_0602",
+        "app_type": "Apply for status increase"
+      },
+      {
+        "app_id": "app_0603",
+        "app_type": "Make a general incentives enquiry"
+      }
+    ]
+  },
+  "group_07": {
+    "name": "Jobs and courses",
+    "apps": [
+      {
+        "app_id": "app_0701",
+        "app_type": "Apply for education"
+      },
+      {
+        "app_id": "app_0702",
+        "app_type": "Apply for a prison job or job change"
+      },
+      {
+        "app_id": "app_0703",
+        "app_type": "Request to be a Listener for the Samaritans"
+      },
+      {
+        "app_id": "app_0704",
+        "app_type": "Request to see an Education and Research worker"
+      },
+      {
+        "app_id": "app_0705",
+        "app_type": "Make a general activities and education enquiry"
+      }
+    ]
+  },
+  "group_08": {
+    "name": "Library",
+    "apps": [
+      {
+        "app_id": "app_0801",
+        "app_type": "Join the library"
+      },
+      {
+        "app_id": "app_0802",
+        "app_type": "Order from the library "
+      },
+      {
+        "app_id": "app_0803",
+        "app_type": "Visit the library"
+      },
+      {
+        "app_id": "app_0804",
+        "app_type": "Make a general library enquiry"
+      }
+    ]
+  },
+  "group_09": {
+    "name": "Offender management unit (OMU)",
+    "apps": [
+      {
+        "app_id": "app_0901",
+        "app_type": "Ask about offender behaviour programmes"
+      },
+      {
+        "app_id": "app_0902",
+        "app_type": "Query about equalities"
+      },
+      {
+        "app_id": "app_0903",
+        "app_type": "Query about court "
+      },
+      {
+        "app_id": "app_0904",
+        "app_type": "Query about prison transfers"
+      },
+      {
+        "app_id": "app_0905",
+        "app_type": "Query about release date"
+      },
+      {
+        "app_id": "app_0906",
+        "app_type": "Request to see case admin"
+      },
+      {
+        "app_id": "app_0907",
+        "app_type": "Request to see an OMU worker"
+      },
+      {
+        "app_id": "app_0908",
+        "app_type": "Request to see prison POM"
+      },
+      {
+        "app_id": "app_0909",
+        "app_type": "Request to see probation POM "
+      },
+      {
+        "app_id": "app_0910",
+        "app_type": "Make a general OMU enquiry"
+      }
+    ]
+  },
+  "group_10": {
+    "name": "PIN phones",
+    "apps": [
+      {
+        "app_id": "app_1001",
+        "app_type": "Add emergency phone credit"
+      },
+      {
+        "app_id": "app_1002",
+        "app_type": "Add an official PIN phone contact"
+      },
+      {
+        "app_id": "app_1003",
+        "app_type": "Add a social PIN phone contact"
+      },
+      {
+        "app_id": "app_1004",
+        "app_type": "Remove a PIN phone contact"
+      },
+      {
+        "app_id": "app_1005",
+        "app_type": "Make a general PIN phone enquiry"
+      }
+    ]
+  },
+  "group_11": {
+    "name": "Police",
+    "apps": [
+      {
+        "app_id": "app_1101",
+        "app_type": "Request to see a police intelligence officer (PIO)"
+      },
+      {
+        "app_id": "app_1102",
+        "app_type": "Make a general police enquiry"
+      }
+    ]
+  },
+  "group_12": {
+    "name": "Property",
+    "apps": [
+      {
+        "app_id": "app_1201",
+        "app_type": "Access stored property and valuables"
+      },
+      {
+        "app_id": "app_1202",
+        "app_type": "Ask about property handed out"
+      },
+      {
+        "app_id": "app_1203",
+        "app_type": "Ask about property sent in"
+      },
+      {
+        "app_id": "app_1204",
+        "app_type": "Gift items to another prisoner"
+      },
+      {
+        "app_id": "app_1205",
+        "app_type": "Request a facilities list"
+      },
+      {
+        "app_id": "app_1205",
+        "app_type": "Request a new mattress"
+      },
+      {
+        "app_id": "app_1206",
+        "app_type": "Request property from Branston"
+      },
+      {
+        "app_id": "app_1207",
+        "app_type": "Make a general property enquiry"
+      }
+    ]
+  },
+  "group_13": {
+    "name": "Resettlement",
+    "apps": [
+      {
+        "app_id": "app_1301",
+        "app_type": "Ask about the discharge grant"
+      },
+      {
+        "app_id": "app_1302",
+        "app_type": "Ask about housing on release"
+      },
+      {
+        "app_id": "app_1303",
+        "app_type": "Ask about probation"
+      },
+      {
+        "app_id": "app_1304",
+        "app_type": "Contact a resettlement practitioner"
+      },
+      {
+        "app_id": "app_1305",
+        "app_type": "Open a bank account before release"
+      },
+      {
+        "app_id": "app_1306",
+        "app_type": "Make a general resettlement query"
+      }
+    ]
+  },
+  "group_15": {
+    "name": "Safety",
+    "apps": [
+      {
+        "app_id": "app_1401",
+        "app_type": "Request for support"
+      },
+      {
+        "app_id": "app_1402",
+        "app_type": "Help with debt"
+      },
+      {
+        "app_id": "app_1403",
+        "app_type": "Order a distraction pack"
+      },
+      {
+        "app_id": "app_1404",
+        "app_type": "Help with bullying"
+      },
+      {
+        "app_id": "app_1405",
+        "app_type": "Help with gang-related issues"
+      },
+      {
+        "app_id": "app_1406",
+        "app_type": "Contact the violence reduction team"
+      },
+      {
+        "app_id": "app_1407",
+        "app_type": "Make a general safety enquiry"
+      }
+    ]
+  },
+  "group_15": {
+    "name": "Transfers",
+    "apps": [
+      {
+        "app_id": "app_1501",
+        "app_type": "Inter-prison transfer"
+      },
+      {
+        "app_id": "app_1502",
+        "app_type": "Make a general transfer enquiry"
+      }
+    ]
+  },
+  "group_16": {
+    "name": "Shopping",
+    "apps": [
+      {
+        "app_id": "app_1601",
+        "app_type": "Emergency canteen"
+      },
+      {
+        "app_id": "app_1602",
+        "app_type": "Canteen query"
+      },
+      {
+        "app_id": "app_1603",
+        "app_type": "Catalogue order"
+      },
+      {
+        "app_id": "app_1604",
+        "app_type": "Catalogue order return"
+      }
+    ]
+  },
+  "group_17": {
+    "name": "Visits",
+    "apps": [
+      {
+        "app_id": "app_1701",
+        "app_type": "Add or remove a visitor"
+      },
+      {
+        "app_id": "app_1702",
+        "app_type": "Apply for AV (Accumulated Visits)"
+      },
+      {
+        "app_id": "app_1703",
+        "app_type": "Apply for a video call"
+      },
+      {
+        "app_id": "app_1704",
+        "app_type": "Book a visit"
+      },
+      {
+        "app_id": "app_1705",
+        "app_type": "Swap VOs for phone credit"
+      },
+      {
+        "app_id": "app_1706",
+        "app_type": "Make a general visits query"
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Select application group" %}
+{% set version="latest" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+    <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+
+          <form class="form" action="">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="chooseApp-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <span class="govuk-caption-xl">Log an application</span>
+            <h1 class="govuk-fieldset__heading">
+              List of all apps
+            </h1>
+          </legend>
+          <div id="chooseApp-hint" class="govuk-hint">
+          </div>
+        <div class="govuk-radios" data-module="govuk-radios">
+            
+          {% for group, details in data['groupsAndGeneralApps'] %}
+                  {% for app in details.apps %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ app.app_id }}" name="appType" type="radio" value="{{ app.app_id }}">
+                    <label class="govuk-label govuk-radios__label" for="{{ app.app_id }}">
+                      {{ app.app_type }}
+                    </label>
+                  </div>
+                  {% endfor %}    
+
+          {% endfor %}
+
+          </div>
+        </fieldset>
+      </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}

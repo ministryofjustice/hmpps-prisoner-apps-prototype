@@ -1,0 +1,103 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="View all applications in your prison" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-width-container">
+
+  <nav aria-label="breadcrumb">
+    <div class="govuk-breadcrumbs">
+      <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <span class="govuk-caption-xl">Applications</span>
+  <h1 class="govuk-heading-xl">
+    {{pageName}}
+  </h1>
+</div>
+
+<div class="dps-content">
+  <div class="govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        {% include "./includes/filters.html" %}
+      </div>
+
+      <div class="govuk-tabs govuk-grid-column-two-thirds" data-module="govuk-tabs">
+        <h2 class="govuk-tabs__title">Applications</h2>
+        <div class="applications-table">
+          <table class="govuk-table" id="applications-table" data-module="moj-sortable-table">
+            <caption class="govuk-table__caption govuk-table__caption--m">
+              Showing <span class="count">0</span> applications
+            </caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header" aria-sort="descending">Date</th>
+                <th scope="col" class="govuk-table__header">Application type</th>
+                <th scope="col" class="govuk-table__header">From</th>
+                <th scope="col" class="govuk-table__header">Messages</th>
+                <th scope="col" class="govuk-table__header"></th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body" id="results-tbody">
+            </tbody>
+          </table>
+          <div class="no-results" style="display: none;">
+            No applications found matching your criteria.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  // Set session data and homeurl globally before other scripts load
+  {% if sessionApplications | length %}
+  window.sessionApplications = {{ sessionApplications | dump | safe }};
+  {% else %}
+  window.sessionApplications = [];
+  {% endif %}
+
+  // Add homeurl to JavaScript
+  window.homeurl = "{{ homeurl }}";
+
+  console.log('Session data loaded:', window.sessionApplications.length, 'applications');
+  console.log('Home URL set:', window.homeurl);
+</script>
+
+<!-- Load the filters JavaScript -->
+<script src="/public/javascripts/filters.js"></script>
+
+<script>
+  // Initialize GOV.UK Frontend components after DOM loads
+  if (typeof GOVUKFrontend !== 'undefined') {
+    GOVUKFrontend.initAll();
+  }
+
+  // Initialize accessible autocomplete if it exists
+  if (typeof accessibleAutocomplete !== 'undefined' && document.querySelector('#prisoner-autocomplete')) {
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: document.querySelector('#prisoner-autocomplete')
+    });
+  }
+</script>
+{% endblock %}

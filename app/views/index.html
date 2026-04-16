@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+
+    <h1 class="govuk-heading-l">
+      {{ serviceName }}
+    </h1>
+
+    <h2 class="govuk-heading-m">
+      Prisoner interface
+    </h2>
+
+    <p class="govuk-body"><a href="/prisoner-latest/">View latest version</a></p>
+    <p class="govuk-body"><a href="/prisoner-mvp/">View MVP version</a></p>
+
+    <h2 class="govuk-heading-m">
+      Staff interface
+    </h2>
+    <p class="govuk-body"><a href="/staff-latest/">View latest version</a></p>
+
+
+  </div>
+</div>
+
+{% endblock %}

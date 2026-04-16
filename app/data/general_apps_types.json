@@ -1,0 +1,197 @@
+[
+  {
+    "app_id": "app_01",
+    "app_type": "Access to stored property",
+    "no_apps": 30
+  },
+  {
+    "app_id": "app_02",
+    "app_type": "Facilities list",
+    "no_apps": 0
+  },
+  {
+    "app_id": "app_03",
+    "app_type": "Gift items to another prisoner",
+    "no_apps": 7
+  },
+  {
+    "app_id": "app_04",
+    "app_type": "Property handed out",
+    "no_apps": 0
+  },
+  {
+    "app_id": "app_05",
+    "app_type": "Property sent in",
+    "no_apps": 26
+  },
+  {
+    "app_id": "app_06",
+    "app_type": "New mattress",
+    "no_apps": 4
+  },
+  {
+    "app_id": "app_07",
+    "app_type": "Add emergency phone credit",
+    "no_apps": 28
+  },
+  {
+    "app_id": "app_08",
+    "app_type": "Add official PIN phone contact",
+    "no_apps": 30
+  },
+  {
+    "app_id": "app_09",
+    "app_type": "Add social PIN phone contact",
+    "no_apps": 13
+  },
+  {
+    "app_id": "app_10",
+    "app_type": "Remove a PIN phone contact",
+    "no_apps": 0
+  },
+  {
+    "app_id": "app_11",
+    "app_type": "Inter-prison transfer",
+    "no_apps": 28
+  },
+  {
+    "app_id": "app_12",
+    "app_type": "Apply for education",
+    "no_apps": 8
+  },
+  {
+    "app_id": "app_13",
+    "app_type": "Request a prison job",
+    "no_apps": 22
+  },
+  {
+    "app_id": "app_14",
+    "app_type": "Request a wing job",
+    "no_apps": 22
+  },
+  {
+    "app_id": "app_15",
+    "app_type": "Join library",
+    "no_apps": 5
+  },
+  {
+    "app_id": "app_16",
+    "app_type": "Governor request",
+    "no_apps": 4
+  },
+  {
+    "app_id": "app_17",
+    "app_type": "Canteen refund",
+    "no_apps": 16
+  },
+  {
+    "app_id": "app_18",
+    "app_type": "Donate to charity",
+    "no_apps": 2
+  },
+  {
+    "app_id": "app_19",
+    "app_type": "Move money",
+    "no_apps": 11
+  },
+  {
+    "app_id": "app_20",
+    "app_type": "Open bank account",
+    "no_apps": 28
+  },
+  {
+    "app_id": "app_21",
+    "app_type": "Pay enquiry",
+    "no_apps": 15
+  },
+  {
+    "app_id": "app_22",
+    "app_type": "Request bank balance",
+    "no_apps": 27
+  },
+  {
+    "app_id": "app_23",
+    "app_type": "Spends query",
+    "no_apps": 23
+  },
+  {
+    "app_id": "app_24",
+    "app_type": "Join the gym",
+    "no_apps": 11
+  },
+  {
+    "app_id": "app_25",
+    "app_type": "Book a gym session",
+    "no_apps": 0
+  },
+  {
+    "app_id": "app_26",
+    "app_type": "IEP appeal",
+    "no_apps": 25
+  },
+  {
+    "app_id": "app_27",
+    "app_type": "Probation officer details request",
+    "no_apps": 6
+  },
+  {
+    "app_id": "app_28",
+    "app_type": "Healthcare application",
+    "no_apps": 17
+  },
+  {
+    "app_id": "app_29",
+    "app_type": "Repeat prescription",
+    "no_apps": 27
+  },
+  {
+    "app_id": "app_30",
+    "app_type": "Emergency canteen request",
+    "no_apps": 23
+  },
+  {
+    "app_id": "app_31",
+    "app_type": "Canteen query",
+    "no_apps": 19
+  },
+  {
+    "app_id": "app_32",
+    "app_type": "Catalogue order",
+    "no_apps": 6
+  },
+  {
+    "app_id": "app_33",
+    "app_type": "Catalogue order return",
+    "no_apps": 21
+  },
+  {
+    "app_id": "app_34",
+    "app_type": "Catalogue query",
+    "no_apps": 11
+  },
+  {
+    "app_id": "app_35",
+    "app_type": "Add or remove a visitor",
+    "no_apps": 10
+  },
+  {
+    "app_id": "app_36",
+    "app_type": "Apply for a video visit",
+    "no_apps": 10
+  },
+  {
+    "app_id": "app_37",
+    "app_type": "Book a visit",
+    "no_apps": 15
+  },
+  {
+    "app_id": "app_38",
+    "app_type": "Swap VOs for phone credit",
+    "no_apps": 11
+  },
+  {
+    "app_id": "app_40",
+    "app_type": "General",
+    "no_apps": 67
+  }
+]

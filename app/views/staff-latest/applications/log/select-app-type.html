@@ -1,0 +1,72 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Select application type" %}
+{% set version="latest" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+{% set appGroup = data['appGroup'] %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+      {% for group, details in data['appGroupsTypes'] %}
+      {% if group == appGroup %}
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+
+          <form class="form" action="/staff-latest/applications/log/select-dept?url_group={{appGroup}}&?url_type={{appType}}">
+
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset" aria-describedby="chooseApp-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                  <span class="govuk-caption-xl">{{ details.name }}</span>
+                  <h1 class="govuk-fieldset__heading">
+                    Select application type
+                  </h1>
+                </legend>
+                <div id="chooseApp-hint" class="govuk-hint">
+                </div>
+                <div id="appTypes" class="govuk-radios" data-module="govuk-radios">
+
+                  {% for app in details.apps %}
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="{{ app.app_id }}" name="appType" type="radio" value="{{ app.app_id }}">
+                    <label class="govuk-label govuk-radios__label" for="{{ app.app_id }}">
+                      {{ app.app_type }}
+                    </label>
+                  </div>
+                  {% endfor %}    
+
+                </div>
+              </fieldset>
+            </div>
+            <div class="moj-button-action">
+              <button name="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+      {% endif %}
+      {% endfor %}
+
+
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}

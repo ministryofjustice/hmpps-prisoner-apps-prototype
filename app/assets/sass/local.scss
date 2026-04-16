@@ -1,0 +1,60 @@
+body.launchpad  > .govuk-width-container {
+  max-width: none;
+  margin-right: auto;
+  margin-left: auto;
+  .govuk-width-container {
+    max-width: 1170px;
+    margin-right: max(30px, calc(15px + env(safe-area-inset-right)));
+    margin-left: max(30px, calc(15px + env(safe-area-inset-left)));
+    @media (max-width: 40.0625em) {
+      margin-right: max(15px, calc(15px + env(safe-area-inset-right)));
+      margin-left: max(15px, calc(15px + env(safe-area-inset-left)));
+    }
+    @media (min-width: 1230px) {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+}
+
+body.launchpad footer > .govuk-width-container {
+   max-width: 1170px;
+    margin-right: max(30px, calc(15px + env(safe-area-inset-right)));
+    margin-left: max(30px, calc(15px + env(safe-area-inset-left)));
+    @media (min-width: 1230px) {
+     margin-right: auto;
+      margin-left: auto;
+  }
+}  
+
+
+@media (min-width: 1230px) {
+.govuk-width-container {
+  section.govuk-width-container {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}  
+}
+
+@media only screen and (orientation: landscape) {
+  .govuk-main-wrapper.hidden-tiles {
+    min-height: 0 !important;
+  }
+}
+
+.container-background-black {
+  background-color: govuk-colour('black');
+}
+
+.hidden {
+  display: none;
+}
+
+.moj-filter__tag::after {
+  background-image: url(/public/images/icon-tag-remove-cross.svg);
+}
+
+.moj-filter__tag:hover::after {
+  background-image: url(/public/images/icon-tag-remove-cross-white.svg);
+}

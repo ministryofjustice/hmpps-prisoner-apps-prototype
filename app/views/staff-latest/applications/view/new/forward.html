@@ -1,0 +1,99 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Forward this application" %}
+{% set version="latest" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+{% set selectedAppId = data['appType'] %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+    <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <form class="form" action="{{homeurl}}applications/view/new/application">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="changedDept-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <span class="govuk-caption-xl">
+      {% for group, details in data['groupsAndGeneralApps'] %}
+        {% for app in details.apps %}
+          {% if app.app_id == data['appType'] %}
+              {{ app.app_type }}
+              {% endif %}
+              {% endfor %}
+              {% endfor %}
+                        </span>
+            <h1 class="govuk-fieldset__heading">
+              {{pageName}}
+            </h1>
+          </legend>
+          <div class="govuk-form-group" style="display: none;">
+            <label class="govuk-label" for="width-10">
+              Application ID
+            </label>
+            <input class="govuk-input govuk-input--width-10" id="url_id" name="url_id" type="text" value="{{ data['url_id'] }}">
+          </div>
+
+          <div id="changedDept-hint" class="govuk-hint">
+            Send to:
+          </div>
+
+          <div class="govuk-radios" data-module="govuk-radios">
+            {% for departments in data['departments'] %}
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="{{ departments.department_id }}" name="departmentFilter" type="radio" value="{{ departments.department_id }}">
+              <label class="govuk-label govuk-radios__label" for="{{ departments.department_id }}">
+                {{ departments.department_name }}
+              </label>
+            </div>
+            {% endfor %}
+
+          </div>
+        </fieldset>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="more-detail">
+          Reason for forwarding (optional)
+        </label>
+        <div id="more-detail-hint" class="govuk-hint">
+          This is added to the comments section for other staff to see
+        </div>
+        <textarea class="govuk-textarea" id="forwardReasons" name="forwardReasons" rows="5"></textarea>
+      </div>
+
+      <div class="moj-button-action">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+      </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#my-autocomplete')
+  })
+</script>
+
+{% endblock %}

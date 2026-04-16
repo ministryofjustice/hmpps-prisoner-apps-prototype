@@ -1,0 +1,286 @@
+<div class="panel-header">
+	<h2 class="govuk-heading-m">Pending applications</h2>
+</div>
+<div class="panel-content">
+
+	<div id="noResults" style="display:none;">
+		<p>No results found.</p>
+	</div>
+
+	<div id="results">
+		<table id="dataTable2" class="dataTable govuk-table apps-list" data-module="moj-sortable-table">
+			<thead class="govuk-table__head">
+				<tr class="govuk-table__row">
+					<th scope="col" class="govuk-table__header nowrap" aria-sort="descending">Date</th>
+					<th scope="col" class="govuk-table__header">Application type</th>
+					<th scope="col" class="govuk-table__header">From</th>
+					<th scope="col" class="govuk-table__header">Department</th>
+					<th scope="col" class="govuk-table__header"></th>
+				</tr>
+			</thead>
+			<tbody class="govuk-table__body">
+				<!-- If you have justed added an deptsAndGeneralApps application-->
+				{% if data['general_app'] === 'submitted' %}
+				<tr class="govuk-table__row "
+					data-tags="Patel, Taj {{ data['pin_07_prisonNumber'] }} ">
+					<td class=" govuk-table__cell nowrap">{{ 0 | getDate }}</td>
+					<td class="govuk-table__cell">
+					  {{ data['checkappType'] }}
+						<span class="govuk-table__subtext govuk-body-s">
+					  {{ data['checkAppGroup'] }}
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						Patel, Taj
+						<span class="govuk-table__subtext govuk-body-s">
+							{% if data['app_prisonNumber'] %}
+							{{ data['app_prisonNumber'] }}
+							{% else %}
+							(AB1234C)
+							{% endif %}
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						{% if data['app_dept'] %}
+						{{ data['app_dept'] }}
+						{% else %}
+						Business Hub
+						{% endif %}
+					</td>
+					<td class="govuk-table__cell"><a href="{{homeurl}}applications/view/new/application.html">View</a>
+					</td>
+				</tr>
+				{% endif %}
+				<!-- If you have justed added an Add new social PIN phone contact application-->
+				{% if data['pin_01_submitted'] === 'submitted' %}
+				<tr class="govuk-table__row "
+					data-tags="Patel, Taj {{ data['prisonNumber'] }} Add new social PIN phone contact"">
+					<td class=" govuk-table__cell nowrap">{{ 0 | getDate }}</td>
+					<td class="govuk-table__cell">
+					Add new social PIN phone contact
+						<span class="govuk-table__subtext govuk-body-s">
+					  PIN phones
+						</span>
+				</td>
+					<td class="govuk-table__cell">
+						{% if data['prisonerName'] %}
+						{{ data['prisonerName'] }}
+						{% else %}
+						Patel, Taj
+						{% endif %}
+						<span class="govuk-table__subtext govuk-body-s">
+							{% if data['prisonNumber'] %}
+							{{ data['prisonNumber'] }}
+							{% else %}
+							(AB1234C)
+							{% endif %}
+						</span>
+					</td>
+					<td class="govuk-table__cell">Business Hub</td>
+					<td class="govuk-table__cell"><a
+							href="{{homeurl}}applications/view/new-social-pin-contact/application.html">View</a></td>
+				</tr>
+				{% endif %}
+				<!-- If you have justed added an Add new official PIN phone contact application-->
+				{% if data['pin_02_submitted'] === 'submitted' %}
+				<tr class="govuk-table__row "
+					data-tags="Patel, Taj {{ data['prisonNumber'] }} Add emergency PIN phone credit"">
+					<td class=" govuk-table__cell nowrap">{{ 0 | getDate }}</td>
+					<td class="govuk-table__cell">
+						Add new official PIN phone contact
+						<span class="govuk-table__subtext govuk-body-s">
+					  PIN phones
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						{% if data['prisonerName'] %}
+						{{ data['prisonerName'] }}
+						{% else %}
+						Patel, Taj
+						{% endif %}
+						<span class="govuk-table__subtext govuk-body-s">
+							{% if data['prisonNumber'] %}
+							{{ data['prisonNumber'] }}
+							{% else %}
+							(AB1234C)
+							{% endif %}
+						</span>
+					</td>
+					<td class="govuk-table__cell">Business Hub</td>
+					<td class="govuk-table__cell"><a
+							href="{{homeurl}}applications/view/new-official-pin-contact/application.html">View</a></td>
+				</tr>
+				{% endif %}
+
+				<!-- If you have justed added an Add emergency PIN phone credit application-->
+				{% if data['pin_03_submitted'] === 'submitted' %}
+				<tr class="govuk-table__row "
+					data-tags="Patel, Taj {{ data['prisonNumber'] }} Add emergency PIN phone credit"">
+					<td class=" govuk-table__cell nowrap">{{ 0 | getDate }}</td>
+					<td class="govuk-table__cell">
+						Add emergency PIN phone credit
+						<span class="govuk-table__subtext govuk-body-s">
+					  PIN phones
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						{% if data['prisonerName'] %}
+						{{ data['prisonerName'] }}
+						{% else %}
+						Patel, Taj
+						{% endif %}
+						<span class="govuk-table__subtext govuk-body-s">
+							{% if data['prisonNumber'] %}
+							{{ data['prisonNumber'] }}
+							{% else %}
+							(AB1234C)
+							{% endif %}
+						</span>
+					</td>
+					<td class="govuk-table__cell">Business Hub</td>
+					<td class="govuk-table__cell"><a
+							href="{{homeurl}}applications/view/emergency-pin-credit/application.html">View</a></td>
+				</tr>
+				{% endif %}
+				<!-- If you have just added a Remove PIN phone contact application-->
+				{% if data['pin_04_submitted'] === 'submitted' %}
+				<tr class="govuk-table__row "
+					data-tags="Patel, Taj {{ data['prisonNumber'] }} Remove PIN phone contact"">
+					<td class=" govuk-table__cell nowrap">{{ 0 | getDate }}</td>
+					<td class="govuk-table__cell">
+						Remove PIN phone contact
+						<span class="govuk-table__subtext govuk-body-s">
+					  PIN phones
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						{% if data['prisonerName'] %}
+						{{ data['prisonerName'] }}
+						{% else %}
+						Patel, Taj
+						{% endif %}
+						<span class="govuk-table__subtext govuk-body-s">
+							{% if data['prisonNumber'] %}
+							{{ data['prisonNumber'] }}
+							{% else %}
+							(AB1234C)
+							{% endif %}
+						</span>
+					</td>
+					<td class="govuk-table__cell">Business Hub</td>
+					<td class="govuk-table__cell"><a
+							href="{{homeurl}}applications/view/remove-pin-phone-contact/application.html">View</a></td>
+				</tr>
+				{% endif %}
+
+				<!-- If you have justed added a Swap VOs for PIN credit application-->
+				{% if data['pin_05_submitted'] === 'submitted' %}
+				<tr class="govuk-table__row"
+					data-tags="Patel, Taj {{ data['prisonNumber'] }} Business Hub Swap VOs for PIN credit"">
+					<td class=" govuk-table__cell nowrap">{{ 0 | getDate }}</td>
+					<td class="govuk-table__cell">
+						Swap VOs for PIN credit
+						<span class="govuk-table__subtext govuk-body-s">
+					  Visits
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						{% if data['prisonerName'] %}
+						{{ data['prisonerName'] }}
+						{% else %}
+						Patel, Taj
+						{% endif %}
+						<span class="govuk-table__subtext govuk-body-s">
+							{% if data['prisonNumber'] %}
+							{{ data['prisonNumber'] }}
+							{% else %}
+							(AB1234C)
+							{% endif %}
+						</span>
+					</td>
+					<td class="govuk-table__cell">Business Hub</td>
+					<td class="govuk-table__cell"><a
+							href="{{homeurl}}applications/view/swap-vos-pin-credit/application.html">View</a></td>
+				</tr>
+				{% endif %}
+				<!-- If you have justed added a Supply list of PIN contacts application-->
+				{% if data['pin_06_submitted'] === 'submitted' %}
+				<tr class="govuk-table__row"
+					data-tags="Patel, Taj {{ data['prisonNumber'] }} Business Hub Supply list of PIN phone contacts"">
+					<td class=" govuk-table__cell nowrap">{{ 0 | getDate }}</td>
+					<td class="govuk-table__cell">
+						Supply list of PIN phone contacts
+						<span class="govuk-table__subtext govuk-body-s">
+					  PIN phones
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						{% if data['prisonerName'] %}
+						{{ data['prisonerName'] }}
+						{% else %}
+						Patel, Taj
+						{% endif %}
+						<span class="govuk-table__subtext govuk-body-s">
+							{% if data['prisonNumber'] %}
+							{{ data['prisonNumber'] }}
+							{% else %}
+							(AB1234C)
+							{% endif %}
+						</span>
+					</td>
+					<td class="govuk-table__cell">Business Hub</td>
+					<td class="govuk-table__cell"><a
+							href="{{homeurl}}applications/view/supply-pin-contacts/application.html">View</a></td>
+				</tr>
+				{% endif %}
+				<!-- Load all other apps from json -->
+				{% for app in data['allMVP2Apps'] %}
+				{% if app.decision == null %}
+				<tr class="govuk-table__row"
+					data-tags="{{ app.prisoner_name }} ({{ app.prisoner_number }}) {{ app.current_dept }} {{ app.app_type }}"">
+					<td class=" govuk-table__cell nowrap reldate">{{ app.date_received }}</td>
+					<td class="govuk-table__cell">
+						{{ app.app_type }}
+						<span class="govuk-table__subtext govuk-body-s">
+					  {{ app.app_group }}
+						</span>
+					</td>
+					<td class="govuk-table__cell">
+						{{ app.prisoner_name }}
+						<span class="govuk-table__subtext govuk-body-s">{{ app.prisoner_number }}</span>
+					</td>
+					<td class="govuk-table__cell">{{ app.current_dept }}</td>
+					<td class="govuk-table__cell"><a href="./app/application?url_id={{ app.app_id }}">View<span
+								class="govuk-visually-hidden"> {{ app.app_type }} for {{ app.prisoner_name }} from {{
+								app.date_received }}</span></a></td>
+				</tr>
+				{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+		{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+		{{ govukPagination({
+		next: {
+		href: "#"
+		},
+		items: [
+		{
+		number: 1,
+		current: true,
+		href: "#"
+		},
+		{
+		number: 2,
+		href: "#"
+		},
+		{
+		number: 3,
+		href: "#"
+		}
+		]
+		}) }}
+
+	</div>
+
+</div>

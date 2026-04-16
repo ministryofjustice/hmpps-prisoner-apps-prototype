@@ -1,0 +1,62 @@
+[
+  {
+    "department_id": "dept_01",
+    "department_name": "Activities"
+  },
+  {
+    "department_id": "dept_02",
+    "department_name": "Business Hub"
+  },
+  {
+    "department_id": "dept_03",
+    "department_name": "Careers Advice (CIAG)"
+  },
+  {
+    "department_id": "dept_04",
+    "department_name": "Chaplaincy"
+  },
+  {
+    "department_id": "dept_05",
+    "department_name": "Education, Work and Skills"
+  },
+  {
+    "department_id": "dept_06",
+    "department_name": "Gym"
+  },
+  {
+    "department_id": "dept_07",
+    "department_name": "Healthcare"
+  },
+  {
+    "department_id": "dept_08",
+    "department_name": "OCA"
+  },
+  {
+    "department_id": "dept_09",
+    "department_name": "OMU"
+  },
+  {
+    "department_id": "dept_10",
+    "department_name": "PINs"
+  },
+  {
+    "department_id": "dept_11",
+    "department_name": "Reception"
+  },
+  {
+    "department_id": "dept_12",
+    "department_name": "Safer Custody"
+  },
+  {
+    "department_id": "dept_13",
+    "department_name": "Security"
+  },
+  {
+    "department_id": "dept_14",
+    "department_name": "Shannon Trust"
+  },
+  {
+    "department_id": "dept_15",
+    "department_name": "Visits"
+  }
+]

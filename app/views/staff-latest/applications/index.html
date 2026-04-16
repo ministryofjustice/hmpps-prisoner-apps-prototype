@@ -1,0 +1,78 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Home" %}
+{% set version="latest" %}
+{% set phasebanner="no" %}
+{% set bodyClasses = 'dps landing-page staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+
+{% block content %}
+
+<div class="dps-landing-page-header__container__wrapper">
+  <div class="govuk-width-container">
+    <div class="dps-landing-page-header__container">
+      <div class="dps-landing-page-header__text">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+
+           {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+            {{ govukBreadcrumbs({
+              classes: "govuk-breadcrumbs--inverse govuk-breadcrumbs__list",
+              items: [
+                {
+                  text: "Digital Prison Services",
+                  href: "/application-tool/mvp"
+                }
+              ]
+            }) }}
+            
+            <h1 class="govuk-heading-l">Applications</h1>
+            <p class="govuk-body-l">Log, action and reply to prisoner applications. You can also forward applications to other departments.</p>
+            <p class="govuk-body">Give us your <a href="">feedback</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dps-landing-page-content__container__wrapper">
+  <div class="govuk-width-container">
+    <div class="dps-landing-page-content__container">
+      <div class="dps-landing-page-content__list">
+
+            <ul class="govuk-grid-row card-group" id="sortable">
+              <li class="govuk-grid-column-one-third card-group__item" id="tile_001">
+                <div class="card card--clickable card_dps" data-test="log-a-new-application">
+                  <h2 class="govuk-heading-m card__heading">
+                    <a class="govuk-link card__link govuk-link--no-visited-state" href="./log/prisoner-details.html">
+                      Log a new application
+                    </a>
+                  </h2>
+                  <p class="govuk-body card__description">
+                    Log a new application to process.
+                  </p>
+                </div>
+              </li>
+              <li class="govuk-grid-column-one-third card-group__item" id="tile_002">
+                <div class="card card--clickable card_dps" data-test="view-all-applications">
+                  <h2 class="govuk-heading-m card__heading">
+                    <a class="govuk-link card__link govuk-link--no-visited-state" href="./view/">
+                      View all applications
+                    </a>
+                  </h2>
+                  <p class="govuk-body card__description">
+                    View all applications logged in your prison.
+                  </p>
+                </div>
+              </li>
+            </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="History" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+  			<div class="govuk-breadcrumbs">
+  				<ol class="govuk-breadcrumbs__list">
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+  					</li>
+            <li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/view/">View all applications</a>
+  					</li>
+  				</ol>
+  			</div>
+  		</nav>
+
+      
+      <span class="govuk-caption-xl">
+        {% set appID = data['url_id'] %}
+        {% for app in data['appsDB'] %}
+        {% if app.app_id == appID  %}
+        {{ app.app_type }}
+        {% endif  %}
+        {% endfor  %}
+      </span>
+        {% for app in data['appsDB'] %}
+          {% if app.app_id == appID  %}
+          <h1 class="govuk-heading-xl">
+            {{ app.app_type }}
+          </h1>
+
+          {% if app.status == "New"  %}
+          <strong class="govuk-tag">New</strong>
+          {% endif  %}
+
+          {% if app.status == "In progress"  %}
+          <strong class="govuk-tag">In progress</strong>
+          {% endif  %}
+
+          {% if app.status == "Closed"  %}
+          <strong class="govuk-tag">Closed</strong>
+          {% endif  %}
+          
+          {% endif  %}
+          {% endfor  %}
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+    {% include "./includes/actions.html" %}
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./application?url_id={{appID}}">
+              Application 
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./messages?url_id={{appID}}">
+              Messages
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link"  aria-current="page" href="./history?url_id={{appID}}">
+              History
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+
+      
+      <h2 class="govuk-heading-m">History of this application</h2>
+
+      {% set appID = data['url_id'] %}
+      {% for app in data['appsDB'] %}
+      {% if app.app_id == appID  %}
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <div class="app-message govuk-body">
+            <div class="app-messages-metadata">
+              J. Smith | {{ 0 | getDate }} at 09:18
+            </div>
+            <div class="app-messages-content">
+              Logged with Business Hub.
+            </div>
+          </div>
+          {% if data['appDept'] == "OMU" %}
+          <div class="app-message govuk-body">
+            <div class="app-messages-metadata">
+              J. Smith | {{ 0 | getDate }} at 12:04
+            </div>
+            <div class="app-messages-content">
+              Forwarded to OMU.
+            </div>
+          </div>
+          {% endif %}
+          {% if (data['actionRespond'] == "Approved") or (app.decision == "Approved") %}
+          <div class="app-message govuk-body">
+            <div class="app-messages-metadata">
+              S. Henderson | {{ 0 | getDate }} at 16:52
+            </div>
+            <div class="app-messages-content">
+                Marked as approved.
+            </div>
+          </div>
+          {% elseif (data['actionRespond'] == "Declined") or (app.decision == "Declined") %}
+          <div class="app-message govuk-body">
+            <div class="app-messages-metadata">
+              S. Henderson | {{ 0 | getDate }} at 16:52
+            </div>
+            <div class="app-messages-content">
+                Marked as declined.
+            </div>
+          </div>
+          {% endif %}
+          </div>
+          </div>
+      </div>
+    </div>
+
+    {% endif  %}
+    {% endfor  %}
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}

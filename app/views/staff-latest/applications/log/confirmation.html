@@ -1,0 +1,68 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Confirmation" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper govuk-!-padding-top-9" id="main-content" role="main">
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-two-thirds">
+            <div class="govuk-panel govuk-panel--confirmation">
+              <div class="govuk-panel__body govuk-!-padding-bottom-3">
+                {% for group, details in data['groupsAndGeneralApps'] %}
+                {% for app in details.apps %}
+                {% if app.app_id == data['appType'] %}
+                {{ app.app_type }}
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+              </div>
+              <h1 class="govuk-panel__title">
+                Application submitted
+              </h1>
+            </div>
+            <p class="govuk-body-l">{{data['appDept']}} now has this application.</p>
+            <p class="govuk-body">You can now log:</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              <li><a href="{{homeurl}}applications/log/select-app-group.html">another application for
+                  {{data['prisonerName']}}</a></li>
+              <li><a href="{{homeurl}}applications/log/clear-and-go-to-prisoner-details">a new application</a></li>
+            </ul>
+
+            <p class="govuk-body">Or you can view:</p>
+
+            <ul class="govuk-list govuk-list--bullet">
+              {% if data['appType'] == 'app_1003' %}
+              <li><a href="{{homeurl}}applications/view/new-social-pin-contact/application.html">this application</a></li>
+              {% elseif data['appType'] == 'app_1002' %}
+              <li><a href="{{homeurl}}applications/view/new-official-pin-contact/application.html">this application</a></li>
+              {% elseif data['appType'] == 'app_1001' %}
+              <li><a href="{{homeurl}}applications/view/emergency-pin-credit/application.html">this application</a></li>
+              {% elseif data['appType'] == 'app_1004' %}
+              <li><a href="{{homeurl}}applications/view/remove-pin-phone-contact/application.html">this application</a></li>
+              {% else %} 
+              <li><a href="{{homeurl}}applications/view/new/application.html">this application</a></li>
+              {% endif %}
+              <li><a href="{{homeurl}}applications/view/">all applications</a></li>
+            </ul>
+
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+{% endblock %}
