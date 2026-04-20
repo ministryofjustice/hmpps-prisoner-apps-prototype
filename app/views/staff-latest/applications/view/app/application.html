@@ -96,12 +96,6 @@
                   {{ app.owner }}
                 {% endif %}
               </dd>
-              <dd class="govuk-summary-list__actions">
-                {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
-                {% else %}
-                  <a class="govuk-link" href="forward?url_id={{appID}}">Forward<span class="govuk-visually-hidden"> department</span></a>
-                {% endif %}
-              </dd>
             </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
