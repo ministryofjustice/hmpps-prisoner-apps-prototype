@@ -103,6 +103,7 @@ router.get('/staff-latest/applications/view/app/mark-in-progress', function (req
 router.post('/staff-latest/applications/view/app/forward', function (req, res) {
   const appId = req.query.url_id
   const newDept = req.body.appDept
+  const forwardReasons = req.body.forwardReasons
 
   if (req.session.data.appsDB && newDept) {
     for (var i = 0; i < req.session.data.appsDB.length; i++) {
@@ -113,9 +114,35 @@ router.post('/staff-latest/applications/view/app/forward', function (req, res) {
     }
   }
 
+  // Add forwarding reason as a staff message
+  if (forwardReasons && forwardReasons.trim() !== '') {
+    if (!req.session.data.staffMessages) {
+      req.session.data.staffMessages = {}
+    }
+    if (!req.session.data.staffMessages[appId]) {
+      req.session.data.staffMessages[appId] = []
+    }
+
+    const now = new Date()
+    const formattedDate = now.toLocaleString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    }).replace(',', ' at')
+
+    req.session.data.staffMessages[appId].push({
+      from: 'J. Smith',
+      text: 'Forwarded to ' + newDept + ': ' + forwardReasons.trim(),
+      visible_to: 'Staff only',
+      date: formattedDate
+    })
+  }
+
   res.redirect('/staff-latest/applications/view/app/application?url_id=' + appId)
 })
-
 
 router.post('/staff-latest/applications/view/app/action', function (req, res) {
   const appId = req.body.url_id

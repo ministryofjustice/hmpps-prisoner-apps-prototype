@@ -2,9 +2,11 @@
 {% call govukInsetText({ classes: "govuk-!-margin-bottom-5 " }) %}
   <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Action this application</h3>
   <div class="govuk-button-group">
+{% if app.status != "In progress" %}
   <a href="/staff-latest/applications/view/app/mark-in-progress?url_id={{appID}}" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
     Mark as in progress
   </a><br>
+  {% endif %}
   <a href="/staff-latest/applications/view/app/forward?url_id={{appID}}" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
     Forward to another department
   </a><br>

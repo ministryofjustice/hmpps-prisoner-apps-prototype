@@ -172,19 +172,15 @@ $(document).ready(function () {
             html += '</div>';
             html += '</td>';
             html += '<td class="govuk-table__cell">';
-            var messageCount = 0;
-            if (item.messages && item.messages.length) {
-                messageCount = item.messages.length;
-            }
-            if (window.staffMessages && window.staffMessages[item.app_id]) {
-                messageCount += window.staffMessages[item.app_id].length;
-            } if (messageCount > 0) {
-                html += '<span class="moj-notification-badge">';
-                html += '<span aria-hidden="true">' + messageCount + '</span>';
-                html += '<span class="govuk-visually-hidden">' + messageCount + ' messages</span>';
-                html += '</span>';
+            var status = item.status || 'New';
+            if (status === 'New') {
+                html += '<strong class="govuk-tag govuk-tag--blue nowrap">New</strong>';
+            } else if (status === 'In progress') {
+                html += '<strong class="govuk-tag govuk-tag--yellow nowrap">In progress</strong>';
+            } else if (status === 'Closed') {
+                html += '<strong class="govuk-tag govuk-tag--grey nowrap">Closed</strong>';
             } else {
-                html += 'None';
+                html += '<strong class="govuk-tag">' + status + '</strong>';
             }
             html += '</td>';
             html += '<td class="govuk-table__cell"><a href="' + viewUrl + '" class="govuk-link">View</a></td>';
@@ -197,8 +193,8 @@ $(document).ready(function () {
         // Ensure pending is selected by default
         if (!$('#status-new').is(':checked') && !$('#status-in-progress').is(':checked') && !$('#status-closed').is(':checked')) {
             $('#status-new').prop('checked', true);
+            $('#status-in-progress').prop('checked', true);
         }
-
         // Initialize filters and display
         populateDepartments();
         populateApplicationTypes();
