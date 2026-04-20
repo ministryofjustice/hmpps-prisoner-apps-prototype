@@ -15,35 +15,21 @@ const fs = require('fs')
 // API routes with error handling
 router.get('/api/applications', function (req, res) {
   try {
-    const dataPath = path.join(__dirname, 'data','prisoner-apps-db.json')
-    console.log('Loading applications from:', dataPath)
-    console.log('File exists:', fs.existsSync(dataPath))
-    
-    if (!fs.existsSync(dataPath)) {
-      console.error('Applications data file not found at:', dataPath)
-      return res.status(404).json({ 
-        error: 'Applications data file not found',
-        path: dataPath 
-      })
+    if (req.session.data && req.session.data.appsDB) {
+      return res.json(req.session.data.appsDB)
     }
-    
-    // Read the raw file content first
+
+    const dataPath = path.join(__dirname, 'data', 'prisoner-apps-db.json')
+    if (!fs.existsSync(dataPath)) {
+      return res.status(404).json({ error: 'Applications data file not found' })
+    }
+
     const rawData = fs.readFileSync(dataPath, 'utf8')
-    console.log('Raw file size:', rawData.length)
-    console.log('First 100 characters:', rawData.substring(0, 100))
-    
-    // Try to parse the JSON
     const data = JSON.parse(rawData)
-    console.log('Parsed successfully, array length:', data.length)
-    
     res.json(data)
   } catch (error) {
-    console.error('Detailed error loading applications:', error)
-    res.status(500).json({ 
-      error: 'Failed to load applications data', 
-      details: error.message,
-      stack: error.stack 
-    })
+    console.error('Error loading applications:', error)
+    res.status(500).json({ error: 'Failed to load applications data' })
   }
 })
 
@@ -103,14 +89,6 @@ router.get('/api/application-types', function (req, res) {
   }
 })
 
-router.get('/staff-latest/applications/new/confirmation', function (req, res) {
-  // Session data should already be set from form submission
-  req.session.data.pageName = 'submitted' // Ensure it's marked as submitted
-  
-  console.log('Confirmation page accessed, session data:', req.session.data)
-  
-  res.render('staff-latest/applications/new/confirmation')
-})
 
 // Add your routes here
 

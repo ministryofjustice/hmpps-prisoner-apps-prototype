@@ -43,17 +43,7 @@
         {{ app.app_type }}
       </h1>
 
-      {% if app.status == "New" %}
-      <strong class="govuk-tag">New</strong>
-      {% endif %}
-
-      {% if app.status == "In progress" %}
-      <strong class="govuk-tag">In progress</strong>
-      {% endif %}
-
-      {% if app.status == "Closed" %}
-      <strong class="govuk-tag">Closed</strong>
-      {% endif %}
+      {% include "./includes/status.html" %}
 
       {% endif %}
       {% endfor %}
@@ -64,6 +54,9 @@
 
   <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+      {% for app in data['appsDB'] %}
+      {% if app.app_id == appID %}
 
       {% include "./includes/actions.html" %}
 
@@ -92,6 +85,15 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
 
+          {% set hasJsonMessages = false %}
+          {% for app in data['appsDB'] %}
+          {% if app.app_id == appID and app.messages | length %}
+          {% set hasJsonMessages = true %}
+          {% endif %}
+          {% endfor %}
+          {% set hasStaffMessages = data.staffMessages[appID] | length %}
+
+          {% if hasJsonMessages or hasStaffMessages %}
           <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
@@ -103,39 +105,40 @@
             </thead>
             <tbody class="govuk-table__body">
               {% for app in data['appsDB'] %}
-                {% if app.app_id == appID %}
-                  {% if app.messages | length %}
-                    {% for msg in app.messages %}
-                    <tr class="govuk-table__row">
-                      <td class="govuk-table__cell">{{ msg.text }}</td>
-                      <td class="govuk-table__cell">{{ msg.sender if msg.sender else '—' }}</td>
-                      <td class="govuk-table__cell">{{ msg.visible_to if msg.visible_to else '—' }}</td>
-                      <td class="govuk-table__cell">{{ msg.datetime | formatDateTime }}</td>
-                    </tr>
-                    {% endfor %}
-                  {% endif %}
-                {% endif %}
+              {% if app.app_id == appID %}
+              {% if app.messages | length %}
+              {% for msg in app.messages %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{ msg.text }}</td>
+                <td class="govuk-table__cell">{{ msg.sender if msg.sender else '—' }}</td>
+                <td class="govuk-table__cell">{{ msg.visible_to if msg.visible_to else '—' }}</td>
+                <td class="govuk-table__cell">{{ msg.datetime | formatDateTime }}</td>
+              </tr>
               {% endfor %}
-              {% if data.staffMessages[appID] | length %}
-                {% for msg in data.staffMessages[appID] %}
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell">{{ msg.text }}</td>
-                  <td class="govuk-table__cell">{{ msg.from }}</td>
-                  <td class="govuk-table__cell">{{ msg.visible_to }}</td>
-                  <td class="govuk-table__cell">{{ msg.date }}</td>
-                </tr>
-                {% endfor %}
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+              {% if hasStaffMessages %}
+              {% for msg in data.staffMessages[appID] %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{ msg.text }}</td>
+                <td class="govuk-table__cell">{{ msg.from }}</td>
+                <td class="govuk-table__cell">{{ msg.visible_to }}</td>
+                <td class="govuk-table__cell">{{ msg.date }}</td>
+              </tr>
+              {% endfor %}
               {% endif %}
             </tbody>
           </table>
-
+          {% else %}
+          <p class="govuk-body">No messages yet</p>
+          {% endif %}
         </div>
 
         <div class="govuk-grid-column-two-thirds">
 
 
-          {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
-          {% else %}
+        {% if app.status != "Closed" %}
           <form method="post" action="/staff-latest/applications/view/app/messages?url_id={{ appID }}"
             class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
             <div class="govuk-form-group">
@@ -152,13 +155,15 @@
                 </legend>
                 <div class="govuk-radios govuk-radios--small">
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="visible-to-staff" name="visibleTo" type="radio" value="Staff only" checked>
+                    <input class="govuk-radios__input" id="visible-to-staff" name="visibleTo" type="radio"
+                      value="Staff only" checked>
                     <label class="govuk-label govuk-radios__label" for="visible-to-staff">
                       Staff only
                     </label>
                   </div>
                   <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="visible-to-both" name="visibleTo" type="radio" value="Prisoner and Staff">
+                    <input class="govuk-radios__input" id="visible-to-both" name="visibleTo" type="radio"
+                      value="Prisoner and Staff">
                     <label class="govuk-label govuk-radios__label" for="visible-to-both">
                       Prisoner and Staff
                     </label>
@@ -174,7 +179,7 @@
             </div>
 
           </form>
-          
+
           {% endif %}
 
         </div>
@@ -183,6 +188,8 @@
     </div>
 
   </div>
+  {% endif %}
+  {% endfor %}
 
 
 </div> <!-- end main content  -->

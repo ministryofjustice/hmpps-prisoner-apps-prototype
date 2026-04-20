@@ -1,0 +1,11 @@
+{% if app.status == "New" %}
+<strong class="govuk-tag govuk-tag--blue">New</strong>
+{% endif %}
+
+{% if app.status == "In progress" %}
+<strong class="govuk-tag govuk-tag--yellow">In progress</strong>
+{% endif %}
+
+{% if app.status == "Closed" %}
+<strong class="govuk-tag govuk-tag--grey">Closed</strong>
+{% endif %}

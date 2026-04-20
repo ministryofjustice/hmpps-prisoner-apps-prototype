@@ -36,17 +36,7 @@
             {{ app.app_type }}
           </h1>
 
-          {% if app.status == "New"  %}
-          <strong class="govuk-tag">New</strong>
-          {% endif  %}
-
-          {% if app.status == "In progress"  %}
-          <strong class="govuk-tag">In progress</strong>
-          {% endif  %}
-
-          {% if app.status == "Closed"  %}
-          <strong class="govuk-tag">Closed</strong>
-          {% endif  %}
+          {% include "./includes/status.html" %}
           
           {% endif  %}
           {% endfor  %}
@@ -56,6 +46,9 @@
 
   <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+      {% for app in data['appsDB'] %}
+      {% if app.app_id == appID  %}
 
     {% include "./includes/actions.html" %}
 
@@ -79,9 +72,6 @@
         </ul>
       </nav>
 
-      {% for app in data['appsDB'] %}
-      {% if app.app_id == appID  %}
-
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
           <h2 class="govuk-heading-m">Application details</h2>
@@ -92,18 +82,8 @@
                 Status
               </dt>
               <dd class="govuk-summary-list__value">
-                {% if app.status == "New"  %}
-                <strong class="govuk-tag">New</strong>
-                {% endif  %}
-
-                {% if app.status == "In progress"  %}
-                <strong class="govuk-tag">In progress</strong>
-                {% endif  %}
-
-                {% if app.status == "Closed"  %}
-                <strong class="govuk-tag">Closed</strong>
-                {% endif  %}
-            </dd>
+                {% include "./includes/status.html" %}
+              </dd>
             </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
@@ -139,6 +119,31 @@
                 {{ app.date_received }}
               </dd>
             </div>
+            {% if app.status == "Closed" %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Decision
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ app.decision }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Reason
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ app.decision_reason }}
+              </dd>
+            </div>
+            <div class="moj-button-action">
+              {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+              <a href="./reply?url_id={{appID}}" target="_blank" class="govuk-button govuk-!-margin-top-5">
+                Print reply
+              </a>
+              {% endif %}
+            </div>
+            {% endif %}
             <!--
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">

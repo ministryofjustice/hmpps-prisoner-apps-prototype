@@ -84,4 +84,56 @@ router.post('/staff-latest/applications/view/app/messages', function (req, res) 
 
   res.redirect('/staff-latest/applications/view/app/messages?url_id=' + appId)
 })
+
+router.get('/staff-latest/applications/view/app/mark-in-progress', function (req, res) {
+  const appId = req.query.url_id
+
+  if (req.session.data.appsDB) {
+    for (var i = 0; i < req.session.data.appsDB.length; i++) {
+      if (String(req.session.data.appsDB[i].app_id) === appId) {
+        req.session.data.appsDB[i].status = 'In progress'
+        break
+      }
+    }
+  }
+
+  res.redirect('/staff-latest/applications/view/app/application?url_id=' + appId)
+})
+
+router.post('/staff-latest/applications/view/app/forward', function (req, res) {
+  const appId = req.query.url_id
+  const newDept = req.body.appDept
+
+  if (req.session.data.appsDB && newDept) {
+    for (var i = 0; i < req.session.data.appsDB.length; i++) {
+      if (String(req.session.data.appsDB[i].app_id) === appId) {
+        req.session.data.appsDB[i].owner = newDept
+        break
+      }
+    }
+  }
+
+  res.redirect('/staff-latest/applications/view/app/application?url_id=' + appId)
+})
+
+
+router.post('/staff-latest/applications/view/app/action', function (req, res) {
+  const appId = req.body.url_id
+  const decision = req.body.actionRespond
+  const reason = req.body.decisionReason
+
+  if (req.session.data.appsDB && decision) {
+    for (var i = 0; i < req.session.data.appsDB.length; i++) {
+      if (String(req.session.data.appsDB[i].app_id) === appId) {
+        req.session.data.appsDB[i].status = 'Closed'
+        req.session.data.appsDB[i].decision = decision
+        req.session.data.appsDB[i].decision_reason = reason || ''
+        break
+      }
+    }
+  }
+
+res.redirect('/staff-latest/applications/view/app/application?url_id=' + appId)
+})
+
 }
