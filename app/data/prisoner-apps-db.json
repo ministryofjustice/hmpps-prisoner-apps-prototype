@@ -48,19 +48,19 @@
     "app_details": null,
     "messages": [
       {
-        "text": "May have got sister’s number wrong – might be 123556",
+        "text": "May have got sisters number wrong – might be 123556",
         "sender": "Patel, Taj",
         "datetime": "2026-04-15T08:07:00.000Z",
-        "visible_to\n": "Prisoner and staff"
+        "visible_to": "Prisoner and staff"
       },
       {
-        "text": "No the number was right – it is 06345 123456",
+        "text": "No the number was right, it is 06345 123456",
         "sender": "Patel, Taj",
         "datetime": "2026-04-15T10:14:00.000Z",
         "visible_to": "Prisoner and staff"
       },
       {
-        "text": "She’s only there after 4pm cos she works at a school",
+        "text": "Shes only there after 4pm cos she works at a school",
         "sender": "Patel, Taj",
         "datetime": "2026-04-15T11:35:00.000Z",
         "visible_to": "Prisoner and staff"
@@ -68,7 +68,8 @@
       {
         "text": "Did you get my message about my sister? Can you reply? Shall I put in new app?",
         "sender": "Patel, Taj",
-        "datetime": "15 April 2026 15.49"
+        "datetime": "15 April 2026 15.49",
+        "visible_to": "Prisoner and staff"
       }
     ]
   },
@@ -89,19 +90,19 @@
     "app_details": null,
     "messages": [
       {
-        "text": "May have got sister’s number wrong – might be 123556",
+        "text": "May have got sisters number wrong, might be 123556",
         "sender": "Patel, Taj",
         "datetime": "2026-04-15T08:07:00.000Z",
-        "visible_to\n": "Prisoner and staff"
+        "visible_to": "Prisoner and staff"
       },
       {
-        "text": "No the number was right – it is 06345 123456",
+        "text": "No the number was right, it is 06345 123456",
         "sender": "Patel, Taj",
         "datetime": "2026-04-15T10:14:00.000Z",
         "visible_to": "Prisoner and staff"
       },
       {
-        "text": "She’s only there after 4pm cos she works at a school",
+        "text": "Shes only there after 4pm cos she works at a school",
         "sender": "Patel, Taj",
         "datetime": "2026-04-15T11:35:00.000Z",
         "visible_to": "Prisoner and staff"
@@ -109,7 +110,8 @@
       {
         "text": "Did you get my message about my sister? Can you reply? Shall I put in new app?",
         "sender": "Patel, Taj",
-        "datetime": "15 April 2026 15.49"
+        "datetime": "15 April 2026 15.49",
+        "visible_to": "Prisoner and staff"
       }
     ]
   },
