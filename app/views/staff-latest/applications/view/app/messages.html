@@ -59,6 +59,7 @@
       {% if app.app_id == appID %}
 
       {% include "./includes/actions.html" %}
+      {% set msgCount = (app.messages | length if app.messages else 0) + (data.staffMessages[appID] | length if data.staffMessages[appID] else 0) %}
 
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
         <ul class="moj-sub-navigation__list">
@@ -66,12 +67,18 @@
             <a class="moj-sub-navigation__link" href="./application?url_id={{appID}}">
               Application
             </a>
-          <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" aria-current="page" href="./messages?url_id={{appID}}">
-              Messages
-            </a>
-          </li>
-          <li class="moj-sub-navigation__item">
+            <li class="moj-sub-navigation__item">
+              <a class="moj-sub-navigation__link" href="./messages?url_id={{appID}}">
+                Messages
+                {% if msgCount > 0 %}
+                <span class="moj-notification-badge">
+                  <span aria-hidden="true">{{ msgCount }}</span>
+                  <span class="govuk-visually-hidden">({{ msgCount }})</span>
+                </span>
+                {% endif %}
+              </a>
+            </li>
+            <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./history?url_id={{appID}}">
               History
             </a>
@@ -149,10 +156,13 @@
             </div>
 
             <div class="govuk-form-group">
-              <fieldset class="govuk-fieldset">
+              <fieldset class="govuk-fieldset" aria-describedby="privacy-hint">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                  Who can see this message?
+                  Who will see this message?
                 </legend>
+                <div id="privacy-hint" class="govuk-hint">
+                  This message will be shown to:
+                </div>
                 <div class="govuk-radios govuk-radios--small">
                   <div class="govuk-radios__item">
                     <input class="govuk-radios__input" id="visible-to-staff" name="visibleTo" type="radio"

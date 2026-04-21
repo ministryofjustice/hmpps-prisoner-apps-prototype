@@ -61,7 +61,7 @@
     <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
 
       {% include "./includes/actions.html" %}
-
+      {% set msgCount = (app.messages | length if app.messages else 0) + (data.staffMessages[appID] | length if data.staffMessages[appID] else 0) %}
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
         <ul class="moj-sub-navigation__list">
           <li class="moj-sub-navigation__item">
@@ -72,6 +72,12 @@
           <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./messages?url_id={{appID}}">
               Messages
+              {% if msgCount > 0 %}
+              <span class="moj-notification-badge">
+                <span aria-hidden="true">{{ msgCount }}</span>
+                <span class="govuk-visually-hidden">({{ msgCount }})</span>
+              </span>
+              {% endif %}
             </a>
           </li>
           <li class="moj-sub-navigation__item">
