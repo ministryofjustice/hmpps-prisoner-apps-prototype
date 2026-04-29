@@ -76,9 +76,12 @@
 
 {% block pageScripts %}
 <script>
-  accessibleAutocomplete.enhanceSelectElement({
-    selectElement: document.querySelector('#address-picker')
-  })
+  var selectEl = document.querySelector('#address-picker')
+  if (selectEl) {
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: selectEl
+    })
+  }
 </script>
 
 {% endblock %}
