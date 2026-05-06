@@ -1,0 +1,627 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Messages" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<main class="govuk-main-wrapper" id="main-content">
+          
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+        <div class="govuk-breadcrumbs">
+          <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="/staff-latest/">Digital Prisons Services</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="/staff-latest/applications/">Applications</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="/staff-latest/applications/view/">View all applications</a>
+            </li>
+          </ol>
+        </div>
+      </nav>
+
+      <span class="govuk-caption-xl">
+            Add a social PIN phone contact
+      </span>
+      
+      <h1 class="govuk-heading-xl">
+        Add a social PIN phone contact
+      </h1>
+
+<strong class="govuk-tag govuk-tag--blue">New</strong>
+
+    </div>
+  </div>
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+<div class="govuk-inset-text govuk-!-margin-bottom-5 ">
+  
+  <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Action this application</h3>
+  <div class="govuk-button-group">
+
+  <a href="/staff-latest/applications/view/app/mark-in-progress?url_id=123456" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+    Mark as in progress
+  </a><br>
+  
+  <a href="/staff-latest/applications/view/app/forward?url_id=123456" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+    Forward to another department
+  </a><br>
+  <a href="/staff-latest/applications/view/app/action?url_id=123456" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+    Mark as closed
+  </a>
+  </div>
+
+</div>
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./application?url_id=123456">
+              Application
+            </a>
+            </li><li class="moj-sub-navigation__item">
+              <a class="moj-sub-navigation__link" aria-current="page" href="./messages?url_id=123456">
+                Messages
+                
+              </a>
+            </li>
+            <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./history?url_id=123456">
+              History
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+
+      <h2 class="govuk-heading-m">Messages and replies</h2>
+
+      <div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+          <div id="messages" class="moj-messages-container">
+            <div class="moj-message-list">
+              <time class="moj-message-list__date" datetime="16 March 2019">16 March 2019</time>
+              <div class="moj-message-item moj-message-item--sent">
+                <div class="moj-message-item__text moj-message-item__text--sent">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <div class="moj-message-item__meta">
+                  <span class="moj-message-item__meta--sender">Patel, Taj</span> at <time class="moj-message-item__meta--timestamp" datetime="10:50am">10:50am</time>
+                </div>
+              </div>
+              <time class="moj-message-list__date" datetime="17 March 2019">17 March 2019</time>
+              <div class="moj-message-item moj-message-item--received">
+                <div class="moj-message-item__text moj-message-item__text--received">Nullam vestibulum lorem vulputate velit euismod luctus.</div>
+                <div class="moj-message-item__meta">
+                  <span class="moj-message-item__meta--sender">J Smith</span> at <time class="moj-message-item__meta--timestamp" datetime="10:51am">10:51am</time>
+                </div>
+              </div>
+              <time class="moj-message-list__date" datetime="19 March 2019">19 March 2019</time>
+              <div class="moj-message-item moj-message-item--sent">
+                <div class="moj-message-item__text moj-message-item__text--sent">Fusce et vulputate justo. Integer suscipit felis non urna lobortis, vel finibus sem tristique.</div>
+                <div class="moj-message-item__meta">
+                  <span class="moj-message-item__meta--sender">Patel, Taj</span> at <time class="moj-message-item__meta--timestamp" datetime="10:53am">10:53am</time>
+                </div>
+              </div>
+              <time class="moj-message-list__date" datetime="21 March 2019">21 March 2019</time>
+              <div class="moj-message-item moj-message-item--received">
+                <div class="moj-message-item__text moj-message-item__text--received">Aliquam ullamcorper purus sit amet pellentesque feugiat. Mauris ut posuere tortor. </div>
+                <div class="moj-message-item__meta">
+                  <span class="moj-message-item__meta--sender">S O'Connor</span> at <time class="moj-message-item__meta--timestamp" datetime="11:56am">11:56am</time>
+                </div>
+              </div>
+              <div class="moj-message-item moj-message-item--received">
+                <div class="moj-message-item__text moj-message-item__text--received">Proin dapibus, nisl id ultricies ultricies, erat magna pulvinar risus, sit amet commodo nunc purus eu nulla. Aliquam erat volutpat. Vestibulum in ante interdum, elementum arcu vel, viverra nibh. Etiam ultrices urna at suscipit sollicitudin. Nulla non lectus magna. Curabitur vel vestibulum lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
+                <div class="moj-message-item__meta">
+                  <span class="moj-message-item__meta--sender">J Smith</span> at <time class="moj-message-item__meta--timestamp" datetime="11:56am">11:56am</time>
+                </div>
+              </div>
+            </div>
+          </div>
+                    
+
+
+        
+          <form method="post" action="" class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-label--s" for="newMessage">
+                Add a message
+              </label>
+              <textarea class="govuk-textarea" id="newMessage" name="newMessage" rows="5"></textarea>
+            </div>
+
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset" aria-describedby="privacy-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                  Who will see this message?
+                </legend>
+                <div id="privacy-hint" class="govuk-hint">
+                  This message will be shown to:
+                </div>
+                <div class="govuk-radios govuk-radios--small">
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="visible-to-staff" name="visibleTo" type="radio" value="Staff only" checked="">
+                    <label class="govuk-label govuk-radios__label" for="visible-to-staff">
+                      Staff only
+                    </label>
+                  </div>
+                  <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="visible-to-both" name="visibleTo" type="radio" value="Prisoner and Staff">
+                    <label class="govuk-label govuk-radios__label" for="visible-to-both">
+                      Prisoner and Staff
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="moj-button-action">
+              <button type="submit" class="govuk-button" data-module="govuk-button" data-govuk-button-init="">
+                Send message
+              </button>
+            </div>
+
+          </form>
+
+          
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+      
+  
+
+
+</div> <!-- end main content  -->
+
+
+
+
+        </main>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    selectElement: document.querySelector('#my-autocomplete')
+  })
+</script>
+
+{% endblock %}
