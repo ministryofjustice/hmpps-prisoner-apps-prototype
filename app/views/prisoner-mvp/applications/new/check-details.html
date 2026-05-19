@@ -13,7 +13,7 @@
     <div class="govuk-width-container">
 
     <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
-      {% for group, details in data['appGroupsTypes'] %}
+      {% for group, details in data['mvpGroupsTypes'] %}
         {% for app in details.apps %}
           {% if app.app_id == data['appType'] %}
 
@@ -29,13 +29,12 @@
             <dl class="govuk-summary-list govuk-!-margin-bottom-9">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Application type
+                  App type
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {{ app.app_type }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                  <a href="/application-tool/prisoner-mvp/applications/log/select-app-type" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -91,10 +90,11 @@
 
         <!-- /end note -->
 
-            <div class="moj-button-action">
+              <div class="govuk-button-group">
               <button type="submit" class="govuk-button" data-module="govuk-button">
                 Submit application
               </button>
+                <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
             </div>
 
           </form>

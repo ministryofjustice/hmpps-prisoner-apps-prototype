@@ -1,5 +1,5 @@
 {% extends "layouts/launchpad.html" %}
-{% set pageName="John's Profile" %}
+{% set pageName = data['first-name'] + "'s Profile" %}
 {% set bodyClasses = 'launchpad profile' %}
 {% set homeURL="/prisoner-mvp/" %}
 
@@ -10,18 +10,18 @@
   <main class="govuk-main-wrapper " id="main-content" role="main">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-          <form class="form" action="/prisoner-mvp/applications/new/type">
+          <form class="form" method="post">
           <div class="govuk-form-group">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-                <span class="govuk-caption-xl">Log an application</span>
+                <span class="govuk-caption-xl">Send a new app</span>
                 <h1 class="govuk-fieldset__heading">
-                  Select application group
+                  Select app group
                 </h1>
               </legend>
               <div class="govuk-radios" data-module="govuk-radios">
 
-          {% for group, details in data['appGroupsTypes'] %}
+          {% for group, details in data['mvpGroupsTypes'] %}
           <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="{{ group }}" name="appGroup" type="radio" value="{{ group }}">
               <label class="govuk-label govuk-radios__label" for="{{ group }}">
@@ -33,9 +33,14 @@
               </div>
             </fieldset>
           </div>
+
+          <div class="govuk-button-group">
           <button type="submit" class="govuk-button" data-module="govuk-button">
             Continue
           </button>
+            <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
+          </div>
+
         </form>
       </div>
     </div>

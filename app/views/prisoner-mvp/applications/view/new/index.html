@@ -30,7 +30,7 @@
       {% endcall %}
     
       <h1 class="govuk-heading-xl">
-      {% for group, details in data['appGroupsTypes'] %}
+      {% for group, details in data['mvpGroupsTypes'] %}
       {% for app in details.apps %}
       {% if app.app_id == data['appType'] %}
       {{ app.app_type }}
@@ -67,7 +67,7 @@
         Type
       </dt>
       <dd class="govuk-summary-list__value">
-      {% for group, details in data['appGroupsTypes'] %}
+      {% for group, details in data['mvpGroupsTypes'] %}
       {% for app in details.apps %}
       {% if app.app_id == data['appType'] %}
       {{ app.app_type }}

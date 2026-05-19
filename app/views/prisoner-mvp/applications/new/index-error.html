@@ -1,0 +1,67 @@
+{% extends "layouts/launchpad.html" %}
+{% set pageName="John's Profile" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-mvp/" %}
+
+{% block content %}
+
+<div class="govuk-width-container">
+  <a href="#" class="govuk-back-link">Back</a>
+  <main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <form class="form" method="post">
+          <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+              <h2 class="govuk-error-summary__title">
+                There is a problem
+              </h2>
+              <div class="govuk-error-summary__body">
+                <ul class="govuk-list govuk-error-summary__list">
+                  <li>
+                    <a href="#">Choose an app group</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="govuk-form-group govuk-form-group--error">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+                <span class="govuk-caption-xl">Send a new app</span>
+                <h1 class="govuk-fieldset__heading">
+                  Select app group
+                </h1>
+              </legend>
+              <p id="app-group-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Select an app group
+              </p>
+              <div class="govuk-radios" data-module="govuk-radios">
+
+                {% for group, details in data['mvpGroupsTypes'] %}
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="{{ group }}" name="appGroup" type="radio" value="{{ group }}">
+                  <label class="govuk-label govuk-radios__label" for="{{ group }}">
+                    {{ details.name }}
+                  </label>
+                </div>
+                {% endfor %}
+
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="govuk-button-group">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+              Continue
+            </button>
+            <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

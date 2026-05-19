@@ -23,7 +23,7 @@
           </ol>
         </div>
       </nav>
-      {% for app in data['appsDB'] %}
+      {% for app in data['mvpsDB'] %}
       {% if app.app_id == appID %}
 
         {% if app.status !== "Closed" %}
@@ -86,11 +86,7 @@
         Details
       </dt>
       <dd class="govuk-summary-list__value">
-        {% if data['app_detail'] %}
-          {{ data['app_detail'] }}
-        {% else %}
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fringilla lectus sit amet aliquam euismod. 
-        {% endif %}
     </dd>
       <dd class="govuk-summary-list__actions">
       </dd>

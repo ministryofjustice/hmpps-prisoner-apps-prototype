@@ -1,4 +1,6 @@
+let mvpGroupsTypes          = require('./mvp_groups_types.json')
 let appGroupsTypes          = require('./app_groups_types.json')
+let mvpsDB                  = require('./mvp-apps-db.json')
 let appsDB                  = require('./prisoner-apps-db.json')
 let addresses               = require('./addresses.json')
 let socialRelationships     = require('./social_relationships.json')
@@ -8,6 +10,8 @@ let departments             = require('./departments.json')
 module.exports = {
 
 // Json data
+mvpGroupsTypes,
+mvpsDB,
 appGroupsTypes,
 appsDB,
 addresses,

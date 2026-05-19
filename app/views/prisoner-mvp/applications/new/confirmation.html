@@ -18,7 +18,7 @@
                 You have sent the app
               </h1>
               <div class="govuk-panel__body">
-                {% for group, details in data['appGroupsTypes'] %}
+                {% for group, details in data['mvpGroupsTypes'] %}
                 {% for app in details.apps %}
                 {% if app.app_id == data['appType'] %}
                 {{ app.app_type }}
@@ -27,26 +27,8 @@
                 {% endfor %}
               </div>
             </div>
-            <p class="govuk-body-l">
-              {# Expecting:
-                - data.appType            -> the selected app_id (e.g. "app_0102")
-                - data.appGroupsTypes     -> an object like { "group_01": { name, apps: [...] }, ... }
-              #}
-
-              {% set groupName = "" %}
-
-              {% for groupKey, details in data.appGroupsTypes %}
-                {% for app in details.apps %}
-                  {% if app.app_id == data.appType %}
-                    {% set groupName = details.name %}
-                  {% endif %}
-                {% endfor %}
-              {% endfor %}
-
-              {# Render the group name (or a fallback if not found) #}
-              {{ groupName | default('Unknown group') }}
-
-              now has this application.</p>
+            <p class="govuk-body-l govuk-!-margin-bottom-2">You have sent a new app to staff.</p>
+            <p class="govuk-body-l">Staff will process it as soon as possible. </p>
             <p class="govuk-body">You can now log:</p>
 
             <ul class="govuk-list govuk-list--bullet">

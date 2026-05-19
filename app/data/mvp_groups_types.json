@@ -1,0 +1,32 @@
+{
+  "group_01": {
+    "name": "Laptops",
+    "description": "Laptops",
+    "apps": [
+      {
+        "app_id": "app_0101",
+        "app_type": "Broken charger"
+      },
+      {
+        "app_id": "app_0102",
+        "app_type": "Broken laptop"
+      },
+      {
+        "app_id": "app_0103",
+        "app_type": "Content Hub"
+      },
+      {
+        "app_id": "app_0104",
+        "app_type": "Password"
+      },
+      {
+        "app_id": "app_0105",
+        "app_type": "Return laptop items"
+      },
+      {
+        "app_id": "app_0106",
+        "app_type": "Laptop help (general enquiry)"
+      }
+    ]
+  }
+}

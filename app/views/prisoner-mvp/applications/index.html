@@ -1,5 +1,5 @@
 {% extends "layouts/launchpad.html" %}
-{% set pageName="John's Profile" %}
+{% set pageName = data['first-name'] + "'s Profile" %}
 {% set bodyClasses = 'launchpad profile' %}
 {% set homeURL="/prisoner-mvp/" %}
 
@@ -20,23 +20,24 @@
         </div>
       </nav>
       <h1 class="govuk-heading-xl">
-        Apps
+        {{ data['first-name'] }}&apos;s apps
       </h1>
 
+      <p class="govuk-body-large">Send a new app and check on apps already sent.</p>
+
       <a href="./new/" class="govuk-button" data-module="govuk-button">
-        New application
+        Send a new app
       </a>
 
 
-      <table class="govuk-table" data-module="">
-      <caption class="govuk-table__caption">Applications submitted</caption>
+      <table class="govuk-table" data-module="moj-sortable-table">
+      <caption class="govuk-table__caption ">Apps you have already sent</caption>
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th scope="col" class="govuk-table__header" aria-sort="none">Date</th>
-          <th scope="col" class="govuk-table__header" aria-sort="none">App</th>
-          <th scope="col" class="govuk-table__header" aria-sort="none">Department</th>
-          <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
-          <th scope="col" class="govuk-table__header" aria-sort="none">Action</th>
+          <th scope="col" class="govuk-table__header" aria-sort="descending">Date sent</th>
+          <th scope="col" class="govuk-table__header">Request</th>
+          <th scope="col" class="govuk-table__header">Status</th>
+          <th scope="col" class="govuk-table__header"></th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -48,13 +49,6 @@
 					  {{ data['checkappType'] }}
 					</td>
 					<td class="govuk-table__cell">
-						{% if data['app_dept'] %}
-						{{ data['app_dept'] }}
-						{% else %}
-						Business Hub
-						{% endif %}
-					</td>
-					<td class="govuk-table__cell">
             <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
 					</td>
 					<td class="govuk-table__cell"><a href="view/new">View</a>
@@ -63,7 +57,7 @@
 				{% endif %}
 
 
-        {% for app in data['appsDB'] %}
+        {% for app in data['mvpsDB'] %}
         {% if app.prisoner_name == 'Craig, Ivor' %}
         <tr class="govuk-table__row">
           <td class=" govuk-table__cell nowrap reldate">
@@ -71,9 +65,6 @@
           </td>
           <td class="govuk-table__cell">
             {{ app.app_type }}
-          </td>
-          <td class="govuk-table__cell">
-            {{ app.owner }}
           </td>
           <td class="govuk-table__cell">
             {% if app.status == "New" %}
