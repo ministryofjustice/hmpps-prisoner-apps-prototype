@@ -29,7 +29,7 @@
         {% if app.status !== "Closed" %}
 
           {% call govukInsetText({ classes: "govuk-!-margin-0 guidance-panel" }) %}
-            <p>You have already sent this app and it is being processed.</p>
+            <p>You have sent this app and staff will process it as soon as possible.</p>
           {% endcall %}
 
       {% endif %}
@@ -61,6 +61,7 @@
       <dd class="govuk-summary-list__actions">
       </dd>
     </div>
+    <h2 class="govuk-heading-m govuk-!-margin-top-6">App details</h2>
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
         Date
@@ -73,7 +74,7 @@
     </div>
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
-        Type
+        App type
       </dt>
       <dd class="govuk-summary-list__value">
       {{ app.app_type }}

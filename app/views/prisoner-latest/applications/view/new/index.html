@@ -26,7 +26,7 @@
 
 
       {% call govukInsetText({ classes: "govuk-!-margin-0 guidance-panel" }) %}
-        <p>You have already sent this app and it is being processed.</p>
+        <p>You have sent this app and staff will process it as soon as possible.</p>
       {% endcall %}
     
       <h1 class="govuk-heading-xl">
@@ -45,13 +45,13 @@
         Status
       </dt>
       <dd class="govuk-summary-list__value">
-
-      <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
-
-    </dd>
+        <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+      </dd>
       <dd class="govuk-summary-list__actions">
       </dd>
     </div>
+
+    <h2>App details</h2>
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
         Date
@@ -97,7 +97,7 @@
   
     
 
-      <a class="govuk-button govuk-button--secondary" href="{{homeURL}}/applications/">Back to the Apps home page</a>
+      <a class="govuk-button govuk-button--secondary" href="{{homeURL}}/applications/">Back to your apps</a>
     </div>
 
 
