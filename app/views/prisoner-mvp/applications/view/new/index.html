@@ -70,6 +70,7 @@
         Type
       </dt>
       <dd class="govuk-summary-list__value">
+      {% if data['mvpGroupsTypes'] %}
       {% for group, details in data['mvpGroupsTypes'] %}
       {% for app in details.apps %}
       {% if app.app_id == data['appType'] %}
@@ -77,6 +78,10 @@
       {% endif %}
       {% endfor %}
       {% endfor %}
+      {% else %}
+        Broken charger
+      {% endif %}
+
     </dd>
       <dd class="govuk-summary-list__actions">
       </dd>
@@ -89,7 +94,7 @@
         {% if data['app_detail'] %}
           {{ data['app_detail'] }}
         {% else %}
-          Request to swap all VOs from last month
+          Charger isnt working any more
         {% endif %}
     </dd>
       <dd class="govuk-summary-list__actions">

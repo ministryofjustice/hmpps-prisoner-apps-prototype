@@ -49,12 +49,12 @@
                   {% endif %}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                  <a href="/application-tool/prisoner-mvp/applications/log/select-app-type" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
+                  <a href="{{homeURL}}applications/new/details.html" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
                 </dd>
               </div>
             </dl>
 
-            <form class="form" action="/prisoner-mvp/applications/new/confirmation">
+            <form class="form" action="{{homeURL}}applications/new/confirmation">
 
                       <!-- Note: This element is to be used in prototype only. It is there to confirm the submission of the form and allow multiple apps to be submitted in one session-->
 
@@ -92,7 +92,7 @@
 
               <div class="govuk-button-group">
               <button type="submit" class="govuk-button" data-module="govuk-button">
-                Submit application
+                Send app
               </button>
                 <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
             </div>
