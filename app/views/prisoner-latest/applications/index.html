@@ -36,6 +36,7 @@
           <th scope="col" class="govuk-table__header" aria-sort="descending">Date sent</th>
           <th scope="col" class="govuk-table__header">App</th>
           <th scope="col" class="govuk-table__header">Status</th>
+          <th scope="col" class="govuk-table__header">Messages</th>
           <th scope="col" class="govuk-table__header">Action</th>
         </tr>
       </thead>
@@ -49,6 +50,8 @@
 					</td>
 					<td class="govuk-table__cell">
             <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+					</td>
+					<td class="govuk-table__cell">
 					</td>
 					<td class="govuk-table__cell"><a href="view/new">View</a>
 					</td>
@@ -75,6 +78,14 @@
               {% elif app.decision == "Declined" %}
               <strong class="govuk-tag govuk-tag--red">{{ app.decision }}</strong>
             {% endif %}
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">
+            {% if app.messages and app.messages | length %}
+              <span class="moj-notification-badge">
+                <span aria-hidden="true">{{ app.messages | length }}</span>
+                <span class="govuk-visually-hidden">({{ app.messages | length }})</span>
+              </span>
             {% endif %}
           </td>
           <td class="govuk-table__cell"><a href="{{homeURL}}applications/view/app?url_id={{ app.app_id }}">View</a></td>

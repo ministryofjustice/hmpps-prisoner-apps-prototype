@@ -1,0 +1,36 @@
+{% if data['pin_02_officialFirstName'] %}
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">First name</dt>
+  <dd class="govuk-summary-list__value">{{ data['pin_02_officialFirstName'] }}</dd>
+</div>
+{% endif %}
+{% if data['pin_02_officialLastName'] %}
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">Last name</dt>
+  <dd class="govuk-summary-list__value">{{ data['pin_02_officialLastName'] }}</dd>
+</div>
+{% endif %}
+{% if data['pin_02_companyName'] %}
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">Organisation</dt>
+  <dd class="govuk-summary-list__value">{{ data['pin_02_companyName'] }}</dd>
+</div>
+{% endif %}
+{% if data['pin_02_contactRelationship'] %}
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">Relationship</dt>
+  <dd class="govuk-summary-list__value">{{ data['pin_02_contactRelationship'] }}</dd>
+</div>
+{% endif %}
+{% if data['pin_02_contactTel1'] %}
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">Telephone number 1</dt>
+  <dd class="govuk-summary-list__value">{{ data['pin_02_contactTel1'] }}</dd>
+</div>
+{% endif %}
+{% if data['pin_02_contactTel2'] %}
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">Telephone number 2</dt>
+  <dd class="govuk-summary-list__value">{{ data['pin_02_contactTel2'] }}</dd>
+</div>
+{% endif %}

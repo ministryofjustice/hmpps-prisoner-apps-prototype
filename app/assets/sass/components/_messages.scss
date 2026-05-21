@@ -59,3 +59,15 @@
   text-align: right;
   color: govuk-colour("white");
 }
+
+.moj-notification-badge {
+  display: inline-block;
+  min-width: 16px;
+  padding: 5px 8px;
+  border-radius: 75px;
+  background-color: govuk-colour("red");
+  color: govuk-colour("white");
+  @include govuk-font($size: 14, $weight: bold);
+  text-align: center;
+  white-space: nowrap;
+}

@@ -1,6 +1,7 @@
 {
   "group_01": {
     "name": "PIN phones",
+    "image": "pin-phones.jpg",
     "apps": [
       {
         "app_id": "app_0101",
@@ -36,6 +37,7 @@
   },
   "group_02": {
     "name": "Faith",
+    "image": "faith.jpg",
     "apps": [
       {
         "app_id": "app_0201",
@@ -55,6 +57,7 @@
   },
   "group_03": {
     "name": "Money",
+    "image": "money.png",
     "apps": [
       {
         "app_id": "app_0301",
@@ -86,6 +89,7 @@
   },
   "group_04": {
     "name": "Gym",
+    "image": "gym.png",
     "apps": [
       {
         "app_id": "app_0401",
@@ -109,6 +113,7 @@
   },
   "group_05": {
     "name": "Incentives (IEP)",
+    "image": "incentives-iep.png",
     "apps": [
       {
         "app_id": "app_0501",
@@ -128,6 +133,7 @@
   },
   "group_06": {
     "name": "Jobs, courses, activities",
+    "image": "jobs-courses-activities.png",
     "apps": [
       {
         "app_id": "app_0601",
@@ -171,6 +177,7 @@
   },
   "group_07": {
     "name": "Programmes",
+    "image": "programmes.png",
     "apps": [
       {
         "app_id": "app_0701",
@@ -182,6 +189,7 @@
   },
   "group_08": {
     "name": "Interventions",
+    "image": "interventions.png",
     "apps": [
       {
         "app_id": "app_0801",
@@ -193,6 +201,7 @@
   },
   "group_09": {
     "name": "Library",
+    "image": "library.png",
     "apps": [
       {
         "app_id": "app_0901",
@@ -212,6 +221,7 @@
   },
   "group_10": {
     "name": "Offender Management Unit (OMU)",
+    "image": "offender-management-unit.png",
     "apps": [
       {
         "app_id": "app_1001",
@@ -267,6 +277,7 @@
   },
   "group_11": {
     "name": "Property",
+    "image": "property.png",
     "apps": [
       {
         "app_id": "app_1101",
@@ -298,6 +309,7 @@
   },
   "group_12": {
     "name": "Resettlement",
+    "image": "resettlement.png",
     "apps": [
       {
         "app_id": "app_1201",
@@ -349,6 +361,7 @@
   },
   "group_13": {
     "name": "Residential",
+    "image": "residential.png",
     "apps": [
       {
         "app_id": "app_1301",
@@ -384,6 +397,7 @@
   },
   "group_14": {
     "name": "Safety",
+    "image": "safety.png",
     "apps": [
       {
         "app_id": "app_1401",
@@ -427,6 +441,7 @@
   },
   "group_15": {
     "name": "Security",
+    "image": "security.png",
     "apps": [
       {
         "app_id": "app_1501",
@@ -446,6 +461,7 @@
   },
   "group_16": {
     "name": "Orders",
+    "image": "orders.png",
     "apps": [
       {
         "app_id": "app_1601",
@@ -477,6 +493,7 @@
   },
   "group_17": {
     "name": "Visits and contact",
+    "image": "visits-contact.png",
     "apps": [
       {
         "app_id": "app_1701",
@@ -512,6 +529,7 @@
   },
   "group_18": {
     "name": "Legal and immigration",
+    "image": "legal-immigration.png",
     "apps": [
       {
         "app_id": "app_1801",
@@ -535,6 +553,7 @@
   },
   "group_19": {
     "name": "Diversity and Inclusion",
+    "image": "diversity-inclusion.png",
     "apps": [
       {
         "app_id": "app_1901",
@@ -578,6 +597,7 @@
   },
   "group_20": {
     "name": "Laptops",
+    "image": "laptops.png",
     "apps": [
       {
         "app_id": "app_2001",

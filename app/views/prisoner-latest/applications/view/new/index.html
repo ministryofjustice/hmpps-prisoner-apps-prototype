@@ -45,7 +45,7 @@
         Status
       </dt>
       <dd class="govuk-summary-list__value">
-        <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+        <strong class="govuk-tag govuk-tag--light-blue">New</strong>
       </dd>
       <dd class="govuk-summary-list__actions">
       </dd>
@@ -78,6 +78,17 @@
       <dd class="govuk-summary-list__actions">
       </dd>
     </div>
+
+    {# Show app-specific details based on type #}
+    {% if data['appType'] == 'app_0101' %}
+      {% include "prisoner-latest/applications/view/new/includes/_official-pin-details.html" %}
+    {% elif data['appType'] == 'app_0102' %}
+      {% include "prisoner-latest/applications/view/new/includes/_social-pin-details.html" %}
+    {% elif data['appType'] == 'app_0103' %}
+      {% include "prisoner-latest/applications/view/new/includes/_emergency-pin-details.html" %}
+    {% elif data['appType'] == 'app_0104' %}
+      {% include "prisoner-latest/applications/view/new/includes/_remove-pin-details.html" %}
+    {% else %}
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
         Details
@@ -88,10 +99,9 @@
         {% else %}
           Request to swap all VOs from last month
         {% endif %}
-    </dd>
-      <dd class="govuk-summary-list__actions">
       </dd>
     </div>
+    {% endif %}
   </dl>
 
   <h2 class="govuk-heading-m">Messages</h2>

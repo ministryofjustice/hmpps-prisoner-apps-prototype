@@ -82,20 +82,16 @@
       <dd class="govuk-summary-list__actions">
       </dd>
     </div>
+    {% if app.app_details %}
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
         Details
       </dt>
       <dd class="govuk-summary-list__value">
-        {% if data['app_detail'] %}
-          {{ data['app_detail'] }}
-        {% else %}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fringilla lectus sit amet aliquam euismod. 
-        {% endif %}
-    </dd>
-      <dd class="govuk-summary-list__actions">
+        {{ app.app_details }}
       </dd>
     </div>
+    {% endif %}
   </dl>
   </div>
 
