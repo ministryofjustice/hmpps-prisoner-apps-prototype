@@ -10,13 +10,17 @@ const fs = require('fs')
 
 // Add your routes here
 
-
+// Clear session data and redirect to home
+router.get('/manage-prototype/clear-data', function (req, res) {
+  req.session.data = {}
+  res.redirect('/')
+})
 
 // API routes with error handling
 router.get('/api/applications', function (req, res) {
   try {
-    if (req.session.data && req.session.data.appsDB) {
-      return res.json(req.session.data.appsDB)
+    if (req.session.data && req.session.data.prisonerAppsDB) {
+      return res.json(req.session.data.prisonerAppsDB)
     }
 
     const dataPath = path.join(__dirname, 'data', 'prisoner-apps-db.json')
@@ -30,6 +34,26 @@ router.get('/api/applications', function (req, res) {
   } catch (error) {
     console.error('Error loading applications:', error)
     res.status(500).json({ error: 'Failed to load applications data' })
+  }
+})
+
+router.get('/api/staff-applications', function (req, res) {
+  try {
+    if (req.session.data && req.session.data.staffAppsDB) {
+      return res.json(req.session.data.staffAppsDB)
+    }
+
+    const dataPath = path.join(__dirname, 'data', 'staff-apps-db.json')
+    if (!fs.existsSync(dataPath)) {
+      return res.status(404).json({ error: 'Staff applications data file not found' })
+    }
+
+    const rawData = fs.readFileSync(dataPath, 'utf8')
+    const data = JSON.parse(rawData)
+    res.json(data)
+  } catch (error) {
+    console.error('Error loading staff applications:', error)
+    res.status(500).json({ error: 'Failed to load staff applications data' })
   }
 })
 

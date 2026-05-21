@@ -18,9 +18,13 @@ $(document).ready(function () {
         console.log('Session applications loaded:', sessionApplications.length);
     }
 
+    // Determine which API endpoint to use based on current page
+    var isStaffPage = window.location.pathname.indexOf('/staff-') !== -1;
+    var applicationsEndpoint = isStaffPage ? '/api/staff-applications' : '/api/applications';
+
     // Load all data files from API routes
     Promise.all([
-        $.getJSON('/api/applications').catch(function (error) {
+        $.getJSON(applicationsEndpoint).catch(function (error) {
             console.error('Failed to load applications:', error);
             return [];
         }),

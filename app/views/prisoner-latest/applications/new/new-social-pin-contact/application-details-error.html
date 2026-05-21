@@ -16,6 +16,58 @@
 
       <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
 
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% if not data['pin_01_socialContactFirstName'] %}
+              <li>
+                <a href="#socialContactFirstName">Enter a first name</a>
+              </li>
+              {% endif %}
+              {% if not data['pin_01_socialContactLastName'] %}
+              <li>
+                <a href="#socialContactLastName">Enter a last name</a>
+              </li>
+              {% endif %}
+              {% if not data['pin_01_agedob'] %}
+              <li>
+                <a href="#dob">Select an answer about the contact's date of birth</a>
+              </li>
+              {% endif %}
+              {% if data['pin_01_agedob'] == 'DOB' and not data['pin_01_contact-dob-day'] %}
+              <li>
+                <a href="#contact-dob-day">Enter contact's date of birth</a>
+              </li>
+              {% endif %}
+              {% if data['pin_01_agedob'] == 'Age' and not data['pin_01_contact-approx-age'] %}
+              <li>
+                <a href="#contact-approx-age">Enter contact's age</a>
+              </li>
+              {% endif %}
+              {% if not data['pin_01_contactRelationship'] %}
+              <li>
+                <a href="#contactRelationship">Select a relationship</a>
+              </li>
+              {% endif %}
+              {% if not data['pin_01_contactAddress1'] %}
+              <li>
+                <a href="#address-picker">Enter an address</a>
+              </li>
+              {% endif %}
+              {% if not data['pin_01_contactTel1'] %}
+              <li>
+                <a href="#contactTel1">Enter a telephone number</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <span class="govuk-caption-xl">
         Add new social PIN phone contact
       </span>
@@ -30,21 +82,31 @@
 
                 <h2 class="govuk-heading-m">New social contact to add</h2>
   
-                <div class="govuk-form-group">
+                <div class="govuk-form-group {% if not data['pin_01_socialContactFirstName'] %}govuk-form-group--error{% endif %}">
                   <label class="govuk-label govuk-label--s" for="pin_01_socialContactFirstName">
                     First name
                   </label>
-                  <input class="govuk-input" id="socialContactFirstName" name="pin_01_socialContactFirstName" type="text" value="{{ data['pin_01_socialContactFirstName'] }}">
+                  {% if not data['pin_01_socialContactFirstName'] %}
+                  <p id="socialContactFirstName-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a first name
+                  </p>
+                  {% endif %}
+                  <input class="govuk-input {% if not data['pin_01_socialContactFirstName'] %}govuk-input--error{% endif %}" id="socialContactFirstName" name="pin_01_socialContactFirstName" type="text" value="{{ data['pin_01_socialContactFirstName'] }}">
                 </div>
   
-                <div class="govuk-form-group">
+                <div class="govuk-form-group {% if not data['pin_01_socialContactLastName'] %}govuk-form-group--error{% endif %}">
                   <label class="govuk-label govuk-label--s" for="pin_01_socialContactLastName">
                     Last name
                   </label>
-                  <input class="govuk-input" id="socialContactLastName" name="pin_01_socialContactLastName" type="text" value="{{ data['pin_01_socialContactLastName'] }}">
+                  {% if not data['pin_01_socialContactLastName'] %}
+                  <p id="socialContactLastName-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a last name
+                  </p>
+                  {% endif %}
+                  <input class="govuk-input {% if not data['pin_01_socialContactLastName'] %}govuk-input--error{% endif %}" id="socialContactLastName" name="pin_01_socialContactLastName" type="text" value="{{ data['pin_01_socialContactLastName'] }}">
                 </div>
   
-                <div class="govuk-form-group">
+                <div class="govuk-form-group {% if not data['pin_01_agedob'] or (data['pin_01_agedob'] == 'DOB' and not data['pin_01_contact-dob-day']) or (data['pin_01_agedob'] == 'Age' and not data['pin_01_contact-approx-age']) %}govuk-form-group--error{% endif %}">
                   <fieldset class="govuk-fieldset" aria-describedby="agedob-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                       Date of birth or age
@@ -52,6 +114,11 @@
                     <div id="agedob-hint" class="govuk-hint">
                       Select one option
                     </div>
+                    {% if not data['pin_01_agedob'] %}
+                    <p id="agedob-error" class="govuk-error-message">
+                      <span class="govuk-visually-hidden">Error:</span> Select an answer about the contact's date of birth
+                    </p>
+                    {% endif %}
                     <div class="govuk-radios" data-module="govuk-radios">
                       <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="dob" name="pin_01_agedob" type="radio" data-aria-controls="conditional-agedob" value="DOB" {{ checked("pin_01_agedob", "DOB") }} >
@@ -65,6 +132,11 @@
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s govuk-visually-hidden">
                               Date of birth
                             </legend>
+                            {% if data['pin_01_agedob'] == 'DOB' and not data['pin_01_contact-dob-day'] %}
+                            <p id="contact-dob-error" class="govuk-error-message">
+                              <span class="govuk-visually-hidden">Error:</span> Enter contact's date of birth
+                            </p>
+                            {% endif %}
                             <div class="govuk-date-input" id="contact-dob">
                               <div class="govuk-date-input__item">
                                 <div class="govuk-form-group">
@@ -105,7 +177,12 @@
                           <label class="govuk-label" for="contact-approx-age govuk-visually-hidden">
                             Age
                           </label>
-                          <input class="govuk-input govuk-!-width-one-third" id="contact-approx-age" name="pin_01_contact-approx-age" value="{{ data['pin_01_contact-approx-age'] }}"  >
+                          {% if data['pin_01_agedob'] == 'Age' and not data['pin_01_contact-approx-age'] %}
+                          <p id="contact-approx-age-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> Enter contact's age
+                          </p>
+                          {% endif %}
+                          <input class="govuk-input govuk-!-width-one-third {% if data['pin_01_agedob'] == 'Age' and not data['pin_01_contact-approx-age'] %}govuk-input--error{% endif %}" id="contact-approx-age" name="pin_01_contact-approx-age" value="{{ data['pin_01_contact-approx-age'] }}"  >
                         </div>
                       </div>
                       <div class="govuk-radios__item">
@@ -119,11 +196,16 @@
                 </div>
   
 
-                  <div class="govuk-form-group govuk-!-margin-bottom-5">
+                  <div class="govuk-form-group govuk-!-margin-bottom-5 {% if not data['pin_01_contactRelationship'] %}govuk-form-group--error{% endif %}">
                   <label class="govuk-label govuk-label--s" for="contactRelationship">
                     Relationship
                   </label>
-                  <select class="govuk-select" id="contactRelationship" name="pin_01_contactRelationship">
+                  {% if not data['pin_01_contactRelationship'] %}
+                  <p id="contactRelationship-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Select a relationship
+                  </p>
+                  {% endif %}
+                  <select class="govuk-select {% if not data['pin_01_contactRelationship'] %}govuk-select--error{% endif %}" id="contactRelationship" name="pin_01_contactRelationship">
                     <option value="" selected disabled hidden>Select a relationship</option>
                     {% for relationship in data['socialRelationships'] %}
                     <option value="{{ relationship.social_rel }}">{{ relationship.social_rel }}</option>
@@ -135,11 +217,16 @@
                 <div class="govuk-hint govuk-!-margin-bottom-5">
                   Fill this in if your establishment requires it
                 </div>
-                  <div class="govuk-form-group address-lookup">
+                  <div class="govuk-form-group address-lookup {% if not data['pin_01_contactAddress1'] %}govuk-form-group--error{% endif %}">
                   <label for="address-picker" class="govuk-label  govuk-label--s">Find address</label>
                   <div id="address-picker-hint" class="govuk-hint">
                     Type part of address or postcode to begin
                   </div>
+                  {% if not data['pin_01_contactAddress1'] %}
+                  <p id="address-picker-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter an address
+                  </p>
+                  {% endif %}
                   <div id="my-autocomplete-wrapper">
                     <select id="address-picker" class="govuk-select">
                       <option value="" selected disabled hidden></option>
@@ -151,11 +238,16 @@
                 </div>
   
   
-                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address {% if not data['pin_01_contactAddress1'] %}govuk-form-group--error{% endif %}">
                   <label class="govuk-label govuk-label--s" for="contactAddress1">
                     Address line 1
                   </label>
-                  <input class="govuk-input" id="contactAddress1" name="pin_01_contactAddress1" type="text" value="{{ data['pin_01_contactAddress1'] }}">
+                  {% if not data['pin_01_contactAddress1'] %}
+                  <p id="contactAddress1-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter address line 1
+                  </p>
+                  {% endif %}
+                  <input class="govuk-input {% if not data['pin_01_contactAddress1'] %}govuk-input--error{% endif %}" id="contactAddress1" name="pin_01_contactAddress1" type="text" value="{{ data['pin_01_contactAddress1'] }}">
                 </div>
   
                 <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
@@ -165,25 +257,40 @@
                   <input class="govuk-input" id="contactAddress2" name="pin_01_contactAddress2" type="text" value="{{ data['pin_01_contactAddress2'] }}">
                 </div>
   
-                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address {% if not data['pin_01_contactTowncity'] %}govuk-form-group--error{% endif %}">
                   <label class="govuk-label govuk-label--s" for="contactTowncity">
                     Town or city
                   </label>
-                  <input class="govuk-input" id="contactTowncity" name="pin_01_contactTowncity" type="text" value="{{ data['pin_01_contactTowncity'] }}">
+                  {% if not data['pin_01_contactTowncity'] %}
+                  <p id="contactTowncity-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a town or city
+                  </p>
+                  {% endif %}
+                  <input class="govuk-input {% if not data['pin_01_contactTowncity'] %}govuk-input--error{% endif %}" id="contactTowncity" name="pin_01_contactTowncity" type="text" value="{{ data['pin_01_contactTowncity'] }}">
                 </div>
   
-                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address {% if not data['pin_01_contactPostcode'] %}govuk-form-group--error{% endif %}">
                   <label class="govuk-label govuk-label--s" for="contactPostcode">
                     Postcode
                   </label>
-                  <input class="govuk-input govuk-input--width-10" id="contactPostcode" name="pin_01_contactPostcode" type="text" value="{{ data['pin_01_contactPostcode'] }}">
+                  {% if not data['pin_01_contactPostcode'] %}
+                  <p id="contactPostcode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a postcode
+                  </p>
+                  {% endif %}
+                  <input class="govuk-input govuk-input--width-10 {% if not data['pin_01_contactPostcode'] %}govuk-input--error{% endif %}" id="contactPostcode" name="pin_01_contactPostcode" type="text" value="{{ data['pin_01_contactPostcode'] }}">
                 </div>
   
-                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address">
+                <div class="govuk-form-group govuk-!-margin-bottom-5 full-address {% if not data['pin_01_country'] %}govuk-form-group--error{% endif %}">
                   <label class="govuk-label govuk-label--s" for="contactCountry">
                     Country
                   </label>
-                  <select class="govuk-select" id="contactCountry" name="pin_01_country">
+                  {% if not data['pin_01_country'] %}
+                  <p id="contactCountry-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Select a country
+                  </p>
+                  {% endif %}
+                  <select class="govuk-select {% if not data['pin_01_country'] %}govuk-select--error{% endif %}" id="contactCountry" name="pin_01_country">
                     <option value="" selected disabled hidden></option>
                     <option value="United Kingdom">United Kingdom</option>
                     <option value="Ireland">Ireland</option>
@@ -205,14 +312,19 @@
                     </h2>
                   </legend>
                   <div id="telephoneNumbers-hint" class="govuk-hint">
-                    Enter a phone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192. Include area code or international code, if overseas.
+                    Enter a phone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192. Include area code or international code, if overseas.
                   </div>
 
-                  <div class="govuk-form-group govuk-form-group govuk-!-margin-top-5  govuk-!-margin-bottom-5 ">
+                  <div class="govuk-form-group govuk-form-group govuk-!-margin-top-5 govuk-!-margin-bottom-5 {% if not data['pin_01_contactTel1'] %}govuk-form-group--error{% endif %}">
                     <label class="govuk-label govuk-label--s" for="contactTel1" aria-describedby="contactTel1-hint">
                       Telephone number 1
                     </label>
-                    <input class="govuk-input govuk-!-margin-bottom-2" id="contactTel1" name="pin_01_contactTel1" type="text" value="{{ data['pin_01_contactTel1'] }}">
+                    {% if not data['pin_01_contactTel1'] %}
+                    <p id="contactTel1-error" class="govuk-error-message">
+                      <span class="govuk-visually-hidden">Error:</span> Enter a telephone number
+                    </p>
+                    {% endif %}
+                    <input class="govuk-input govuk-!-margin-bottom-2 {% if not data['pin_01_contactTel1'] %}govuk-input--error{% endif %}" id="contactTel1" name="pin_01_contactTel1" type="text" value="{{ data['pin_01_contactTel1'] }}">
                    </div>
 
                    <div class="govuk-form-group govuk-form-group govuk-!-margin-bottom-5">

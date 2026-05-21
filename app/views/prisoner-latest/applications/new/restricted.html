@@ -1,0 +1,48 @@
+{% extends "layouts/launchpad.html" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-latest/" %}
+{% set appGroup = data['appGroup'] %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+      {% for group, details in data['appGroupsTypes'] %}
+        {% for app in details.apps %}
+          {% if app.app_id == data['appType'] %}
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <div class="moj-interruption-card">
+              <div class="moj-interruption-card__content">
+                <h1 class="moj-interruption-card__heading">{{ app.app_type }}</h1>
+                <div class="moj-interruption-card__body">
+                  <p>You have one of those apps open already.</p>
+                  <p>You sent it on 3 May 2026 and can't send another until it is closed.</p>
+                </div>
+                <div class="govuk-button-group moj-interruption-card__actions">
+                  <a href="{{ homeURL }}applications/" role="button" draggable="false" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+                    Go back to apps
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      
+
+
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+{% endblock %}

@@ -32,7 +32,7 @@
       
       <span class="govuk-caption-xl">
         {% set appID = data['url_id'] %}
-        {% for app in data['appsDB'] %}
+        {% for app in data['staffAppsDB'] %}
         {% if app.app_id == appID  %}
         {{ app.app_type }}
         {% endif  %}
@@ -51,7 +51,7 @@
         <div class="govuk-grid-column-two-thirds">
 
           {% set appID = data['url_id'] %}
-          {% for app in data['appsDB'] %}
+          {% for app in data['staffAppsDB'] %}
           {% if app.app_id == appID  %}
 
           {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}

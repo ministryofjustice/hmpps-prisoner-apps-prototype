@@ -27,7 +27,7 @@
           <div class="govuk-grid-column-one-half">
 
 
-            <form class="form" action="/prisoner-latest/applications/new/new-official-pin-contact/check-details">
+            <form class="form" method="post">
 
               <div class="govuk-form-group govuk-!-margin-bottom-5">
                 <label class="govuk-label govuk-label--s" for="officialFirstName">
@@ -89,10 +89,11 @@
             </fieldset>
           
 
-              <div class="moj-button-action">
+              <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                   Continue
                 </button>
+                <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
               </div>
   
               </form>

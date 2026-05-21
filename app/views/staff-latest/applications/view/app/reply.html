@@ -18,7 +18,7 @@
          
         <img src="/public/images/HMPPS-Logo-Black.svg" alt="HM Prison & Probation Service" width="200px" class="govuk-!-margin-bottom-7">
  
-        {% for app in data['appsDB'] %}
+        {% for app in data['staffAppsDB'] %}
         {% if app.app_id == appID  %}
       
           <p class="govuk-body govuk-!-margin-bottom-0">{{ app.prisoner_name }}</p>

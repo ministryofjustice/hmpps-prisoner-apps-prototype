@@ -1,5 +1,5 @@
 {% extends "layouts/launchpad.html" %}
-{% set pageName="John's Profile" %}
+{% set pageName = data['first-name'] + "'s Profile" %}
 {% set bodyClasses = 'launchpad profile' %}
 {% set homeURL="/prisoner-latest/" %}
 {% set appID = data['url_id'] %}
@@ -23,7 +23,7 @@
           </ol>
         </div>
       </nav>
-      {% for app in data['appsDB'] %}
+      {% for app in data['prisonerAppsDB'] %}
       {% if app.app_id == appID %}
 
         {% if app.status !== "Closed" %}
@@ -99,46 +99,73 @@
   </dl>
   </div>
 
-  <div class="govuk-grid-column-full">
+  <div class="govuk-grid-column-two-thirds">
 
   <h2 class="govuk-heading-m">Messages</h2>
 
-  <table class="govuk-table">
-    <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header">Your chat</th>
-        <th class="govuk-table__header">From</th>
-        <th class="govuk-table__header">Date</th>
-      </tr>
-    </thead>
-    <tbody class="govuk-table__body">
+  {# Get session messages for this specific app #}
+  {% set thisAppMessages = data.appMessages[appID] if data.appMessages and data.appMessages[appID] else [] %}
 
-      {% if data.messages %}
-        {% for message in data.messages %}
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell">{{ message.text }}</td>
-          <td class="govuk-table__cell">{{ message.from }}</td>
-          <td class="govuk-table__cell">{{ message.date }}</td>
-        </tr>
+  {# Determine if there are any messages #}
+  {% set hasAppMessages = app.messages and app.messages | length %}
+  {% set hasSessionMessages = thisAppMessages | length %}
+  {% set hasMessages = hasAppMessages or hasSessionMessages %}
+
+  {# Work out who sent the last message #}
+  {% set lastSender = '' %}
+  {% if hasSessionMessages %}
+    {% set lastSender = 'Prisoner' %}
+  {% elif hasAppMessages %}
+    {% set lastSender = app.messages[app.messages | length - 1].sender %}
+  {% endif %}
+
+  {% if not hasMessages %}
+    <p class="govuk-body">There are no messages yet.</p>
+  {% else %}
+  <div id="messages" class="moj-messages-container">
+    <div class="moj-message-list">
+
+      {# Show messages from the app database #}
+      {% if hasAppMessages %}
+        {% for message in app.messages %}
+          {% if message.sender == "Staff" %}
+          <div class="moj-message-item moj-message-item--received">
+            <div class="moj-message-item__text moj-message-item__text--received">{{ message.text }}</div>
+            <div class="moj-message-item__meta">
+              <span class="moj-message-item__meta--sender">Staff</span>
+            </div>
+          </div>
+          {% else %}
+          <div class="moj-message-item moj-message-item--sent">
+            <div class="moj-message-item__text moj-message-item__text--sent">{{ message.text }}</div>
+            <div class="moj-message-item__meta">
+              <span class="moj-message-item__meta--sender">You</span>
+            </div>
+          </div>
+          {% endif %}
         {% endfor %}
-      {% else %}
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell">No messages yet</td>
-          <td class="govuk-table__cell">—</td>
-          <td class="govuk-table__cell">—</td>
-        </tr>
       {% endif %}
 
-    </tbody>
-  </table>
+      {# Show messages from session (sent during this session) #}
+      {% if hasSessionMessages %}
+        {% for message in thisAppMessages %}
+          <div class="moj-message-item moj-message-item--sent">
+            <div class="moj-message-item__text moj-message-item__text--sent">{{ message.text }}</div>
+            <div class="moj-message-item__meta">
+              <span class="moj-message-item__meta--sender">You</span> at <time class="moj-message-item__meta--timestamp">{{ message.date }}</time>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
 
+    </div>
   </div>
+  {% endif %}
 
-  <div class="govuk-grid-column-two-thirds">
-
-
+  {% if lastSender == 'Prisoner' %}
+    <p class="govuk-body-l">You cannot send another message until staff reply to this one.</p>
+  {% else %}
   <h2 class="govuk-heading-m">Send a reply</h2>
-
   <form method="post" action="/prisoner-latest/applications/view/app?url_id={{ appID }}">  {{ govukTextarea({
       name: "message",
       id: "message",
@@ -152,6 +179,7 @@
       text: "Send"
     }) }}
   </form>
+  {% endif %}
 
     {% endif %}
   {% endfor %}

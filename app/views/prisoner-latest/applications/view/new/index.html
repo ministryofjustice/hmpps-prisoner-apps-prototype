@@ -1,5 +1,5 @@
 {% extends "layouts/launchpad.html" %}
-{% set pageName="John's Profile" %}
+{% set pageName = data['first-name'] + "'s Profile" %}
 {% set bodyClasses = 'launchpad profile' %}
 {% set homeURL="/prisoner-latest/" %}
 {% set appID = data['url_id'] %}
@@ -94,10 +94,59 @@
     </div>
   </dl>
 
-  
-    
+  <h2 class="govuk-heading-m">Messages</h2>
 
-      <a class="govuk-button govuk-button--secondary" href="{{homeURL}}/applications/">Back to your apps</a>
+  {# Get session messages for this specific app #}
+  {% set thisAppMessages = data.appMessages['new'] if data.appMessages and data.appMessages['new'] else [] %}
+
+  {# Determine if there are any messages #}
+  {% set hasMessages = thisAppMessages | length %}
+
+  {# Work out who sent the last message #}
+  {% set lastSender = '' %}
+  {% if hasMessages %}
+    {% set lastSender = 'Prisoner' %}
+  {% endif %}
+
+  {% if not hasMessages %}
+    <p class="govuk-body">There are no messages yet.</p>
+  {% else %}
+  <div id="messages" class="moj-messages-container">
+    <div class="moj-message-list">
+
+      {% for message in thisAppMessages %}
+        <div class="moj-message-item moj-message-item--sent">
+          <div class="moj-message-item__text moj-message-item__text--sent">{{ message.text }}</div>
+          <div class="moj-message-item__meta">
+            <span class="moj-message-item__meta--sender">You</span> at <time class="moj-message-item__meta--timestamp">{{ message.date }}</time>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+  {% endif %}
+
+  {% if lastSender == 'Prisoner' %}
+    <p class="govuk-body-l">You cannot send another message until staff reply to this one.</p>
+  {% else %}
+  <h2 class="govuk-heading-m">Send a reply</h2>
+  <form method="post" action="/prisoner-latest/applications/view/new">
+    {{ govukTextarea({
+      name: "message",
+      id: "message",
+      label: {
+        text: "Message",
+        classes: "govuk-visually-hidden"
+      }
+    }) }}
+
+    {{ govukButton({
+      text: "Send"
+    }) }}
+  </form>
+  {% endif %}
+
     </div>
 
 

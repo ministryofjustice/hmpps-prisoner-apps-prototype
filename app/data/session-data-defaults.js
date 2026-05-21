@@ -1,7 +1,8 @@
 let mvpGroupsTypes          = require('./mvp_groups_types.json')
 let appGroupsTypes          = require('./app_groups_types.json')
 let mvpsDB                  = require('./mvp-apps-db.json')
-let appsDB                  = require('./prisoner-apps-db.json')
+let prisonerAppsDB          = require('./prisoner-apps-db.json')
+let staffAppsDB             = require('./staff-apps-db.json')
 let addresses               = require('./addresses.json')
 let socialRelationships     = require('./social_relationships.json')
 let officialRelationships   = require('./legal_relationships.json')
@@ -13,7 +14,8 @@ module.exports = {
 mvpGroupsTypes,
 mvpsDB,
 appGroupsTypes,
-appsDB,
+prisonerAppsDB,
+staffAppsDB,
 addresses,
 socialRelationships,
 officialRelationships,

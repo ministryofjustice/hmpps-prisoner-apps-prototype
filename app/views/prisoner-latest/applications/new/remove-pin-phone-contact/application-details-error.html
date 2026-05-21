@@ -1,0 +1,137 @@
+{% extends "layouts/launchpad.html" %}
+{% set bodyClasses = 'launchpad' %}
+
+{% set pageName="Log details" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set homeurl="/prisoner-latest/" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
+
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% if not data['pin_04_officialFirstName'] %}
+              <li>
+                <a href="#officialFirstName">Enter a first name</a>
+              </li>
+              {% endif %}
+              {% if not data['pin_04_officialLastName'] %}
+              <li>
+                <a href="#officialLastName">Enter a last name</a>
+              </li>
+              {% endif %}
+              {% if not data['pin_04_officialContactTel1'] %}
+              <li>
+                <a href="#officialContactTel1">Enter a telephone number</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <span class="govuk-caption-xl">
+        Remove PIN phone contact
+      </span>
+      <h1 class="govuk-heading-xl">Log details</h1>
+
+      <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+
+
+            <form class="form" method="post">
+
+              <div class="govuk-form-group govuk-!-margin-bottom-5 {% if not data['pin_04_officialFirstName'] %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label govuk-label--s" for="officialFirstName">
+                  First name
+                </label>
+                {% if not data['pin_04_officialFirstName'] %}
+                <p id="officialFirstName-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> Enter a first name
+                </p>
+                {% endif %}
+                <input class="govuk-input {% if not data['pin_04_officialFirstName'] %}govuk-input--error{% endif %}" id="officialFirstName" name="pin_04_officialFirstName" type="text" value="{{ data['pin_04_officialFirstName'] }}">
+              </div>
+  
+              <div class="govuk-form-group govuk-!-margin-bottom-5 {% if not data['pin_04_officialLastName'] %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label govuk-label--s" for="officialLastName">
+                  Last name
+                </label>
+                {% if not data['pin_04_officialLastName'] %}
+                <p id="officialLastName-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> Enter a last name
+                </p>
+                {% endif %}
+                <input class="govuk-input {% if not data['pin_04_officialLastName'] %}govuk-input--error{% endif %}" id="officialLastName" name="pin_04_officialLastName" type="text" value="{{ data['pin_04_officialLastName'] }}">
+              </div>
+    
+              <div class="govuk-form-group govuk-!-margin-bottom-5 {% if not data['pin_04_officialContactTel1'] %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label govuk-label--s" for="officialContactTel1" aria-describedby="officialContactTel1-hint">
+                  Telephone number 1
+                </label>
+                <div id="officialContactTel1-hint" class="govuk-hint">
+                  Include area code or international code, if overseas
+                </div>
+                {% if not data['pin_04_officialContactTel1'] %}
+                <p id="officialContactTel1-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span> Enter a telephone number
+                </p>
+                {% endif %}
+                <input class="govuk-input govuk-!-margin-bottom-2 {% if not data['pin_04_officialContactTel1'] %}govuk-input--error{% endif %}" id="officialContactTel1" name="pin_04_officialContactTel1" type="tel" value="{{ data['pin_04_officialContactTel1'] }}">
+                </div>
+
+              <div class="govuk-form-group  govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="officialContactTel2" aria-describedby="officialContactTel2-hint">
+                  Telephone number 2 (optional)
+                </label>
+                <div id="officialContactTel2-hint" class="govuk-hint">
+                  Include area code or international code, if overseas
+                </div>
+                <input class="govuk-input govuk-!-margin-bottom-2" id="officialContactTel2" name="pin_04_officialContactTel2" type="tel" value="{{ data['pin_04_officialContactTel2'] }}">
+              </div>
+
+              <div class="govuk-form-group  govuk-!-margin-bottom-5">
+                <label class="govuk-label govuk-label--s" for="relationship" aria-describedby="relationship-hint">
+                  Relationship (optional)
+                </label>
+                <input class="govuk-input govuk-!-margin-bottom-2" id="relationship" name="pin_04_relationship" type="tel" value="{{ data['pin_04_relationship'] }}">
+              </div>
+
+
+
+              <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                  Continue
+                </button>
+                <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
+              </div>
+  
+              </form>
+    
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- end main content  -->
+
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+.moj-messages-container {
+  margin-bottom: govuk-spacing(6);
+}
+
+.moj-message-list {
+  display: flex;
+  flex-direction: column;
+  gap: govuk-spacing(3);
+}
+
+.moj-message-list__date {
+  display: block;
+  text-align: center;
+  @include govuk-font($size: 16);
+  color: govuk-colour("dark-grey");
+  margin: govuk-spacing(2) 0;
+}
+
+.moj-message-item {
+  max-width: 80%;
+}
+
+.moj-message-item--sent {
+  align-self: flex-end;
+}
+
+.moj-message-item--received {
+  align-self: flex-start;
+}
+
+.moj-message-item__text {
+  @include govuk-font($size: 19);
+  padding: govuk-spacing(3);
+  border-radius: 8px;
+  word-wrap: break-word;
+}
+
+.moj-message-item__text--sent {
+  background-color: govuk-colour("blue");
+  color: govuk-colour("white");
+
+  a, time {
+    color: govuk-colour("white");
+  }
+}
+
+.moj-message-item__text--received {
+  background-color: govuk-colour("light-grey");
+  color: govuk-colour("black");
+}
+
+.moj-message-item__meta {
+  @include govuk-font($size: 14);
+  color: govuk-colour("dark-grey");
+  margin-top: govuk-spacing(1);
+}
+
+.moj-message-item--sent .moj-message-item__meta {
+  text-align: right;
+  color: govuk-colour("white");
+}

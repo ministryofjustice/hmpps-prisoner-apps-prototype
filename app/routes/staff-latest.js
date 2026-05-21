@@ -88,10 +88,10 @@ router.post('/staff-latest/applications/view/app/messages', function (req, res) 
 router.get('/staff-latest/applications/view/app/mark-in-progress', function (req, res) {
   const appId = req.query.url_id
 
-  if (req.session.data.appsDB) {
-    for (var i = 0; i < req.session.data.appsDB.length; i++) {
-      if (String(req.session.data.appsDB[i].app_id) === appId) {
-        req.session.data.appsDB[i].status = 'In progress'
+  if (req.session.data.staffAppsDB) {
+    for (var i = 0; i < req.session.data.staffAppsDB.length; i++) {
+      if (String(req.session.data.staffAppsDB[i].app_id) === appId) {
+        req.session.data.staffAppsDB[i].status = 'In progress'
         break
       }
     }
@@ -105,10 +105,10 @@ router.post('/staff-latest/applications/view/app/forward', function (req, res) {
   const newDept = req.body.appDept
   const forwardReasons = req.body.forwardReasons
 
-  if (req.session.data.appsDB && newDept) {
-    for (var i = 0; i < req.session.data.appsDB.length; i++) {
-      if (String(req.session.data.appsDB[i].app_id) === appId) {
-        req.session.data.appsDB[i].owner = newDept
+  if (req.session.data.staffAppsDB && newDept) {
+    for (var i = 0; i < req.session.data.staffAppsDB.length; i++) {
+      if (String(req.session.data.staffAppsDB[i].app_id) === appId) {
+        req.session.data.staffAppsDB[i].owner = newDept
         break
       }
     }
@@ -149,12 +149,12 @@ router.post('/staff-latest/applications/view/app/action', function (req, res) {
   const decision = req.body.actionRespond
   const reason = req.body.decisionReason
 
-  if (req.session.data.appsDB && decision) {
-    for (var i = 0; i < req.session.data.appsDB.length; i++) {
-      if (String(req.session.data.appsDB[i].app_id) === appId) {
-        req.session.data.appsDB[i].status = 'Closed'
-        req.session.data.appsDB[i].decision = decision
-        req.session.data.appsDB[i].decision_reason = reason || ''
+  if (req.session.data.staffAppsDB && decision) {
+    for (var i = 0; i < req.session.data.staffAppsDB.length; i++) {
+      if (String(req.session.data.staffAppsDB[i].app_id) === appId) {
+        req.session.data.staffAppsDB[i].status = 'Closed'
+        req.session.data.staffAppsDB[i].decision = decision
+        req.session.data.staffAppsDB[i].decision_reason = reason || ''
         break
       }
     }

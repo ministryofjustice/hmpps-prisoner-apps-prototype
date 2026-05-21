@@ -30,7 +30,7 @@
   			</div>
   		</nav>
 
-        {% for app in data['appsDB'] %}
+        {% for app in data['staffAppsDB'] %}
           {% if app.app_id == appID  %}
           <h1 class="govuk-heading-xl">
             {{ app.app_type }}
@@ -47,7 +47,7 @@
   <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
 
-      {% for app in data['appsDB'] %}
+      {% for app in data['staffAppsDB'] %}
       {% if app.app_id == appID  %}
 
     {% include "./includes/actions.html" %}

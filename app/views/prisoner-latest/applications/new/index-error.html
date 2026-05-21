@@ -1,7 +1,7 @@
 {% extends "layouts/launchpad.html" %}
 {% set pageName = data['first-name'] + "'s Profile" %}
 {% set bodyClasses = 'launchpad profile' %}
-{% set homeURL="/prisoner-mvp/" %}
+{% set homeURL="/prisoner-latest/" %}
 
 {% block content %}
 
@@ -38,7 +38,7 @@
               </p>
               <div class="govuk-radios" data-module="govuk-radios">
 
-                {% for group, details in data['mvpGroupsTypes'] %}
+                {% for group, details in data['appGroupsTypes'] %}
                 <div class="govuk-radios__item">
                   <input class="govuk-radios__input" id="{{ group }}" name="appGroup" type="radio" value="{{ group }}">
                   <label class="govuk-label govuk-radios__label" for="{{ group }}">

@@ -1,5 +1,5 @@
 {% extends "layouts/launchpad.html" %}
-{% set pageName="John's Profile" %}
+{% set pageName = data['first-name'] + "'s Profile" %}
 {% set bodyClasses = 'launchpad' %}
 {% set homeURL="/prisoner-latest/" %}
 {% set appGroup = data['appGroup'] %}
@@ -29,13 +29,12 @@
             <dl class="govuk-summary-list govuk-!-margin-bottom-9">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Application type
+                  App type
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {{ app.app_type }}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                  <a href="/application-tool/latest/applications/log/select-app-type" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -50,7 +49,7 @@
                   {% endif %}
                 </dd>
                 <dd class="govuk-summary-list__actions">
-                  <a href="/application-tool/latest/applications/log/select-app-type" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
+                  <a href="{{homeURL}}applications/new/details" class="govuk-body">Change <span class="govuk-visually-hidden"> details</span></a>
                 </dd>
               </div>
             </dl>
@@ -76,13 +75,13 @@
             </div>
             <div class="govuk-form-group">
               <label class="govuk-label" for="app-group">
-                Application group
+                App group
               </label>
               <input class="govuk-input" id="app-group" name="checkAppGroup" type="text" value="{{ details.name }}">
             </div>
             <div class="govuk-form-group">
               <label class="govuk-label" for="app-type">
-                Application type
+                App type
               </label>
               <input class="govuk-input" id="app-type" name="checkappType" type="text" value="{{ app.app_type }}">
             </div>
@@ -91,10 +90,11 @@
 
         <!-- /end note -->
 
-            <div class="moj-button-action">
+            <div class="govuk-button-group">
               <button type="submit" class="govuk-button" data-module="govuk-button">
-                Submit application
+                Send app
               </button>
+              <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
             </div>
 
           </form>

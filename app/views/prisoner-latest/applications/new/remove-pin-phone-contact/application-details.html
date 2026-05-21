@@ -27,7 +27,7 @@
           <div class="govuk-grid-column-one-half">
 
 
-            <form class="form" action="/prisoner-latest/applications/new/remove-pin-phone-contact/check-details">
+            <form class="form" method="post">
 
               <div class="govuk-form-group govuk-!-margin-bottom-5">
                 <label class="govuk-label govuk-label--s" for="officialFirstName">
@@ -55,7 +55,7 @@
 
               <div class="govuk-form-group  govuk-!-margin-bottom-5">
                 <label class="govuk-label govuk-label--s" for="officialContactTel2" aria-describedby="officialContactTel2-hint">
-                  Telephone number 2
+                  Telephone number 2 (optional)
                 </label>
                 <div id="officialContactTel2-hint" class="govuk-hint">
                   Include area code or international code, if overseas
@@ -65,17 +65,18 @@
 
               <div class="govuk-form-group  govuk-!-margin-bottom-5">
                 <label class="govuk-label govuk-label--s" for="relationship" aria-describedby="relationship-hint">
-                  Relationship to prisoner (optional)
+                  Relationship (optional)
                 </label>
                 <input class="govuk-input govuk-!-margin-bottom-2" id="relationship" name="pin_04_relationship" type="tel" value="{{ data['pin_04_relationship'] }}">
               </div>
 
 
 
-              <div class="moj-button-action">
+              <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                   Continue
                 </button>
+                <a href="{{homeURL}}applications" class="govuk-link">Cancel</a>
               </div>
   
               </form>

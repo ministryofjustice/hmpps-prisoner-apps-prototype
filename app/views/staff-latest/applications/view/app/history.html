@@ -32,13 +32,13 @@
 
       <span class="govuk-caption-xl">
         {% set appID = data['url_id'] %}
-        {% for app in data['appsDB'] %}
+        {% for app in data['staffAppsDB'] %}
         {% if app.app_id == appID %}
         {{ app.app_type }}
         {% endif %}
         {% endfor %}
       </span>
-      {% for app in data['appsDB'] %}
+      {% for app in data['staffAppsDB'] %}
       {% if app.app_id == appID %}
       <h1 class="govuk-heading-xl">
         {{ app.app_type }}
@@ -53,7 +53,7 @@
 
 
   {% set appID = data['url_id'] %}
-  {% for app in data['appsDB'] %}
+  {% for app in data['staffAppsDB'] %}
   {% if app.app_id == appID %}
 
 
