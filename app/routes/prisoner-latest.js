@@ -29,8 +29,21 @@ module.exports = function (router, content) {
 
     if (!appType) {
       res.redirect('/prisoner-latest/applications/new/type-error')
+      return
     }
-    else if (appType == "app_0101") {
+
+    // Check if this app type already exists and is not closed
+    var prisonerApps = req.session.data.prisonerAppsDB || []
+    var existingApp = prisonerApps.find(function (app) {
+      return app.app_type_id === appType && app.status !== 'Closed'
+    })
+
+    if (existingApp) {
+      res.redirect('/prisoner-latest/applications/new/restricted')
+      return
+    }
+
+    if (appType == "app_0101") {
       res.redirect('/prisoner-latest/applications/new/new-official-pin-contact/application-details')
     }
     else if (appType == "app_0102") {
@@ -61,8 +74,21 @@ module.exports = function (router, content) {
 
     if (!appType) {
       res.redirect('/prisoner-latest/applications/new/type-error')
+      return
     }
-    else if (appType == "app_0101") {
+
+    // Check if this app type already exists and is not closed
+    var prisonerApps = req.session.data.prisonerAppsDB || []
+    var existingApp = prisonerApps.find(function (app) {
+      return app.app_type_id === appType && app.status !== 'Closed'
+    })
+
+    if (existingApp) {
+      res.redirect('/prisoner-latest/applications/new/restricted')
+      return
+    }
+
+    if (appType == "app_0101") {
       res.redirect('/prisoner-latest/applications/new/new-official-pin-contact/application-details')
     }
     else if (appType == "app_0102") {

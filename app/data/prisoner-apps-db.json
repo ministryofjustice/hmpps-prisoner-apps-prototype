@@ -1,6 +1,7 @@
 [
   {
     "app_id": 123456,
+    "app_type_id": "app_1105",
     "date_received": 0,
     "app_type": "Stored property and valuables",
     "app_group": "Property",
@@ -10,6 +11,7 @@
   },
   {
     "app_id": 123457,
+    "app_type_id": "app_1101",
     "date_received": -1,
     "app_type": "Copy of my property card",
     "app_group": "Property",
@@ -19,6 +21,7 @@
   },
   {
     "app_id": 123458,
+    "app_type_id": "app_1601",
     "date_received": -2,
     "app_type": "Catalogue orders",
     "app_group": "Orders",
@@ -38,6 +41,7 @@
   },
   {
     "app_id": 123459,
+    "app_type_id": "app_0105",
     "date_received": -2,
     "app_type": "Supply list of contacts",
     "app_group": "PIN phones",
@@ -47,6 +51,7 @@
   },
   {
     "app_id": 123460,
+    "app_type_id": "app_0201",
     "date_received": -3,
     "app_type": "Attend worship",
     "app_group": "Faith",
@@ -66,6 +71,7 @@
   },
   {
     "app_id": 123461,
+    "app_type_id": "app_1703",
     "date_received": -3,
     "app_type": "Apply for video call",
     "app_group": "Visits and contact",
@@ -75,6 +81,7 @@
   },
   {
     "app_id": 123462,
+    "app_type_id": "app_1702",
     "date_received": -5,
     "app_type": "Add or remove a visitor",
     "app_group": "Visits and contact",
@@ -83,6 +90,7 @@
   },
   {
     "app_id": 123463,
+    "app_type_id": "app_1704",
     "date_received": -8,
     "app_type": "Letters, phones, emails",
     "app_group": "Visits and contact",
@@ -93,6 +101,7 @@
   },
   {
     "app_id": 123464,
+    "app_type_id": "app_0403",
     "date_received": -8,
     "app_type": "Gym induction",
     "app_group": "Gym",
@@ -101,6 +110,7 @@
   },
   {
     "app_id": 123465,
+    "app_type_id": "app_1604",
     "date_received": -9,
     "app_type": "Emergency vapes",
     "app_group": "Orders",
@@ -112,6 +122,7 @@
   },
   {
     "app_id": 123466,
+    "app_type_id": "app_1603",
     "date_received": -9,
     "app_type": "Emergency canteen",
     "app_group": "Orders",
@@ -123,6 +134,7 @@
   },
   {
     "app_id": 123467,
+    "app_type_id": "app_0201",
     "date_received": -10,
     "app_type": "Attend worship",
     "app_group": "Faith",
@@ -133,6 +145,7 @@
   },
   {
     "app_id": 123468,
+    "app_type_id": "app_2004",
     "date_received": -12,
     "app_type": "Password",
     "app_group": "Laptops",
@@ -142,6 +155,7 @@
   },
   {
     "app_id": 123469,
+    "app_type_id": "app_0103",
     "date_received": -14,
     "app_type": "Add emergency phone credit",
     "app_group": "PIN phones",

@@ -16,6 +16,14 @@
         {% for app in details.apps %}
           {% if app.app_id == data['appType'] %}
 
+      {# Find the existing open app in the database #}
+      {% set existingApp = null %}
+      {% for dbApp in data['prisonerAppsDB'] %}
+        {% if dbApp.app_type_id == data['appType'] and dbApp.status !== 'Closed' %}
+          {% set existingApp = dbApp %}
+        {% endif %}
+      {% endfor %}
+
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
           <div class="moj-interruption-card">
@@ -23,7 +31,7 @@
                 <h1 class="moj-interruption-card__heading">{{ app.app_type }}</h1>
                 <div class="moj-interruption-card__body">
                   <p>You have one of those apps open already.</p>
-                  <p>You sent it on 3 May 2026 and can't send another until it is closed.</p>
+                  <p>You sent it on {{ existingApp.date_received | govDate }} and can't send another until it is closed.</p>
                 </div>
                 <div class="govuk-button-group moj-interruption-card__actions">
                   <a href="{{ homeURL }}applications/" role="button" draggable="false" class="govuk-button govuk-button--inverse" data-module="govuk-button">
