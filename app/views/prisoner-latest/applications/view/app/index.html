@@ -161,13 +161,16 @@
   {% if lastSender == 'Prisoner' %}
     <p class="govuk-body-l">You cannot send another message until staff reply to this one.</p>
   {% else %}
-  <h2 class="govuk-heading-m">Send a reply</h2>
+  <h2 class="govuk-heading-s">Send a message</h2>
   <form method="post" action="/prisoner-latest/applications/view/app?url_id={{ appID }}">  {{ govukTextarea({
       name: "message",
       id: "message",
       label: {
         text: "Message",
         classes: "govuk-visually-hidden"
+      },
+      hint: {
+        text: "Changes to the original request may not be possible if your app is being processed."
       }
     }) }}
 
