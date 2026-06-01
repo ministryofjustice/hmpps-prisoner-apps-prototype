@@ -105,8 +105,11 @@
           </td>
           <td class="govuk-table__cell">
             {% if app.messages and app.messages | length %}
-                <span aria-hidden="true">{{ app.messages | length }}</span>
-                <span class="govuk-visually-hidden">({{ app.messages | length }})</span>
+                {% set staffMessages = app.messages | selectattr('sender', 'equalto', 'Staff') | list %}
+                {% if staffMessages | length %}
+                    <span aria-hidden="true">{{ staffMessages | length }}</span>
+                    <span class="govuk-visually-hidden">({{ staffMessages | length }})</span>
+                {% endif %}
             {% endif %}
           </td>
           <td class="govuk-table__cell"><a href="{{homeURL}}applications/view/app?url_id={{ app.app_id }}">View</a></td>
