@@ -32,8 +32,8 @@
         "app_type": "PIN phones (general enquiry)"
       }
     ],
-    "description": "Add or remove a contact from your list, add emergency credit, add phone contacts and swap VOs",
-    "group_full": "PIN phones  - Add or remove a contact from your list, add emergency credit, add phone contacts and swap VOs"
+    "description": "Add or remove a contact from your list, add emergency credit, add phone contacts and swap VOs.",
+    "group_full": "PIN phones - Add or remove a contact from your list, add emergency credit, add phone contacts and swap VOs."
   },
   "group_02": {
     "name": "Faith",
@@ -52,8 +52,8 @@
         "app_type": "Faith (general enquiry)"
       }
     ],
-    "description": "Ask about worship, chaplaincy and seeing a faith leader",
-    "group_full": "Faith - Ask about worship, chaplaincy and seeing a faith leader"
+    "description": "Ask about worship, chaplaincy and seeing a faith leader.",
+    "group_full": "Faith - Ask about worship, chaplaincy and seeing a faith leader."
   },
   "group_03": {
     "name": "Money",
@@ -80,8 +80,8 @@
         "app_type": "Money (general enquiry)"
       }
     ],
-    "description": "Balances, court fines, transfers and charitable gifts",
-    "group_full": "Money - Balances, court fines, transfers and charitable gifts"
+    "description": "Balances, court fines, transfers and charitable gifts.",
+    "group_full": "Money - Balances, court fines, transfers and charitable gifts."
   },
   "group_04": {
     "name": "Gym",
@@ -104,8 +104,8 @@
         "app_type": "Gym (general enquiry)"
       }
     ],
-    "description": "Join the gym or book a session or course",
-    "group_full": "Gym - Join the gym or book a session or course"
+    "description": "Join the gym or book a session or course.",
+    "group_full": "Gym - Join the gym or book a session or course."
   },
   "group_05": {
     "name": "Incentives (IEP)",
@@ -124,8 +124,8 @@
         "app_type": "Incentives (IEP general enquiry)"
       }
     ],
-    "description": "Ask about appeals and apply to increase your incentive status",
-    "group_full": "Incentives (IEP) - Ask about appeals and apply to increase your incentive status"
+    "description": "Ask about appeals and apply to increase your incentive status.",
+    "group_full": "Incentives (IEP) - Ask about appeals and apply to increase your incentive status."
   },
   "group_06": {
     "name": "Jobs, courses, activities",
@@ -168,8 +168,8 @@
         "app_type": "Jobs, courses, activities (general enquiry)"
       }
     ],
-    "description": "Prison jobs, education, wages, being a Listener and more",
-    "group_full": "Jobs, courses, activities - Prison jobs, education, wages, being a Listener and more"
+    "description": "Prison jobs, education, wages, being a Listener and more.",
+    "group_full": "Jobs, courses, activities - Prison jobs, education, wages, being a Listener and more."
   },
   "group_07": {
     "name": "Programmes",
@@ -180,8 +180,8 @@
         "app_type": "Programmes (general enquiry)"
       }
     ],
-    "description": "Courses to help with behaviour, violence reduction and anger management",
-    "group_full": "Programmes - Courses to help with behaviour, violence reduction and anger management"
+    "description": "Courses to help with behaviour, violence reduction and anger management.",
+    "group_full": "Programmes - Courses to help with behaviour, violence reduction and anger management."
   },
   "group_08": {
     "name": "Interventions",
@@ -192,8 +192,8 @@
         "app_type": "Interventions (general enquiry)"
       }
     ],
-    "description": "Therapy, support meetings and help with substance misuse and gambling",
-    "group_full": "Interventions - Therapy, support meetings and help with substance misuse and gambling"
+    "description": "Therapy, support meetings and help with substance misuse and gambling.",
+    "group_full": "Interventions - Therapy, support meetings and help with substance misuse and gambling."
   },
   "group_09": {
     "name": "Library",
@@ -212,8 +212,8 @@
         "app_type": "Library (general enquiry)"
       }
     ],
-    "description": "Join, find books, ask about Storybook Mums/Dads and reading skills with Shannon Trust",
-    "group_full": "Library - Join, find books, ask about Storybook Mums/Dads and reading skills with Shannon Trust"
+    "description": "Join, find books, ask about Storybook Mums/Dads and reading skills with Shannon Trust.",
+    "group_full": "Library - Join, find books, ask about Storybook Mums/Dads and reading skills with Shannon Trust."
   },
   "group_10": {
     "name": "Offender Management Unit (OMU)",
@@ -268,8 +268,8 @@
         "app_type": "OMU (general enquiry)"
       }
     ],
-    "description": "Contact staff, questions about court, Foreign Nationals, parole, home detention curfew, release dates and transfers",
-    "group_full": "Offender Management Unit (OMU) - Contact staff, questions about court, Foreign Nationals, parole, home detention curfew, release dates and transfers"
+    "description": "Contact staff, questions about court, Foreign Nationals, parole, home detention curfew, release dates and transfers.",
+    "group_full": "Offender Management Unit (OMU) - Contact staff, questions about court, Foreign Nationals, parole, home detention curfew, release dates and transfers."
   },
   "group_11": {
     "name": "Property",
@@ -300,8 +300,8 @@
         "app_type": "Property (general enquiry)"
       }
     ],
-    "description": "Get a copy of your property card, facilities lists and send or store things",
-    "group_full": "Property - Get a copy of your property card, facilities lists and send or store things"
+    "description": "Get a copy of your property card, facilities lists and send or store things.",
+    "group_full": "Property - Get a copy of your property card, facilities lists and send or store things."
   },
   "group_12": {
     "name": "Resettlement",
@@ -352,8 +352,8 @@
         "app_type": "Resettlement (general enquiry)"
       }
     ],
-    "description": "Help with benefits, grants, jobs and housing before getting out",
-    "group_full": "Resettlement - Help with benefits, grants, jobs and housing before getting out"
+    "description": "Help with benefits, grants, jobs and housing before getting out.",
+    "group_full": "Resettlement - Help with benefits, grants, jobs and housing before getting out."
   },
   "group_13": {
     "name": "Residential",
@@ -388,8 +388,8 @@
         "app_type": "Residential (general enquiry)"
       }
     ],
-    "description": "Ask about your cell and wing, new kit, mattress and cell moves",
-    "group_full": "Residential - Ask about your cell and wing, new kit, mattress and cell moves"
+    "description": "Ask about your cell and wing, new kit, mattress and cell moves.",
+    "group_full": "Residential - Ask about your cell and wing, new kit, mattress and cell moves."
   },
   "group_14": {
     "name": "Safety",
@@ -432,8 +432,8 @@
         "app_type": "Safety (general enquiry)"
       }
     ],
-    "description": "Help with gangs, debt, bullying and distraction packs",
-    "group_full": "Safety - Help with gangs, debt, bullying and distraction packs"
+    "description": "Help with gangs, debt, bullying and distraction packs.",
+    "group_full": "Safety - Help with gangs, debt, bullying and distraction packs."
   },
   "group_15": {
     "name": "Security",
@@ -452,8 +452,8 @@
         "app_type": "Security (general enquiry)"
       }
     ],
-    "description": "Contact security staff and help with any incidents",
-    "group_full": "Security - Contact security staff and help with any incidents"
+    "description": "Contact security staff and help with any incidents.",
+    "group_full": "Security - Contact security staff and help with any incidents."
   },
   "group_16": {
     "name": "Orders",
@@ -484,8 +484,8 @@
         "app_type": "Orders (general enquiry)"
       }
     ],
-    "description": "Catalogue orders and returns, emergency vapes and newspapers",
-    "group_full": "Orders - Catalogue orders and returns, emergency vapes and newspapers"
+    "description": "Catalogue orders and returns, emergency vapes and newspapers.",
+    "group_full": "Orders - Catalogue orders and returns, emergency vapes and newspapers."
   },
   "group_17": {
     "name": "Visits and contact",
@@ -520,8 +520,8 @@
         "app_type": "Visits and contact (general enquiry)"
       }
     ],
-    "description": "Support with visitor lists, video calls, letters, emails, AVs and VOs",
-    "group_full": "Visits and contact - Support with visitor lists, video calls, letters, emails, AVs and VOs"
+    "description": "Support with visitor lists, video calls, letters, emails, AVs and VOs.",
+    "group_full": "Visits and contact - Support with visitor lists, video calls, letters, emails, AVs and VOs."
   },
   "group_18": {
     "name": "Legal and immigration",
@@ -544,8 +544,8 @@
         "app_type": "Legal and immigration (general enquiry)"
       }
     ],
-    "description": "Help with legal clinics, police contact and immigration enforcement questions",
-    "group_full": "Legal and immigration - Help with legal clinics, police contact and immigration enforcement questions"
+    "description": "Help with legal clinics, police contact and immigration enforcement questions.",
+    "group_full": "Legal and immigration - Help with legal clinics, police contact and immigration enforcement questions."
   },
   "group_19": {
     "name": "Diversity and Inclusion",
@@ -588,8 +588,8 @@
         "app_type": "Diversity and inclusion (general enquiry)"
       }
     ],
-    "description": "Mentoring, disability, LGBTQ+, veteran and race support and report an incident",
-    "group_full": "Diversity and Inclusion - Mentoring, disability, LGBTQ+, veteran and race support and report an incident"
+    "description": "Mentoring, disability, LGBTQ+, veteran and race support and report an incident.",
+    "group_full": "Diversity and Inclusion - Mentoring, disability, LGBTQ+, veteran and race support and report an incident."
   },
   "group_20": {
     "name": "Laptops",
@@ -620,7 +620,7 @@
         "app_type": "Laptop help (general enquiry)"
       }
     ],
-    "description": "Support with laptops, breakages, returns, passwords and Content Hub",
-    "group_full": "Laptops - Support with laptops, breakages, returns, passwords and Content Hub"
+    "description": "Support with laptops, breakages, returns, passwords and Content Hub.",
+    "group_full": "Laptops - Support with laptops, breakages, returns, passwords and Content Hub."
   }
 }
