@@ -61,31 +61,27 @@
     "apps": [
       {
         "app_id": "app_0301",
-        "app_type": "Cash disbursement"
-      },
-      {
-        "app_id": "app_0302",
         "app_type": "Court fines"
       },
       {
-        "app_id": "app_0303",
+        "app_id": "app_0302",
         "app_type": "Give to charity"
       },
       {
-        "app_id": "app_0304",
+        "app_id": "app_0303",
         "app_type": "Send money out"
       },
       {
-        "app_id": "app_0305",
+        "app_id": "app_0304",
         "app_type": "Transfer money"
       },
       {
-        "app_id": "app_0306",
+        "app_id": "app_0305",
         "app_type": "Money (general enquiry)"
       }
     ],
-    "description": "Refunds, balances, court fines, disbursements, transfers and charitable gifts",
-    "group_full": "Money - Refunds, balances, court fines, disbursements, transfers and charitable gifts"
+    "description": "Balances, court fines, transfers and charitable gifts",
+    "group_full": "Money - Balances, court fines, transfers and charitable gifts"
   },
   "group_04": {
     "name": "Gym",
