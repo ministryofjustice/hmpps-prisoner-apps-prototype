@@ -95,9 +95,8 @@
   </dl>
   </div>
 
+  {% if app.status !== "Closed" %}
   <div class="govuk-grid-column-two-thirds">
-
-  <h2 class="govuk-heading-m">Messages</h2>
 
   {# Get session messages for this specific app #}
   {% set thisAppMessages = data.appMessages[appID] if data.appMessages and data.appMessages[appID] else [] %}
@@ -115,9 +114,8 @@
     {% set lastSender = app.messages[app.messages | length - 1].sender %}
   {% endif %}
 
-  {% if not hasMessages %}
-    <p class="govuk-body">There are no messages yet.</p>
-  {% else %}
+  {% if hasMessages %}
+  <h2 class="govuk-heading-m">Messages</h2>
   <div id="messages" class="moj-messages-container">
     <div class="moj-message-list">
 
@@ -159,7 +157,7 @@
   {% endif %}
 
   {% if lastSender == 'Prisoner' %}
-    <p class="govuk-body-l">You cannot send another message until staff reply to this one.</p>
+    <p class="govuk-body-l">You can't send another message until staff reply to this one.</p>
   {% else %}
   <h2 class="govuk-heading-s">Send a message</h2>
   <form method="post" action="/prisoner-latest/applications/view/app?url_id={{ appID }}">  {{ govukTextarea({
@@ -170,7 +168,7 @@
         classes: "govuk-visually-hidden"
       },
       hint: {
-        text: "Changes to the original request may not be possible if your app is being processed."
+        text: "You can't ask for changes to your app once staff are working on it."
       }
     }) }}
 
@@ -180,6 +178,7 @@
   </form>
   {% endif %}
 
+  {% endif %}
     {% endif %}
   {% endfor %}
 

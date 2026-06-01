@@ -54,7 +54,7 @@
               </div>
             </dl>
 
-            <form class="form" action="/prisoner-latest/applications/new/confirmation">
+            <form class="form" method="post" action="/prisoner-latest/applications/new/confirmation">
 
                       <!-- Note: This element is to be used in prototype only. It is there to confirm the submission of the form and allow multiple apps to be submitted in one session-->
 
@@ -85,6 +85,12 @@
               </label>
               <input class="govuk-input" id="app-type" name="checkappType" type="text" value="{{ app.app_type }}">
             </div>
+              <div class="govuk-form-group" style="display: none;">
+                <label class="govuk-label" for="app-type-id">
+                  App type ID
+                </label>
+                <input class="govuk-input" id="app-type-id" name="appType" type="text" value="{{ app.app_id }}">
+              </div>
             </fieldset>
         </div>
 

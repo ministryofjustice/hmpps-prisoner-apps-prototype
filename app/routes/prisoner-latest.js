@@ -1,5 +1,138 @@
 module.exports = function (router, content) {
 
+  function normalizeText(value) {
+    return String(value || '').trim().toLowerCase()
+  }
+
+  function getAppTypeIdByName(sessionData, appTypeName) {
+    var targetName = normalizeText(appTypeName)
+    var appGroupsTypes = sessionData.appGroupsTypes || {}
+
+    for (var group in appGroupsTypes) {
+      var details = appGroupsTypes[group]
+      if (!details || !details.apps) {
+        continue
+      }
+
+      var matchedApp = details.apps.find(function (app) {
+        return normalizeText(app.app_type) === targetName
+      })
+
+      if (matchedApp) {
+        return matchedApp.app_id
+      }
+    }
+
+    return null
+  }
+
+  function getAppTypeName(sessionData, appTypeId) {
+    var appGroupsTypes = sessionData.appGroupsTypes || {}
+
+    for (var group in appGroupsTypes) {
+      var details = appGroupsTypes[group]
+      if (!details || !details.apps) {
+        continue
+      }
+
+      var matchedApp = details.apps.find(function (app) {
+        return app.app_id === appTypeId
+      })
+
+      if (matchedApp) {
+        return matchedApp.app_type
+      }
+    }
+
+    return null
+  }
+
+  function hasOpenAppAlreadySubmitted(sessionData, appTypeId) {
+    var submittedAppTypeIds = sessionData.submittedAppTypeIds || []
+    if (submittedAppTypeIds.indexOf(appTypeId) !== -1) {
+      return true
+    }
+
+    var prisonerApps = sessionData.prisonerAppsDB || []
+    var existingDbApp = prisonerApps.find(function (app) {
+      return app.app_type_id === appTypeId && app.status !== 'Closed'
+    })
+
+    if (existingDbApp) {
+      return true
+    }
+
+    var formSubmissionFlagsByType = {
+      app_0101: 'pin_02_submitted',
+      app_0102: 'pin_01_submitted',
+      app_0103: 'pin_03_submitted',
+      app_0104: 'pin_04_submitted',
+      app_0105: 'pin_06_submitted',
+      app_0106: 'pin_05_submitted'
+    }
+
+    var submittedFlagForType = formSubmissionFlagsByType[appTypeId]
+    if (submittedFlagForType && sessionData[submittedFlagForType] === 'submitted') {
+      return true
+    }
+
+    if (sessionData.general_app === 'submitted') {
+      var selectedAppName = getAppTypeName(sessionData, appTypeId)
+      if (selectedAppName && normalizeText(sessionData.checkappType) === normalizeText(selectedAppName)) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  function inferSubmittedAppTypeId(sessionData, sourceData) {
+    if (sourceData.appType) {
+      return sourceData.appType
+    }
+
+    var appTypeBySubmittedFlag = {
+      pin_01_submitted: 'app_0102',
+      pin_02_submitted: 'app_0101',
+      pin_03_submitted: 'app_0103',
+      pin_04_submitted: 'app_0104',
+      pin_05_submitted: 'app_0106',
+      pin_06_submitted: 'app_0105'
+    }
+
+    for (var submittedFlag in appTypeBySubmittedFlag) {
+      if (sourceData[submittedFlag] === 'submitted') {
+        return appTypeBySubmittedFlag[submittedFlag]
+      }
+    }
+
+    if (sourceData.general_app === 'submitted' && sourceData.checkappType) {
+      return getAppTypeIdByName(sessionData, sourceData.checkappType)
+    }
+
+    return null
+  }
+
+  function persistSubmissionData(req, sourceData) {
+    var data = sourceData || {}
+    var sessionData = req.session.data
+
+    Object.keys(data).forEach(function (key) {
+      sessionData[key] = data[key]
+    })
+
+    var appTypeId = inferSubmittedAppTypeId(sessionData, data)
+    if (!appTypeId) {
+      return
+    }
+
+    sessionData.submittedAppTypeIds = sessionData.submittedAppTypeIds || []
+
+    if (sessionData.submittedAppTypeIds.indexOf(appTypeId) === -1) {
+      sessionData.submittedAppTypeIds.push(appTypeId)
+    }
+  }
+
 
   router.post('/prisoner-latest/applications/new/', function (req, res) {
     var appGroup = req.body.appGroup
@@ -32,13 +165,8 @@ module.exports = function (router, content) {
       return
     }
 
-    // Check if this app type already exists and is not closed
-    var prisonerApps = req.session.data.prisonerAppsDB || []
-    var existingApp = prisonerApps.find(function (app) {
-      return app.app_type_id === appType && app.status !== 'Closed'
-    })
-
-    if (existingApp) {
+    // Check if this app type already exists and is not closed, including form submissions.
+    if (hasOpenAppAlreadySubmitted(req.session.data, appType)) {
       res.redirect('/prisoner-latest/applications/new/restricted')
       return
     }
@@ -77,13 +205,8 @@ module.exports = function (router, content) {
       return
     }
 
-    // Check if this app type already exists and is not closed
-    var prisonerApps = req.session.data.prisonerAppsDB || []
-    var existingApp = prisonerApps.find(function (app) {
-      return app.app_type_id === appType && app.status !== 'Closed'
-    })
-
-    if (existingApp) {
+    // Check if this app type already exists and is not closed, including form submissions.
+    if (hasOpenAppAlreadySubmitted(req.session.data, appType)) {
       res.redirect('/prisoner-latest/applications/new/restricted')
       return
     }
@@ -131,6 +254,19 @@ module.exports = function (router, content) {
     } else {
       res.redirect('/prisoner-latest/applications/new/check-details')
     }
+  })
+
+
+  router.post('/prisoner-latest/applications/new/confirmation', function (req, res) {
+    persistSubmissionData(req, req.body)
+
+    res.redirect('/prisoner-latest/applications/new/confirmation')
+  })
+
+
+  router.get('/prisoner-latest/applications/new/confirmation', function (req, res) {
+    persistSubmissionData(req, req.query)
+    res.render('prisoner-latest/applications/new/confirmation')
   })
 
 
@@ -257,7 +393,11 @@ module.exports = function (router, content) {
 
 
   router.get('/prisoner-latest/applications/new/clear-and-send-new-app', function(req, res) {
-      req.session.destroy();
+      delete req.session.data.appGroup
+      delete req.session.data.appType
+      delete req.session.data.app_detail
+      delete req.session.data.checkAppGroup
+      delete req.session.data.checkappType
       res.redirect('/prisoner-latest/applications/new/')
   })
 

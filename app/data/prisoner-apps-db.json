@@ -62,10 +62,6 @@
       {
         "text": "What day do you want to attend?",
         "sender": "Staff"
-      },
-      {
-        "text": "Monday",
-        "sender": "Prisoner"
       }
     ]
   },

@@ -31,7 +31,11 @@
                 <h1 class="moj-interruption-card__heading">{{ app.app_type }}</h1>
                 <div class="moj-interruption-card__body">
                   <p>You have one of those apps open already.</p>
+                  {% if existingApp %}
                   <p>You sent it on {{ existingApp.date_received | govDate }} and can't send another until it is closed.</p>
+                  {% else %}
+                  <p>You have already sent this app and can't send another until it is closed.</p>
+                  {% endif %}
                 </div>
                 <div class="govuk-button-group moj-interruption-card__actions">
                   <a href="{{ homeURL }}applications/" role="button" draggable="false" class="govuk-button govuk-button--inverse" data-module="govuk-button">
