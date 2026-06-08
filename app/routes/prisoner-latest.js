@@ -417,18 +417,17 @@ module.exports = function (router, content) {
     if (newMessage && newMessage.trim() !== '') {
       const now = new Date()
 
-      const formattedDate = now.toLocaleString('en-GB', {
-        day: 'numeric',
-        month: 'long',
+      const messageTime = now.toLocaleTimeString('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
-      }).replace(',', ' at')
+      })
 
       req.session.data.appMessages[appId].push({
         from: 'You',
         text: newMessage.trim(),
-        date: formattedDate
+        date_offset: 0,
+        time: messageTime
       })
     }
 
@@ -448,18 +447,17 @@ res.redirect('/prisoner-latest/applications/view/app?url_id=' + appId + '#messag
     if (newMessage && newMessage.trim() !== '') {
       const now = new Date()
 
-      const formattedDate = now.toLocaleString('en-GB', {
-        day: 'numeric',
-        month: 'long',
+      const messageTime = now.toLocaleTimeString('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
-      }).replace(',', ' at')
+      })
 
       req.session.data.appMessages[appId].push({
         from: 'You',
         text: newMessage.trim(),
-        date: formattedDate
+        date_offset: 0,
+        time: messageTime
       })
     }
 

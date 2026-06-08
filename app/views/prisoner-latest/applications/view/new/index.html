@@ -125,7 +125,12 @@
         <div class="moj-message-item moj-message-item--sent">
           <div class="moj-message-item__text moj-message-item__text--sent">{{ message.text }}</div>
           <div class="moj-message-item__meta">
-            <span class="moj-message-item__meta--sender">You</span> at <time class="moj-message-item__meta--timestamp">{{ message.date }}</time>
+            <span class="moj-message-item__meta--sender">You</span>
+            {% if message.date_offset is defined %}
+            on <time class="moj-message-item__meta--timestamp"><span class="reldate">{{ message.date_offset }}</span> at {{ message.time if message.time else '09:00' }}</time>
+            {% else %}
+            at <time class="moj-message-item__meta--timestamp">{{ message.date }}</time>
+            {% endif %}
           </div>
         </div>
       {% endfor %}
