@@ -30,7 +30,6 @@
 
 .moj-message-item__text {
   @include govuk-font($size: 19);
-  padding: govuk-spacing(3);
   border-radius: 8px;
   word-wrap: break-word;
 }

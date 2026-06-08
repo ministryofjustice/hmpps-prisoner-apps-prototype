@@ -68,12 +68,18 @@
   {
     "app_id": 123461,
     "app_type_id": "app_1703",
-    "date_received": -3,
+    "date_received": -5,
     "app_type": "Apply for video call",
     "app_group": "Visits and contact",
     "owner": "Business Hub",
     "app_details": "How do I get a video call with my family?",
-    "status": "New"
+    "status": "New",
+    "messages": [
+      {
+        "text": "Your app will be processed soon.",
+        "sender": "Automated message"
+      }
+    ]
   },
   {
     "app_id": 123462,

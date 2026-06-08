@@ -122,18 +122,18 @@
       {# Show messages from the app database #}
       {% if hasAppMessages %}
         {% for message in app.messages %}
-          {% if message.sender == "Staff" %}
-          <div class="moj-message-item moj-message-item--received">
-            <div class="moj-message-item__text moj-message-item__text--received">{{ message.text }}</div>
-            <div class="moj-message-item__meta">
-              <span class="moj-message-item__meta--sender">Staff</span>
-            </div>
-          </div>
-          {% else %}
+          {% if message.sender == "Prisoner" %}
           <div class="moj-message-item moj-message-item--sent">
             <div class="moj-message-item__text moj-message-item__text--sent">{{ message.text }}</div>
             <div class="moj-message-item__meta">
               <span class="moj-message-item__meta--sender">You</span>
+            </div>
+          </div>
+          {% else %}
+          <div class="moj-message-item moj-message-item--received">
+            <div class="moj-message-item__text moj-message-item__text--received">{{ message.text }}</div>
+            <div class="moj-message-item__meta">
+              <span class="moj-message-item__meta--sender">{{ message.sender }}</span>
             </div>
           </div>
           {% endif %}
