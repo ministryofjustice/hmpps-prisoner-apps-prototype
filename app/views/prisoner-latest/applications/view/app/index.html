@@ -127,7 +127,7 @@
             <div class="moj-message-item__text moj-message-item__text--sent">{{ message.text }}</div>
             <div class="moj-message-item__meta">
               <span class="moj-message-item__meta--sender">You</span>
-              on <time class="moj-message-item__meta--timestamp"><span class="reldate">{{ message.date_received if message.date_received is defined else app.date_received }}</span> at {{ message.time if message.time else '09:00' }}</time>
+              on <time class="moj-message-item__meta--timestamp"><span class="reldate">{{ message.date }}</span> at {{ message.time if message.time else '09:00' }}</time>
             </div>
           </div>
           {% else %}
@@ -135,7 +135,7 @@
             <div class="moj-message-item__text moj-message-item__text--received">{{ message.text }}</div>
             <div class="moj-message-item__meta">
               <span class="moj-message-item__meta--sender">{{ message.sender }}</span>
-              on <time class="moj-message-item__meta--timestamp"><span class="reldate">{{ message.date_received if message.date_received is defined else app.date_received }}</span> at {{ message.time if message.time else '09:00' }}</time>
+              on <time class="moj-message-item__meta--timestamp"><span class="reldate">{{ message.date }}</span> at {{ message.time if message.time else '09:00' }}</time>
             </div>
           </div>
           {% endif %}
