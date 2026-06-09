@@ -33,7 +33,7 @@
                 <div id="appTypes" class="govuk-radios" data-module="govuk-radios">
 
                   {% for app in details.apps %}
-                  {% if loop.last %}
+                  {% if details.apps | length > 1 and loop.last %}
                   <div class="govuk-radios__divider">or</div>
                   {% endif %}
                   <div class="govuk-radios__item">
