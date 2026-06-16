@@ -51,8 +51,9 @@
     "app_group": "PIN phones",
     "owner": "PIN phones",
     "app_details": "I want to see what numbers I have activated as I need to swap some about",
-    "status": "New"
-  },
+    "status": "Closed",
+    "decision": "Approved"
+    },
   {
     "app_id": 123460,
     "app_type_id": "app_0201",
@@ -95,8 +96,9 @@
     "app_type": "Add or remove a visitor",
     "app_group": "Visits and contact",
     "owner": "Visits",
-    "status": "In progress"
-  },
+    "status": "Closed",
+    "decision": "Approved"
+    },
   {
     "app_id": 123463,
     "app_type_id": "app_1704",
@@ -115,8 +117,9 @@
     "app_type": "Gym induction",
     "app_group": "Gym",
     "owner": "Gym",
-    "status": "In progress"
-  },
+    "status": "Closed",
+    "decision": "Approved"
+    },
   {
     "app_id": 123465,
     "app_type_id": "app_1604",

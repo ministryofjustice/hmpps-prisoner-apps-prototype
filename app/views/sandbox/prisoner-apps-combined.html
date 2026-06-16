@@ -1,0 +1,151 @@
+{% extends "layouts/launchpad.html" %}
+{% set pageName = data['first-name'] + "'s Profile" %}
+{% set bodyClasses = 'launchpad profile' %}
+{% set homeURL="/prisoner-latest/" %}
+
+{% block content %}
+
+<div class="govuk-grid-row" id="main-content">
+
+  <div class="govuk-grid-column-full">
+
+    <div class="govuk-width-container">
+      <nav aria-label="breadcrumb">
+        <div class="govuk-breadcrumbs">
+          <ol class="govuk-breadcrumbs__list">
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeURL}}">Home</a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+              <a class="govuk-breadcrumbs__link" href="{{homeURL}}">Apps</a>
+            </li>
+          </ol>
+        </div>
+      </nav>
+      <h1 class="govuk-heading-xl">
+        {{ data['first-name'] }}&apos;s apps
+      </h1>
+
+      <p class="govuk-body-l">Check on apps already sent.</p>
+
+      <table class="govuk-table">
+      <caption class="govuk-table__caption">Apps you have already sent</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">App</th>
+          <th scope="col" class="govuk-table__header">Status</th>
+          <th scope="col" class="govuk-table__header">Messages</th>
+          <th scope="col" class="govuk-table__header">Date sent</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% if data['submittedAppTypeIds'] and (data['submittedAppTypeIds'] | length) %}
+          {% for submittedAppTypeId in data['submittedAppTypeIds'] %}
+            {% for group, details in data['appGroupsTypes'] %}
+              {% for submittedApp in details.apps %}
+                {% if submittedApp.app_id == submittedAppTypeId %}
+                <tr class="govuk-table__row "
+                  data-tags="Patel, Taj {{ data['pin_07_prisonNumber'] }} ">
+                  <td class="govuk-table__cell">
+                    <a href="view/new">{{ submittedApp.app_type }}</a>
+                  </td>
+                  <td class="govuk-table__cell">
+                    <strong class="govuk-tag govuk-tag--light-blue">New</strong>
+                  </td>
+                  <td class=" govuk-table__cell nowrap reldate date">{{ 0 | govDate }}</td>
+                </tr>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          {% endfor %}
+        {% elif data['general_app'] === 'submitted' and data['checkappType'] %}
+        <tr class="govuk-table__row "
+          data-tags="Patel, Taj {{ data['pin_07_prisonNumber'] }} ">
+          <td class="govuk-table__cell">
+            <a href="view/new">{{ data['checkappType'] }}</a>
+          </td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+          </td>
+          <td class=" govuk-table__cell nowrap reldate date">{{ 0 | govDate }}</td>
+        </tr>
+        {% endif %}
+
+
+        {% for app in data['prisonerAppsDB'] %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <a href="{{homeURL}}applications/view/app?url_id={{ app.app_id }}">{{ app.app_type }}</a>
+          </td>
+          <td class="govuk-table__cell">
+            {% if app.status == "New" %}
+              <strong class="govuk-tag govuk-tag--light-blue">{{ app.status }}</strong>
+            {% elif app.status == "In progress" %}
+              <strong class="govuk-tag govuk-tag--yellow">{{ app.status }}</strong>
+            {% elif app.status == "Closed" %}
+              {% if app.decision == "Approved" %}
+              <strong class="govuk-tag govuk-tag--green">{{ app.decision }}</strong>
+              {% elif app.decision == "Declined" %}
+              <strong class="govuk-tag govuk-tag--red">{{ app.decision }}</strong>
+            {% endif %}
+            {% endif %}
+          </td>
+          <td class="govuk-table__cell">
+            {% if app.messages and app.messages | length %}
+                {% set staffMessages = app.messages | selectattr('sender', 'equalto', 'Staff') | list %}
+                {% if staffMessages | length %}
+                    <span aria-hidden="true">{{ staffMessages | length }}</span>
+                    <span class="govuk-visually-hidden">({{ staffMessages | length }})</span>
+                {% endif %}
+            {% endif %}
+          </td>
+          <td class=" govuk-table__cell nowrap reldate">
+            {{ app.date_received }}
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <div class="moj-pagination">
+      <nav class="govuk-pagination moj-pagination__pagination " aria-label="Pagination">
+        <ul class="govuk-pagination__list">
+          <li class="govuk-pagination__item govuk-pagination__item--current">
+            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+              1
+            </a>
+          </li>
+          <li class="govuk-pagination__item">
+            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+              2
+            </a>
+          </li>
+          <li class="govuk-pagination__item">
+            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+              3
+            </a>
+          </li>
+        </ul>
+        <div class="govuk-pagination__next">
+          <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+            <span class="govuk-pagination__link-title">
+              Next
+            </span>
+            <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+              <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+            </svg>
+          </a>
+        </div>
+      </nav>
+      <p class="moj-pagination__results">Showing 1 to 10 of 34 total results</p>
+    </div>
+    
+
+    </div>
+
+</div>
+</div>
+
+
+{% endblock %}
