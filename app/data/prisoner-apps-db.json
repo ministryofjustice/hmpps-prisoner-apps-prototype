@@ -20,7 +20,7 @@
     "status": "New",
     "messages": [
       {
-        "text": "This message has been deleted",
+        "text": "This message has been deleted because it was sent in error",
         "sender": "HMP Preston Staff"
       }
     ]

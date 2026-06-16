@@ -27,6 +27,7 @@
       </h1>
 
       <p class="govuk-body-l">Check on apps already sent.</p>
+      {% set prisonerSenderName = data['last-name'] + ', ' + data['first-name'] %}
 
       <div class="govuk-tabs" data-module="govuk-tabs">
         <h2 class="govuk-tabs__title">Contents</h2>
@@ -46,7 +47,7 @@
             <tr class="govuk-table__row">
               <th scope="col" class="govuk-table__header">App</th>
               <th scope="col" class="govuk-table__header">Status</th>
-              <th scope="col" class="govuk-table__header">Messages</th>
+              <th scope="col" class="govuk-table__header text-align-center">Messages</th>
               <th scope="col" class="govuk-table__header">Date sent</th>
             </tr>
           </thead>
@@ -96,12 +97,29 @@
                     <strong class="govuk-tag govuk-tag--yellow">{{ app.status }}</strong>
                   {% endif %}
                 </td>
-                <td class="govuk-table__cell">
+                <td class="govuk-table__cell text-align-center">
                   {% if app.messages and app.messages | length %}
-                      {% set staffMessages = app.messages | selectattr('sender', 'equalto', 'Staff') | list %}
-                      {% if staffMessages | length %}
-                          <span aria-hidden="true">{{ staffMessages | length }}</span>
-                          <span class="govuk-visually-hidden">({{ staffMessages | length }})</span>
+                      {% set incomingMessageCount = 0 %}
+                      {% for message in app.messages %}
+                        {% if not message.deleted and message.text != 'This message has been deleted' and message.sender != 'Prisoner' and message.sender != prisonerSenderName %}
+                          {% set incomingMessageCount = incomingMessageCount + 1 %}
+                        {% endif %}
+                      {% endfor %}
+                      {% if incomingMessageCount > 0 %}
+                          {% set lastMessageSender = app.messages[app.messages | length - 1].sender %}
+                          {% set hasUnrepliedIncoming = lastMessageSender != 'Prisoner' and lastMessageSender != prisonerSenderName %}
+                          {% set lastMessage = app.messages[app.messages | length - 1] %}
+                          {% set currentViewToken = (app.messages | length) ~ '|' ~ (lastMessage.sender or '') ~ '|' ~ (lastMessage.text or '') ~ '|' ~ (lastMessage.date or '') ~ '|' ~ (lastMessage.time or '') %}
+                          {% set hasBeenViewed = data.viewedMessageState and data.viewedMessageState[app.app_id] == currentViewToken %}
+                          {% if hasUnrepliedIncoming and not hasBeenViewed %}
+                            <span class="moj-notification-badge">
+                              <span aria-hidden="true">{{ incomingMessageCount }}</span>
+                              <span class="govuk-visually-hidden">({{ incomingMessageCount }} new messages)</span>
+                            </span>
+                          {% else %}
+                            <span aria-hidden="true">{{ incomingMessageCount }}</span>
+                            <span class="govuk-visually-hidden">({{ incomingMessageCount }})</span>
+                          {% endif %}
                       {% endif %}
                   {% endif %}
                 </td>
@@ -122,7 +140,7 @@
             <tr class="govuk-table__row">
               <th scope="col" class="govuk-table__header">App</th>
               <th scope="col" class="govuk-table__header">Status</th>
-              <th scope="col" class="govuk-table__header">Messages</th>
+              <th scope="col" class="govuk-table__header text-align-center">Messages</th>
               <th scope="col" class="govuk-table__header">Date sent</th>
             </tr>
           </thead>
@@ -140,12 +158,29 @@
                   <strong class="govuk-tag govuk-tag--red">{{ app.decision }}</strong>
                   {% endif %}
                 </td>
-                <td class="govuk-table__cell">
+                <td class="govuk-table__cell text-align-center">
                   {% if app.messages and app.messages | length %}
-                      {% set staffMessages = app.messages | selectattr('sender', 'equalto', 'Staff') | list %}
-                      {% if staffMessages | length %}
-                          <span aria-hidden="true">{{ staffMessages | length }}</span>
-                          <span class="govuk-visually-hidden">({{ staffMessages | length }})</span>
+                      {% set incomingMessageCount = 0 %}
+                      {% for message in app.messages %}
+                        {% if not message.deleted and message.text != 'This message has been deleted' and message.sender != 'Prisoner' and message.sender != prisonerSenderName %}
+                          {% set incomingMessageCount = incomingMessageCount + 1 %}
+                        {% endif %}
+                      {% endfor %}
+                      {% if incomingMessageCount > 0 %}
+                          {% set lastMessageSender = app.messages[app.messages | length - 1].sender %}
+                          {% set hasUnrepliedIncoming = lastMessageSender != 'Prisoner' and lastMessageSender != prisonerSenderName %}
+                          {% set lastMessage = app.messages[app.messages | length - 1] %}
+                          {% set currentViewToken = (app.messages | length) ~ '|' ~ (lastMessage.sender or '') ~ '|' ~ (lastMessage.text or '') ~ '|' ~ (lastMessage.date or '') ~ '|' ~ (lastMessage.time or '') %}
+                          {% set hasBeenViewed = data.viewedMessageState and data.viewedMessageState[app.app_id] == currentViewToken %}
+                          {% if hasUnrepliedIncoming and not hasBeenViewed %}
+                            <span class="moj-notification-badge">
+                              <span aria-hidden="true">{{ incomingMessageCount }}</span>
+                              <span class="govuk-visually-hidden">({{ incomingMessageCount }} new messages)</span>
+                            </span>
+                          {% else %}
+                            <span aria-hidden="true">{{ incomingMessageCount }}</span>
+                            <span class="govuk-visually-hidden">({{ incomingMessageCount }})</span>
+                          {% endif %}
                       {% endif %}
                   {% endif %}
                 </td>
