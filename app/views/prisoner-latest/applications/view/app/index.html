@@ -120,6 +120,7 @@
   {% set hasAppMessages = app.messages and app.messages | length %}
   {% set hasSessionMessages = thisAppMessages | length %}
   {% set hasMessages = hasAppMessages or hasSessionMessages %}
+  {% set prisonerSenderName = data['last-name'] + ', ' + data['first-name'] %}
 
   {# Work out who sent the last message #}
   {% set lastSender = '' %}
@@ -137,7 +138,7 @@
       {# Show messages from the app database #}
       {% if hasAppMessages %}
         {% for message in app.messages %}
-          {% if message.sender == "Prisoner" %}
+          {% if message.sender == "Prisoner" or message.sender == prisonerSenderName %}
           <div class="moj-message-item moj-message-item--sent">
             <div class="moj-message-item__text moj-message-item__text--sent">{{ message.text }}</div>
             <div class="moj-message-item__meta">
@@ -178,7 +179,7 @@
   </div>
   {% endif %}
 
-  {% if lastSender == 'Prisoner' %}
+  {% if lastSender == 'Prisoner' or lastSender == prisonerSenderName %}
     <p class="govuk-body-l">You can't send another message until staff reply to this one.</p>
   {% else %}
   {% set messageHintText = "If you need to make a change to this app, you can send staff a message" if app.status == "New" else "You can't ask for changes to your app once staff are working on it." %}

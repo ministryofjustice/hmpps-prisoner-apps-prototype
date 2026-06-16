@@ -401,6 +401,32 @@ module.exports = function (router, content) {
       res.redirect('/prisoner-latest/applications/new/')
   })
 
+  router.use('/prisoner-latest/applications/view/app', function (req, res, next) {
+    if (req.method === 'GET' && req.query.url_id) {
+      var appId = String(req.query.url_id)
+      var apps = req.session.data.prisonerAppsDB || []
+      var viewedApp = apps.find(function (app) {
+        return String(app.app_id) === appId
+      })
+
+      if (viewedApp && Array.isArray(viewedApp.messages) && viewedApp.messages.length) {
+        var lastMessage = viewedApp.messages[viewedApp.messages.length - 1]
+        var viewToken = [
+          viewedApp.messages.length,
+          lastMessage.sender || '',
+          lastMessage.text || '',
+          lastMessage.date || '',
+          lastMessage.time || ''
+        ].join('|')
+
+        req.session.data.viewedMessageState = req.session.data.viewedMessageState || {}
+        req.session.data.viewedMessageState[appId] = viewToken
+      }
+    }
+
+    next()
+  })
+
   router.post('/prisoner-latest/applications/view/app', function (req, res) {
     const newMessage = req.body.message
     const appId = req.query.url_id

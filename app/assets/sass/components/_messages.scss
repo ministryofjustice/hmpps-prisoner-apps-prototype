@@ -37,6 +37,7 @@
 .moj-message-item__text--sent {
   background-color: govuk-colour("blue");
   color: govuk-colour("white");
+  text-align: left;
 
   a, time {
     color: govuk-colour("white");
