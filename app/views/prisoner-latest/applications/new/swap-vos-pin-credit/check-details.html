@@ -4,7 +4,7 @@
 {% set version="latest" %}
 {% set phasebanner="yes" %}
 {% set bodyClasses = 'dps staff-v1' %}
-{% set homeurl="/prisoner-latest/" %}
+{% set homeURL="/prisoner-latest/" %}
 
 
 {% block content %}
@@ -22,80 +22,36 @@
           Swap VOs for PIN credit
         </span>
 
-        <h1 class="govuk-heading-xl">Check details</h1>
-
-
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Prisoner name
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {% if (data['prisonerName']) and (data['prisonNumber']) %}
-                {{ data['prisonerName'] }} ({{ data['prisonNumber'] }})
-              {% else %}
-                Patel, Taj (AB1234C)
-              {% endif %}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/application-tool/latest/applications/log/prisoner-detauls" class="govuk-body">Change <span class="govuk-visually-hidden"> prisner name</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              App group
-            </dt>
-            <dd class="govuk-summary-list__value">
-              PIN phones
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/application-tool/latest/applications/log/select-app-group" class="govuk-body">Change <span class="govuk-visually-hidden"> application group</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              App type
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Add new social PIN phone contact
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/application-tool/latest/applications/log/select-app-type" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Department
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{data['appDept']}}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a href="/application-tool/latest/applications/log/select-dept" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
-            </dd>
-          </div>
-        </dl>
-
-        
-        <div class="govuk-summary-list--header">
-          <h2 class="govuk-heading-m">VOs to swap</h2>
-          <a href="javascript:window.history.go(-1)" class="govuk-body">Change <span class="govuk-visually-hidden"> Visiting orders</span></a>
-        </div>
-
-        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Details
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {% if data['pin_05_detail'] %}
+      <h1 class="govuk-heading-xl">Check details</h1>
+            <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  App type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  Swap VOs for PIN credit
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Details
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {% if data['pin_05_detail'] %}
                 {{ data['pin_05_detail'] }}
               {% else %}
                 Request to swap all VOs from last month
               {% endif %}
-            </dd>
-          </div>
-        </dl>
+
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  <a href="javascript:window.history.go(-1)" class="govuk-body">Change <span class="govuk-visually-hidden"> details</span></a>
+                </dd>
+              </div>
+            </dl>
+
 
         <form class="form" method="post" action="/prisoner-latest/applications/new/confirmation">
         
