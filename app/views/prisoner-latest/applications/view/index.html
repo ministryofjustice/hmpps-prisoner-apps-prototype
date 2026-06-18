@@ -47,7 +47,7 @@
                 {% if submittedApp.app_id == submittedAppTypeId %}
                 <tr class="govuk-table__row " data-tags="Patel, Taj {{ data['pin_07_prisonNumber'] }} ">
                   <td class="govuk-table__cell">
-                    <a href="view/new">{{ submittedApp.app_type }}</a>
+                    <a href="{{homeURL}}applications/view/new">{{ submittedApp.app_type }}</a>
                   </td>
                   <td class="govuk-table__cell">
                     <strong class="govuk-tag govuk-tag--light-blue">New</strong>
@@ -62,7 +62,7 @@
         {% elif data['general_app'] === 'submitted' and data['checkappType'] %}
         <tr class="govuk-table__row " data-tags="Patel, Taj {{ data['pin_07_prisonNumber'] }} ">
           <td class="govuk-table__cell">
-            <a href="view/new">{{ data['checkappType'] }}</a>
+            <a href="{{homeURL}}applications/view/new">{{ data['checkappType'] }}</a>
           </td>
           <td class="govuk-table__cell">
             <strong class="govuk-tag govuk-tag--light-blue">New</strong>
