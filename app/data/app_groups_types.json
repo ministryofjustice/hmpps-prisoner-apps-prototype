@@ -65,11 +65,11 @@
       },
       {
         "app_id": "app_0302",
-        "app_type": "Give to charity"
+        "app_type": "Discharge grant"
       },
       {
         "app_id": "app_0303",
-        "app_type": "Send money out"
+        "app_type": "Give to charity"
       },
       {
         "app_id": "app_0304",
@@ -97,7 +97,7 @@
       },
       {
         "app_id": "app_0403",
-        "app_type": "Gym induction"
+        "app_type": "Join the gym"
       },
       {
         "app_id": "app_0404",
@@ -201,7 +201,7 @@
     "apps": [
       {
         "app_id": "app_0901",
-        "app_type": "Reading help with Shannon Trust"
+        "app_type": "Reading group with Shannon Trust"
       },
       {
         "app_id": "app_0902",
@@ -237,7 +237,7 @@
       },
       {
         "app_id": "app_1005",
-        "app_type": "Home Detention Curfew"
+        "app_type": "Home Detention Curfew (HDC)"
       },
       {
         "app_id": "app_1006",
@@ -373,7 +373,7 @@
       },
       {
         "app_id": "app_1304",
-        "app_type": "Mattress"
+        "app_type": "Mattress or pillow"
       },
       {
         "app_id": "app_1305",
@@ -409,7 +409,7 @@
       },
       {
         "app_id": "app_1404",
-        "app_type": "Report Gang-related concerns"
+        "app_type": "Report gang-related concerns"
       },
       {
         "app_id": "app_1405",
@@ -421,7 +421,7 @@
       },
       {
         "app_id": "app_1407",
-        "app_type": "Safety help and support"
+        "app_type": "Safety request"
       },
       {
         "app_id": "app_1408",
@@ -581,7 +581,7 @@
       },
       {
         "app_id": "app_1908",
-        "app_type": "Veterans"
+        "app_type": "Veterans meetings"
       },
       {
         "app_id": "app_1909",
@@ -609,7 +609,7 @@
       },
       {
         "app_id": "app_2004",
-        "app_type": "Password"
+        "app_type": "Password problem"
       },
       {
         "app_id": "app_2005",

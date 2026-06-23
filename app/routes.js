@@ -92,28 +92,6 @@ router.get('/api/departments', function (req, res) {
   }
 })
 
-router.get('/api/application-types', function (req, res) {
-  try {
-    const dataPath = path.join(__dirname, 'data', 'general_apps_types.json')
-    console.log('Loading application types from:', dataPath)
-    
-    if (!fs.existsSync(dataPath)) {
-      console.error('Application types data file not found, returning empty array')
-      return res.json([])
-    }
-    
-    const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
-    res.json(data)
-  } catch (error) {
-    console.error('Error loading application types:', error)
-    res.status(500).json({ 
-      error: 'Failed to load application types data', 
-      details: error.message 
-    })
-  }
-})
-
-
 // Add your routes here
 
 
