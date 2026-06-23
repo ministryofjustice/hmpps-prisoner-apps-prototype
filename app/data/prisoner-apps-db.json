@@ -48,13 +48,7 @@
     "app_group": "Property",
     "owner": "Reception",
     "app_details": "I want to see what games I have stored so I can swap for a new one",
-    "status": "New",
-    "messages": [
-      {
-        "text": "This message has been deleted because it was sent in error",
-        "sender": "HMP Preston Staff"
-      }
-    ]
+    "status": "New"
   },
   {
     "app_id": 123461,
