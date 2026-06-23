@@ -71,3 +71,14 @@
   text-align: center;
   white-space: nowrap;
 }
+
+.moj-message-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: govuk-spacing(1);
+}
+
+.govuk-tag--pink {
+  background: #f8d7e6;
+  color: #5f0b2f;
+}

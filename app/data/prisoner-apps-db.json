@@ -86,7 +86,15 @@
     "owner": "PIN phones",
     "app_details": "I want to see what numbers I have activated as I need to swap some about",
     "status": "Closed",
-    "decision": "Approved"
+    "decision": "Approved",
+    "messages": [
+      {
+        "text": "This will be in the wing mail tomorrow.",
+        "sender": "HMP Preston Staff",
+        "date": "-5",
+        "time": "10:00"
+      }
+    ]
     },
   {
     "app_id": 123462,
@@ -96,7 +104,21 @@
     "app_group": "Visits and contact",
     "owner": "Visits",
     "status": "Closed",
-    "decision": "Approved"
+    "decision": "Approved",
+    "messages": [
+      {
+        "text": "Can you include the house number too please?",
+        "sender": "HMP Preston Staff",
+        "date": "-5",
+        "time": "10:00"
+      },
+      {
+        "text": "140.",
+        "sender": "Prisoner",
+        "date": "-5",
+        "time": "12:50"
+      }
+    ]
     },
   {
     "app_id": 123463,
@@ -129,7 +151,14 @@
     "app_details": "I need a new vape, can I have an emergency one, my family are sending some money next week.",
     "status": "Closed",
     "decision": "Declined",
-    "reason": "You have passed the time where emergency vapes are available."
+    "reason": "You have passed the time where emergency vapes are available.",
+    "messages": [
+      {
+        "text": "You have passed the time where emergency vapes are available?",
+        "sender": "HMP Preston Staff",
+        "date": "-9",
+        "time": "10:00"}
+    ]
   },
   {
     "app_id": 123466,
@@ -141,7 +170,14 @@
     "app_details": "I have run out of deoderant, can I have emergency canteen, my family are sending some money next week.",
     "status": "Closed",
     "decision": "Declined",
-    "reason": "You have passed the time where emergency canteen is available."
+    "reason": "You have passed the time where emergency canteen is available.",
+    "messages": [
+      {
+        "text": "You have passed the time where emergency canteen is available?",
+        "sender": "HMP Preston Staff",
+        "date": "-9",
+        "time": "10:00"}
+    ]
   },
   {
     "app_id": 123467,
@@ -174,6 +210,13 @@
     "app_details": "I have run out of PIN credit, can I have more, my family are sending some money next week.",
     "status": "Closed",
     "decision": "Declined",
-    "reason": "You have passed the time where PIn credit is available."
+    "reason": "You have passed the time where emergency PIN credit is available.",
+    "messages": [
+      {
+        "text": "You have passed the time where emergency PIN credit is available?",
+        "sender": "HMP Preston Staff",
+        "date": "-14",
+        "time": "10:00"      }
+    ]
   }
 ]

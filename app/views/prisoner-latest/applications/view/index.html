@@ -35,7 +35,7 @@
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header">App</th>
           <th scope="col" class="govuk-table__header">Status</th>
-          <th scope="col" class="govuk-table__header text-align-center">Messages</th>
+          <th scope="col" class="govuk-table__header govuk-!-text-align-left">Messages</th>
           <th scope="col" class="govuk-table__header">Date sent</th>
         </tr>
       </thead>
@@ -85,7 +85,7 @@
                 <strong class="govuk-tag govuk-tag--yellow">{{ app.status }}</strong>
               {% endif %}
             </td>
-            <td class="govuk-table__cell text-align-center">
+            <td class="govuk-table__cell">
               {% if app.messages and app.messages | length %}
                   {% set incomingMessageCount = 0 %}
                   {% for message in app.messages %}
@@ -100,8 +100,9 @@
                       {% set currentViewToken = (app.messages | length) ~ '|' ~ (lastMessage.sender or '') ~ '|' ~ (lastMessage.text or '') ~ '|' ~ (lastMessage.date or '') ~ '|' ~ (lastMessage.time or '') %}
                       {% set hasBeenViewed = data.viewedMessageState and data.viewedMessageState[app.app_id] == currentViewToken %}
                       {% if hasUnrepliedIncoming and not hasBeenViewed %}
-                        <span class="moj-notification-badge">
+                        <span class="moj-message-indicator">
                           <span aria-hidden="true">{{ incomingMessageCount }}</span>
+                          <strong class="govuk-tag govuk-tag--pink">New message</strong>
                           <span class="govuk-visually-hidden">({{ incomingMessageCount }} new messages)</span>
                         </span>
                       {% else %}
@@ -126,7 +127,7 @@
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header">App</th>
           <th scope="col" class="govuk-table__header">Status</th>
-          <th scope="col" class="govuk-table__header text-align-center">Messages</th>
+          <th scope="col" class="govuk-table__header govuk-!-text-align-left">Messages</th>
           <th scope="col" class="govuk-table__header">Date sent</th>
         </tr>
       </thead>
@@ -144,7 +145,7 @@
               <strong class="govuk-tag govuk-tag--red">{{ app.decision }}</strong>
               {% endif %}
             </td>
-            <td class="govuk-table__cell text-align-center">
+            <td class="govuk-table__cell govuk-!-text-align-left">
               {% if app.messages and app.messages | length %}
                   {% set incomingMessageCount = 0 %}
                   {% for message in app.messages %}
@@ -158,15 +159,8 @@
                       {% set lastMessage = app.messages[app.messages | length - 1] %}
                       {% set currentViewToken = (app.messages | length) ~ '|' ~ (lastMessage.sender or '') ~ '|' ~ (lastMessage.text or '') ~ '|' ~ (lastMessage.date or '') ~ '|' ~ (lastMessage.time or '') %}
                       {% set hasBeenViewed = data.viewedMessageState and data.viewedMessageState[app.app_id] == currentViewToken %}
-                      {% if hasUnrepliedIncoming and not hasBeenViewed %}
-                        <span class="moj-notification-badge">
-                          <span aria-hidden="true">{{ incomingMessageCount }}</span>
-                          <span class="govuk-visually-hidden">({{ incomingMessageCount }} new messages)</span>
-                        </span>
-                      {% else %}
-                        <span aria-hidden="true">{{ incomingMessageCount }}</span>
-                        <span class="govuk-visually-hidden">({{ incomingMessageCount }})</span>
-                      {% endif %}
+                      <span aria-hidden="true">{{ incomingMessageCount }}</span>
+                      <span class="govuk-visually-hidden">({{ incomingMessageCount }})</span>
                   {% endif %}
               {% endif %}
             </td>
