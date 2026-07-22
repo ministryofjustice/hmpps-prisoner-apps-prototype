@@ -5,6 +5,9 @@
 {% set bodyClasses = 'dps staff-v1' %}
 {% set homeurl="/staff-latest/" %}
 {% set appType = data['appType'] %}
+{% set selectedAppType = data['checkappType'] or 'Application details' %}
+{% set selectedAppGroupKey = data['checkAppGroup'] or data['appGroup'] %}
+{% set selectedAppGroup = (data['appGroupsTypes'][selectedAppGroupKey].name if data['appGroupsTypes'] and selectedAppGroupKey and data['appGroupsTypes'][selectedAppGroupKey] and data['appGroupsTypes'][selectedAppGroupKey].name else selectedAppGroupKey or 'Application group') %}
 
 {% block content %}
 
@@ -14,14 +17,11 @@
     <div class="govuk-width-container">
 
     <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
-      {% for group, details in data['groupsAndGeneralApps'] %}
-        {% for app in details.apps %}
-          {% if app.app_id == data['appType'] %}
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds-from-desktop">
         <span class="govuk-caption-xl">
-          {{ app.app_type }}
+          {{ selectedAppType }}
         </span>
 
         <h1 class="govuk-heading-xl">Check details</h1>
@@ -48,7 +48,7 @@
               Application group
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ details.name }}
+              {{ selectedAppGroup }}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a href="/staff-latest/applications/log/select-app-group" class="govuk-body">Change <span class="govuk-visually-hidden"> application group</span></a>
@@ -59,7 +59,7 @@
               Application type
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ app.app_type }}
+              {{ selectedAppType }}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a href="/staff-latest/applications/log/select-app-type" class="govuk-body">Change <span class="govuk-visually-hidden"> application type</span></a>
@@ -121,13 +121,13 @@
               <label class="govuk-label" for="app-group">
                 Application group
               </label>
-              <input class="govuk-input" id="app-group" name="checkAppGroup" type="text" value="{{ details.name }}">
+              <input class="govuk-input" id="app-group" name="checkAppGroup" type="text" value="{{ selectedAppGroup }}">
             </div>
             <div class="govuk-form-group">
               <label class="govuk-label" for="app-type">
                 Application type
               </label>
-              <input class="govuk-input" id="app-type" name="checkappType" type="text" value="{{ app.app_type }}">
+              <input class="govuk-input" id="app-type" name="checkappType" type="text" value="{{ selectedAppType }}">
             </div>
             </fieldset>
         </div>
@@ -144,11 +144,6 @@
     </div>
 
     </div>
-
-          {% endif %}
-      {% endfor %}
-    {% endfor %}
-
 
     </div>
   </div>

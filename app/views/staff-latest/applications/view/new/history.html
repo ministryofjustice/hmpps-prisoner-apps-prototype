@@ -5,6 +5,9 @@
 {% set bodyClasses = 'dps staff-v1' %}
 {% set homeurl="/staff-latest/" %}
 {% set selectedAppId = data['appType'] %}
+{% set selectedAppType = data['checkappType'] or 'Application details' %}
+{% set isClosedApproved = data['actionRespond'] == 'Approved' %}
+{% set isClosedDeclined = data['actionRespond'] == 'Declined' %}
 
 {% block content %}
 
@@ -30,15 +33,7 @@
   		</nav>
 
       
-      <span class="govuk-caption-xl">
-      {% for group, details in data['groupsAndGeneralApps'] %}
-        {% for app in details.apps %}
-          {% if app.app_id == data['appType'] %}
-        {{ app.app_name }}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-      </span>
+      <span class="govuk-caption-xl">{{ selectedAppType }}</span>
       <h1 class="govuk-heading-xl">
         History
       </h1>
@@ -51,23 +46,23 @@
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
         <ul class="moj-sub-navigation__list">
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./application?url_id={{appID}}">
+            <a class="moj-sub-navigation__link" href="./application">
               Application 
             </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./comments?url_id={{appID}}">
+            <a class="moj-sub-navigation__link" href="./comments">
               Comments
             </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./action?url_id={{appID}}">
-              Action and reply
-              </a>
+            <a class="moj-sub-navigation__link"  aria-current="page" href="./history">
+              History
+            </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link"  aria-current="page" href="./history?url_id={{appID}}">
-              History
+            <a class="moj-sub-navigation__link" href="./messages">
+              Messages
             </a>
           </li>
         </ul>
@@ -77,48 +72,65 @@
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-          <div class="app-message govuk-body">
-            <div class="app-messages-metadata">
-              J. Smith | {{ 0 | getDate }} at 09:18
+          <div class="moj-timeline">
+            <div class="moj-timeline__item">
+              <h2 class="moj-timeline__title">Application logged <span class="govuk-!-font-weight-regular">by J Bloggs</span></h2>
+              <p class="moj-timeline__date"><time datetime="2026-06-14T14:01:00">14 June 2026 at 2:01pm</time></p>
+              <div class="moj-timeline__description">
+                <p class="govuk-body">Assigned to Business Hub</p>
+              </div>
             </div>
-            <div class="app-messages-content">
 
-              Logged with {{ data['app_dept'] }}.
+            <div class="moj-timeline__item">
+              <h2 class="moj-timeline__title">Application forwarded <span class="govuk-!-font-weight-regular">by J Bloggs</span></h2>
+              <p class="moj-timeline__date"><time datetime="2026-06-14T14:01:00">14 June 2026 at 2:01pm</time></p>
+              <div class="moj-timeline__description">
+                <p class="govuk-body">Forwarded to Offender Management unit (OMU)</p>
+              </div>
             </div>
-          </div>
-          {% if data['appDept'] == "OMU" %}
-          <div class="app-message govuk-body">
-            <div class="app-messages-metadata">
-              J. Smith | {{ 0 | getDate }} at 12:04
-            </div>
-            <div class="app-messages-content">
-              Forwarded to OMU.
-            </div>
-          </div>
-          {% endif %}
-          
-          {% if (data['actionRespond'] == "Approved") or (app.decision == "Approved") %}
 
-          <div class="app-message govuk-body">
-            <div class="app-messages-metadata">
-              S. Henderson | {{ 0 | getDate }} at 16:52
+            <div class="moj-timeline__item">
+              <h2 class="moj-timeline__title">Comment <span class="govuk-!-font-weight-regular">by J Bloggs</span></h2>
+              <p class="moj-timeline__date"><time datetime="2026-06-14T14:01:00">14 June 2026 at 2:01pm</time></p>
+              <div class="moj-timeline__description">
+                <p class="govuk-body">First contact attempt made - no answer. Will try again tomorrow</p>
+              </div>
             </div>
-            <div class="app-messages-content">
-                Marked as approved.
+
+            <div class="moj-timeline__item">
+              <h2 class="moj-timeline__title">Message from prisoner <span class="govuk-!-font-weight-regular">by Patel, Taj</span></h2>
+              <p class="moj-timeline__date"><time datetime="2026-06-15T14:01:00">15 June 2026 at 2:01pm</time></p>
+              <div class="moj-timeline__description">
+                <p class="govuk-body">my mum works in a school so she wont answer until after 3</p>
+              </div>
+            </div>
+
+            <div class="moj-timeline__item">
+              <h2 class="moj-timeline__title">Message to prisoner <span class="govuk-!-font-weight-regular">by J Bloggs</span></h2>
+              <p class="moj-timeline__date"><time datetime="2026-06-15T14:01:00">15 June 2026 at 2:01pm</time></p>
+              <div class="moj-timeline__description">
+                <p class="govuk-body">Thank you, that is helpful</p>
+              </div>
+            </div>
+
+            <div class="moj-timeline__item">
+              <h2 class="moj-timeline__title">Comment <span class="govuk-!-font-weight-regular">by J Bloggs</span></h2>
+              <p class="moj-timeline__date"><time datetime="2026-06-15T16:01:00">15 June 2026 at 4:01pm</time></p>
+              <div class="moj-timeline__description">
+                <p class="govuk-body">Second contact attempt made - no answer. Will try again tomorrow</p>
+              </div>
+            </div>
+
+            <div class="moj-timeline__item">
+              <h2 class="moj-timeline__title">Application closed <span class="govuk-!-font-weight-regular">by J Bloggs</span></h2>
+              <p class="moj-timeline__date"><time datetime="2019-06-16T14:01:00">16 June 2019 at 2:01pm</time></p>
+              <div class="moj-timeline__description">
+                <p class="govuk-body">Application approved. Contact made and approved. Number has been added.</p>
+              </div>
             </div>
           </div>
-          {% elseif (data['actionRespond'] == "Declined") or (app.decision == "Declined") %}
-          <div class="app-message govuk-body">
-            <div class="app-messages-metadata">
-              S. Henderson | {{ 0 | getDate }} at 16:52
-            </div>
-            <div class="app-messages-content">
-                Marked as declined.
-            </div>
-          </div>
-          {% endif %}
-          </div>
-          </div>
+        </div>
+      </div>
       </div>
     </div>
   </div> <!-- end main content  -->

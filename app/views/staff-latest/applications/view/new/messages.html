@@ -1,0 +1,226 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Messages" %}
+{% set version="latest" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+{% set selectedAppId = data['appType'] %}
+{% set selectedAppType = data['checkappType'] or 'Application details' %}
+{% set isClosed = data['actionRespond'] == 'Approved' or data['actionRespond'] == 'Declined' %}
+{% set isInProgress = data['newAppStatus'] == 'In progress' %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-full">
+    <div class="govuk-width-container">
+
+      <nav aria-label="breadcrumb">
+  			<div class="govuk-breadcrumbs">
+  				<ol class="govuk-breadcrumbs__list">
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+  					</li>
+  					<li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+  					</li>
+            <li class="govuk-breadcrumbs__list-item">
+  						<a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/view/">View all applications</a>
+  					</li>
+  				</ol>
+  			</div>
+  		</nav>
+
+      <span class="govuk-caption-xl">{{ selectedAppType }}</span>
+      <h1 class="govuk-heading-xl">
+        Messages
+      </h1>
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
+    <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+
+      {% if not isClosed %}
+      {% call govukInsetText({ classes: "govuk-!-margin-bottom-5" }) %}
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Action this application</h3>
+        <div class="govuk-button-group">
+          {% if not isInProgress %}
+          <a href="./mark-in-progress" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as in progress
+          </a>
+          {% endif %}
+          <a href="./forward" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Forward to another department
+          </a>
+          <a href="./action" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as closed
+          </a>
+        </div>
+      {% endcall %}
+      {% endif %}
+
+
+      <nav class="moj-sub-navigation" aria-label="Sub navigation">
+        <ul class="moj-sub-navigation__list">
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./application">
+              Application 
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./comments">
+              Comments
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./history">
+              History
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page" href="./messages">
+              Messages
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <h2 class="govuk-heading-m">Messages and replies</h2>
+      <div class="govuk-warning-text govuk-!-margin-bottom-4">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
+          These messages will be sent to prisoner.
+        </strong>
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full staff-messages-panel">
+          {% set hasNewFlowMessages = data.newFlowMessages | length %}
+          {% if hasNewFlowMessages %}
+          <div id="messages" class="moj-messages-container">
+            <div class="moj-message-list">
+              {% if hasNewFlowMessages %}
+              {% for msg in data.newFlowMessages %}
+              <div class="moj-message-item moj-message-item--sent">
+                <div class="moj-message-item__text moj-message-item__text--sent">
+                  <p class="moj-message-bubble__body">{{ msg.text }}</p>
+                  <p class="moj-message-bubble__meta">{{ msg.from if msg.from else 'S. Staff' }}{% if msg.date %} on <span class="reldate">{{ msg.date }}</span>{% endif %}</p>
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          {% else %}
+          <p class="govuk-body">No messages yet</p>
+          {% endif %}
+        </div>
+
+        <div class="govuk-grid-column-two-thirds">
+      <form class="govuk-!-margin-top-5 govuk-!-margin-bottom-5" action="/staff-latest/applications/view/new/messages" method="post">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="newMessage">
+            Add a message
+          </label>
+          <textarea class="govuk-textarea" id="newMessage" name="newMessage" rows="5"></textarea>
+        </div>
+
+        <div class="moj-button-action">
+          <button type="button" class="govuk-button" data-module="govuk-button" id="open-send-prisoner-message-modal-new">
+            Send message
+          </button>
+        </div>
+
+      </form>
+
+      <div class="moj-modal" id="send-prisoner-message-modal-new" role="dialog" aria-modal="true" aria-labelledby="send-prisoner-message-title-new" hidden>
+        <div class="moj-modal__overlay" data-close-send-prisoner-message-modal-new="true"></div>
+        <div class="moj-modal__dialog" role="document">
+          <button type="button" class="moj-modal__close" aria-label="Close modal" data-close-send-prisoner-message-modal-new="true">X</button>
+          <h2 class="govuk-heading-m" id="send-prisoner-message-title-new">Are you sure you want to send this to a prisoner?</h2>
+          <div class="govuk-button-group govuk-!-margin-top-6">
+            <button type="button" class="govuk-button moj-modal__confirm-button" data-module="govuk-button" id="confirm-send-prisoner-message-new">
+              Yes
+            </button>
+            <a href="#" class="govuk-link" data-close-send-prisoner-message-modal-new="true">No, go back</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+      </div>
+
+      </div>
+
+    </div>
+
+
+  </div> <!-- end main content  -->
+
+
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  const autocompleteElementNew = document.querySelector('#my-autocomplete')
+  if (autocompleteElementNew) {
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: autocompleteElementNew
+    })
+  }
+
+  const newMessagesForm = document.querySelector('form[action="/staff-latest/applications/view/new/messages"]')
+  const newMessagesModal = document.getElementById('send-prisoner-message-modal-new')
+  const newMessagesOpenButton = document.getElementById('open-send-prisoner-message-modal-new')
+  const newMessagesConfirmButton = document.getElementById('confirm-send-prisoner-message-new')
+  const newMessagesCloseControls = document.querySelectorAll('[data-close-send-prisoner-message-modal-new="true"]')
+
+  function openNewMessagesModal () {
+    if (!newMessagesModal) return
+    newMessagesModal.removeAttribute('hidden')
+    document.body.classList.add('moj-modal-open')
+    if (newMessagesConfirmButton) {
+      newMessagesConfirmButton.focus()
+    }
+  }
+
+  function closeNewMessagesModal (focusButton) {
+    if (!newMessagesModal) return
+    newMessagesModal.setAttribute('hidden', 'hidden')
+    document.body.classList.remove('moj-modal-open')
+    if (focusButton && newMessagesOpenButton) {
+      newMessagesOpenButton.focus()
+    }
+  }
+
+  if (newMessagesOpenButton) {
+    newMessagesOpenButton.addEventListener('click', openNewMessagesModal)
+  }
+
+  if (newMessagesConfirmButton && newMessagesForm) {
+    newMessagesConfirmButton.addEventListener('click', function () {
+      newMessagesForm.submit()
+    })
+  }
+
+  newMessagesCloseControls.forEach(function (closeControl) {
+    closeControl.addEventListener('click', function (event) {
+      event.preventDefault()
+      closeNewMessagesModal(true)
+    })
+  })
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && newMessagesModal && !newMessagesModal.hasAttribute('hidden')) {
+      closeNewMessagesModal(true)
+    }
+  })
+</script>
+
+{% endblock %}

@@ -13,7 +13,14 @@
     "prisoner_alerts": 5,
     "iep_status": "Enhanced",
     "priority": null,
-    "app_details": null
+    "app_details": null,
+    "messages": [
+      {
+        "sender": "Clegg, James",
+        "text": "Made a mistake, the postcode is B32 6HJ",
+        "date": "0",
+        "time": "10:00"}
+    ]
   },  
   {
     "app_id": 123457,

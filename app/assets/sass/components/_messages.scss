@@ -28,14 +28,80 @@
   align-self: flex-start;
 }
 
+.moj-message-item--staff-only {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+
+  &::before,
+  &::after {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .moj-message-item__text {
+    background-color: govuk-colour("red") !important;
+    border: 0;
+    box-shadow: none;
+    color: govuk-colour("white") !important;
+  }
+
+  .moj-message-bubble__meta,
+  .moj-message-bubble__visibility,
+  .moj-message-bubble__body,
+  a,
+  time {
+    color: govuk-colour("white") !important;
+  }
+}
+
+.staff-v1 {
+  .staff-messages-panel {
+    width: 75%;
+  }
+
+  @media (max-width: 640px) {
+    .staff-messages-panel {
+      width: 100%;
+    }
+  }
+
+  .moj-message-item--sent,
+  .moj-message-item--received,
+  .moj-message-item--staff-only {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+
+    &::before,
+    &::after {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .moj-message-item__text--sent,
+  .moj-message-item__text--received,
+  .moj-message-item__text--staff-only {
+    padding: govuk-spacing(3) !important;
+  }
+}
+
 .moj-message-item__text {
   @include govuk-font($size: 19);
   border-radius: 8px;
   word-wrap: break-word;
+  padding: govuk-spacing(3);
 }
 
 .moj-message-item__text--sent {
   background-color: govuk-colour("blue");
+  border: 0;
+  box-shadow: none;
   color: govuk-colour("white");
   text-align: left;
 
@@ -47,6 +113,54 @@
 .moj-message-item__text--received {
   background-color: govuk-colour("light-grey");
   color: govuk-colour("black");
+}
+
+.moj-message-item__text--staff-only {
+  background-color: govuk-colour("red") !important;
+  border: 0;
+  box-shadow: none;
+  color: govuk-colour("white") !important;
+  text-align: left;
+
+  a, time {
+    color: govuk-colour("white") !important;
+  }
+}
+
+.moj-message-bubble__meta {
+  @include govuk-font($size: 16, $weight: bold);
+  margin: 0 0 govuk-spacing(1) 0;
+}
+
+.moj-message-bubble__visibility {
+  @include govuk-font($size: 16);
+  display: flex;
+  align-items: center;
+  gap: govuk-spacing(1);
+  margin: 0 0 govuk-spacing(2) 0;
+}
+
+.moj-message-item__text--sent .moj-message-bubble__meta,
+.moj-message-item__text--sent .moj-message-bubble__visibility,
+.moj-message-item__text--sent .moj-message-bubble__body,
+.moj-message-item__text--staff-only .moj-message-bubble__meta,
+.moj-message-item__text--staff-only .moj-message-bubble__visibility,
+.moj-message-item__text--staff-only .moj-message-bubble__body {
+  color: govuk-colour("white");
+}
+
+.moj-message-bubble__eye {
+  display: inline-flex;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.moj-message-bubble__body {
+  @include govuk-font($size: 19);
+  margin: 0;
 }
 
 .moj-message-item__meta {

@@ -67,20 +67,26 @@
             <a class="moj-sub-navigation__link" href="./application?url_id={{appID}}">
               Application
             </a>
-            <li class="moj-sub-navigation__item">
-              <a class="moj-sub-navigation__link" aria-current="page" href="./messages?url_id={{appID}}">
-                Messages
-                {% if msgCount > 0 %}
-                <span class="moj-notification-badge">
-                  <span aria-hidden="true">{{ msgCount }}</span>
-                  <span class="govuk-visually-hidden">({{ msgCount }})</span>
-                </span>
-                {% endif %}
-              </a>
-            </li>
-            <li class="moj-sub-navigation__item">
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./comments?url_id={{appID}}">
+              Comments
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./history?url_id={{appID}}">
               History
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" aria-current="page" href="./messages?url_id={{appID}}">
+              Messages
+              {% if msgCount > 0 %}
+              <span class="moj-notification-badge">
+                <span aria-hidden="true">{{ msgCount }}</span>
+                <span class="govuk-visually-hidden">({{ msgCount }})</span>
+              </span>
+              {% endif %}
             </a>
           </li>
         </ul>
@@ -88,9 +94,16 @@
 
 
       <h2 class="govuk-heading-m">Messages and replies</h2>
+      <div class="govuk-warning-text govuk-!-margin-bottom-4">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
+          These messages will be sent to prisoner.
+        </strong>
+      </div>
 
       <div class="govuk-grid-row">
-        <div class="govuk-grid-column-full">
+        <div class="govuk-grid-column-full staff-messages-panel">
 
           {% set hasJsonMessages = false %}
           {% for app in data['staffAppsDB'] %}
@@ -101,42 +114,50 @@
           {% set hasStaffMessages = data.staffMessages[appID] | length %}
 
           {% if hasJsonMessages or hasStaffMessages %}
-          <table class="govuk-table">
-            <thead class="govuk-table__head">
-              <tr class="govuk-table__row">
-                <th class="govuk-table__header">Message</th>
-                <th class="govuk-table__header">From</th>
-                <th class="govuk-table__header">Visible to</th>
-                <th class="govuk-table__header">Date</th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-              {% for app in data['staffAppsDB'] %}
-              {% if app.app_id == appID %}
+          <div id="messages" class="moj-messages-container">
+            <div class="moj-message-list">
+
               {% if app.messages | length %}
               {% for msg in app.messages %}
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">{{ msg.text }}</td>
-                <td class="govuk-table__cell">{{ msg.sender if msg.sender else '—' }}</td>
-                <td class="govuk-table__cell">{{ msg.visible_to if msg.visible_to else '—' }}</td>
-                <td class="govuk-table__cell">{{ msg.datetime | formatDateTime }}</td>
-              </tr>
+                {% set isPrisonerMessage = msg.sender == app.prisoner_name or msg.sender == 'Prisoner' %}
+                {% if isPrisonerMessage %}
+                <div class="moj-message-item moj-message-item--received">
+                  <div class="moj-message-item__text moj-message-item__text--received">
+                    <p class="moj-message-bubble__body">{{ msg.text }}</p>
+                    <p class="moj-message-bubble__meta">{{ app.prisoner_name }}{% if msg.datetime %} on {{ msg.datetime | formatDateTime }}{% elif msg.date %} on <span class="reldate">{{ msg.date }}</span>{% if msg.time %} at {{ msg.time }}{% endif %}{% endif %}</p>
+                  </div>
+                </div>
+                {% else %}
+                {% set visibilityText = msg.visible_to if msg.visible_to else 'Staff and prisoner' %}
+                {% set visibilityText = 'Staff and prisoner' if visibilityText == 'Prisoner and staff' else visibilityText %}
+                {% if (visibilityText | trim | lower) != 'staff only' %}
+                <div class="moj-message-item moj-message-item--sent">
+                  <div class="moj-message-item__text moj-message-item__text--sent">
+                    <p class="moj-message-bubble__body">{{ msg.text }}</p>
+                    <p class="moj-message-bubble__meta">{{ msg.sender if msg.sender else 'S. Staff' }}{% if msg.datetime %} on {{ msg.datetime | formatDateTime }}{% elif msg.date %} on <span class="reldate">{{ msg.date }}</span>{% if msg.time %} at {{ msg.time }}{% endif %}{% endif %}</p>
+                  </div>
+                </div>
+                {% endif %}
+                {% endif %}
               {% endfor %}
               {% endif %}
-              {% endif %}
-              {% endfor %}
+
               {% if hasStaffMessages %}
               {% for msg in data.staffMessages[appID] %}
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">{{ msg.text }}</td>
-                <td class="govuk-table__cell">{{ msg.from }}</td>
-                <td class="govuk-table__cell">{{ msg.visible_to }}</td>
-                <td class="govuk-table__cell">{{ msg.date }}</td>
-              </tr>
+                {% set visibilityText = msg.visible_to if msg.visible_to else 'Staff and prisoner' %}
+                {% set visibilityText = 'Staff and prisoner' if visibilityText == 'Prisoner and staff' else visibilityText %}
+                {% if (visibilityText | trim | lower) != 'staff only' %}
+                <div class="moj-message-item moj-message-item--sent">
+                  <div class="moj-message-item__text moj-message-item__text--sent">
+                    <p class="moj-message-bubble__body">{{ msg.text }}</p>
+                    <p class="moj-message-bubble__meta">{{ msg.from if msg.from else 'S. Staff' }}{% if msg.date %} on <span class="reldate">{{ msg.date }}</span>{% if msg.time %} at {{ msg.time }}{% endif %}{% endif %}</p>
+                  </div>
+                </div>
+                {% endif %}
               {% endfor %}
               {% endif %}
-            </tbody>
-          </table>
+            </div>
+          </div>
           {% else %}
           <p class="govuk-body">No messages yet</p>
           {% endif %}
@@ -155,40 +176,27 @@
               <textarea class="govuk-textarea" id="newMessage" name="newMessage" rows="5"></textarea>
             </div>
 
-            <div class="govuk-form-group">
-              <fieldset class="govuk-fieldset" aria-describedby="privacy-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                  Who will see this message?
-                </legend>
-                <div id="privacy-hint" class="govuk-hint">
-                  This message will be shown to:
-                </div>
-                <div class="govuk-radios govuk-radios--small">
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="visible-to-staff" name="visibleTo" type="radio"
-                      value="Staff only" checked>
-                    <label class="govuk-label govuk-radios__label" for="visible-to-staff">
-                      Staff only
-                    </label>
-                  </div>
-                  <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="visible-to-both" name="visibleTo" type="radio"
-                      value="Prisoner and Staff">
-                    <label class="govuk-label govuk-radios__label" for="visible-to-both">
-                      Prisoner and Staff
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-
             <div class="moj-button-action">
-              <button type="submit" class="govuk-button" data-module="govuk-button">
+              <button type="button" class="govuk-button" data-module="govuk-button" id="open-send-prisoner-message-modal-app">
                 Send message
               </button>
             </div>
 
           </form>
+
+          <div class="moj-modal" id="send-prisoner-message-modal-app" role="dialog" aria-modal="true" aria-labelledby="send-prisoner-message-title-app" hidden>
+            <div class="moj-modal__overlay" data-close-send-prisoner-message-modal-app="true"></div>
+            <div class="moj-modal__dialog" role="document">
+              <button type="button" class="moj-modal__close" aria-label="Close modal" data-close-send-prisoner-message-modal-app="true">X</button>
+              <h2 class="govuk-heading-m" id="send-prisoner-message-title-app">Are you sure you want to send this to a prisoner?</h2>
+              <div class="govuk-button-group govuk-!-margin-top-6">
+                <button type="button" class="govuk-button moj-modal__confirm-button" data-module="govuk-button" id="confirm-send-prisoner-message-app">
+                  Yes
+                </button>
+                <a href="#" class="govuk-link" data-close-send-prisoner-message-modal-app="true">No, go back</a>
+              </div>
+            </div>
+          </div>
 
           {% endif %}
 
@@ -210,8 +218,58 @@
 
 {% block pageScripts %}
 <script>
-  accessibleAutocomplete.enhanceSelectElement({
-    selectElement: document.querySelector('#my-autocomplete')
+  const autocompleteElementApp = document.querySelector('#my-autocomplete')
+  if (autocompleteElementApp) {
+    accessibleAutocomplete.enhanceSelectElement({
+      selectElement: autocompleteElementApp
+    })
+  }
+
+  const appMessagesForm = document.querySelector('form[action^="/staff-latest/applications/view/app/messages"]')
+  const appMessagesModal = document.getElementById('send-prisoner-message-modal-app')
+  const appMessagesOpenButton = document.getElementById('open-send-prisoner-message-modal-app')
+  const appMessagesConfirmButton = document.getElementById('confirm-send-prisoner-message-app')
+  const appMessagesCloseControls = document.querySelectorAll('[data-close-send-prisoner-message-modal-app="true"]')
+
+  function openAppMessagesModal () {
+    if (!appMessagesModal) return
+    appMessagesModal.removeAttribute('hidden')
+    document.body.classList.add('moj-modal-open')
+    if (appMessagesConfirmButton) {
+      appMessagesConfirmButton.focus()
+    }
+  }
+
+  function closeAppMessagesModal (focusButton) {
+    if (!appMessagesModal) return
+    appMessagesModal.setAttribute('hidden', 'hidden')
+    document.body.classList.remove('moj-modal-open')
+    if (focusButton && appMessagesOpenButton) {
+      appMessagesOpenButton.focus()
+    }
+  }
+
+  if (appMessagesOpenButton) {
+    appMessagesOpenButton.addEventListener('click', openAppMessagesModal)
+  }
+
+  if (appMessagesConfirmButton && appMessagesForm) {
+    appMessagesConfirmButton.addEventListener('click', function () {
+      appMessagesForm.submit()
+    })
+  }
+
+  appMessagesCloseControls.forEach(function (closeControl) {
+    closeControl.addEventListener('click', function (event) {
+      event.preventDefault()
+      closeAppMessagesModal(true)
+    })
+  })
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && appMessagesModal && !appMessagesModal.hasAttribute('hidden')) {
+      closeAppMessagesModal(true)
+    }
   })
 </script>
 

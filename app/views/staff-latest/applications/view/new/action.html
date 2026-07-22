@@ -5,6 +5,8 @@
 {% set bodyClasses = 'dps staff-v1' %}
 {% set homeurl="/staff-latest/" %}
 {% set selectedAppId = data['appType'] %}
+{% set selectedAppType = data['checkappType'] or 'Application details' %}
+{% set isClosed = data['actionRespond'] == 'Approved' or data['actionRespond'] == 'Declined' %}
 
 {% block content %}
 
@@ -30,15 +32,7 @@
   		</nav>
 
       
-      <span class="govuk-caption-xl">
-      {% for group, details in data['groupsAndGeneralApps'] %}
-        {% for app in details.apps %}
-          {% if app.app_id == data['appType'] %}
-        {{ app.app_type }}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-      </span>
+      <span class="govuk-caption-xl">{{ selectedAppType }}</span>
       <h1 class="govuk-heading-xl">
         Action and reply
       </h1>
@@ -55,19 +49,20 @@
             <a class="moj-sub-navigation__link" href="./application">
               Application 
             </a>
+          </li>
           <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./comments">
               Comments
             </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link"  aria-current="page" href="./action">
-              Action and reply
-              </a>
-          </li>
-          <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./history">
               History
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./messages">
+              Messages
             </a>
           </li>
         </ul>
@@ -79,7 +74,7 @@
 
           <h2 class="govuk-heading-m">Action this application</h2>
 
-          {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+          {% if isClosed %}
 
           <div id="response-approved" class="response-toggle form">
             <dl class="govuk-summary-list">
@@ -91,7 +86,7 @@
                   {% if data['actionRespond'] %}
                     {{ data['actionRespond'] }}
                   {% else %}
-                    {{ app.decision }}
+                    Closed
                   {% endif %}
                 </dd>
               </div>
@@ -103,7 +98,7 @@
                   {% if data['decisionReason'] %}
                     {{ data['decisionReason'] }}
                   {% else %}
-                    {{ app.decision_reason }}
+                    No reason provided
                   {% endif %}
                 </dd>
               </div>
@@ -125,7 +120,7 @@
               </div>
             </dl>
             <div class="moj-button-action">
-              {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+              {% if isClosed %}
               <a href="./reply" target="_blank" class="govuk-button">
                 Print reply
               </a>
@@ -133,7 +128,7 @@
             </div>
           </div>
 
-          {% elseif app.decision == null %}
+          {% else %}
 
           <div id="response-form" class="response-toggle form">
 

@@ -14,11 +14,13 @@
     <div class="govuk-width-container">
 
       <a href="javascript:history.go(-1)" class="govuk-back-link">Back</a>
-      {% for group, details in data['groupsAndGeneralApps'] %}
-        {% for app in details.apps %}
-          {% if app.app_id == data['appType'] %}
-
-      <span class="govuk-caption-xl">{{ app.app_type }}</span>
+      <span class="govuk-caption-xl">
+        {% if data['checkappType'] %}
+          {{ data['checkappType'] }}
+        {% else %}
+          Application details
+        {% endif %}
+      </span>
       <h1 class="govuk-heading-xl">Log details</h1>
 
       <div class="govuk-width-container">
@@ -68,9 +70,6 @@
       </div>
 
       </div>
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
 </div>
   </div>
 

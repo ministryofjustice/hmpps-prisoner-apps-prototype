@@ -5,6 +5,25 @@
 {% set bodyClasses = 'dps staff-v1' %}
 {% set homeurl="/staff-latest/" %}
 {% set selectedAppId = data['appType'] %}
+{% set selectedAppType = data['checkappType'] %}
+{% set selectedAppGroup = data['checkAppGroup'] or data['appGroup'] %}
+{% if (not selectedAppType or selectedAppType == 'Application details') and data['appGroupsTypes'] and selectedAppId %}
+  {% for groupKey, appGroup in data['appGroupsTypes'] %}
+    {% for app in appGroup.apps %}
+      {% if app.app_id == selectedAppId %}
+        {% set selectedAppType = app.app_type %}
+        {% set selectedAppGroup = appGroup.name %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+{% set selectedAppType = selectedAppType or 'Application details' %}
+{% set selectedAppGroup = selectedAppGroup or 'Application group' %}
+{% set selectedPrisonerName = data['prisonerName'] or data['prisoner_name'] or 'Patel, Taj' %}
+{% set selectedPrisonerNumber = data['prisonNumber'] or data['app_prisonNumber'] or data['prisoner_number'] or 'A1234BC' %}
+{% set isClosed = data['actionRespond'] or data['decision'] == 'Approved' or data['decision'] == 'Declined' %}
+{% set isInProgress = data['newAppStatus'] == 'In progress' %}
+{% set currentStatus = 'Closed' if isClosed else ('In progress' if isInProgress else 'New') %}
 
 {% block content %}
 
@@ -29,16 +48,10 @@
   				</ol>
   			</div>
   		</nav>
-      {% for group, details in data['groupsAndGeneralApps'] %}
-        {% for app in details.apps %}
-          {% if app.app_id == data['appType'] %}
-      <span class="govuk-caption-xl">{{ details.name }}</span>
+      <span class="govuk-caption-xl">{{ selectedAppGroup }}</span>
       <h1 class="govuk-heading-xl">
-        {{ app.app_type }}
+        {{ selectedAppType }}
       </h1>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
     </div>
   </div>
 
@@ -46,11 +59,30 @@
   <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
 
+      {% if not isClosed %}
+      {% call govukInsetText({ classes: "govuk-!-margin-bottom-5" }) %}
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Action this application</h3>
+        <div class="govuk-button-group">
+          {% if not isInProgress %}
+          <a href="./mark-in-progress" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as in progress
+          </a>
+          {% endif %}
+          <a href="./forward" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Forward to another department
+          </a>
+          <a href="./action" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as closed
+          </a>
+        </div>
+      {% endcall %}
+      {% endif %}
+
 
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
         <ul class="moj-sub-navigation__list">
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" aria-current="page" href="./details">
+            <a class="moj-sub-navigation__link" aria-current="page" href="./application">
               Application 
             </a>
           </li>
@@ -60,22 +92,17 @@
             </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./action">
-              Action and reply
-              </a>
-          </li>
-          <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./history">
               History
             </a>
           </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./messages">
+              Messages
+            </a>
+          </li>
         </ul>
       </nav>
-
-      {% for group, details in data['groupsAndGeneralApps'] %}
-        {% for app in details.apps %}
-          {% if app.app_id == data['appType'] %}
-
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
           <h2 class="govuk-heading-m">Application details</h2>
@@ -86,11 +113,7 @@
                 Status
               </dt>
               <dd class="govuk-summary-list__value">
-                {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
-                  Closed
-                {% else %}
-                  Pending
-                {% endif %}
+                {{ currentStatus }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -101,7 +124,7 @@
                 {{ data['appDept'] }}
               </dd>
               <dd class="govuk-summary-list__actions">
-                {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+                {% if isClosed %}
                 {% else %}
                   <a class="govuk-link" href="forward">Forward<span class="govuk-visually-hidden"> department</span></a>
                 {% endif %}
@@ -112,7 +135,7 @@
                 Application type
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data['checkappType'] }}
+                {{ selectedAppType }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -120,7 +143,7 @@
                 Application group
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data['checkAppGroup'] }}
+                {{ selectedAppGroup }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -128,7 +151,7 @@
                 Date
               </dt>
               <dd class="govuk-summary-list__value reldate">
-                {{ app.date_received }}
+                {{ data['date_received'] or 0 }}
               </dd>
             </div>
             <!--
@@ -150,11 +173,7 @@
                 Prisoner
               </dt>
               <dd class="govuk-summary-list__value">
-                {% if data['app_prisonNumber'] %}
-                  Patel, Taj ({{ data['app_prisonNumber'] }})
-                {% else %}
-                  Patel, Taj (A1234BC)
-                {% endif %}
+                {{ selectedPrisonerName }} ({{ selectedPrisonerNumber }})
               </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="#">View profile</a>
@@ -191,7 +210,7 @@
 
       <div class="govuk-summary-list--header">
         <h2 class="govuk-heading-m">Action and department</h2>
-        {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+        {% if isClosed %}
         {% else %}
         <a href="#" class="govuk-body">Change <span class="govuk-visually-hidden"> Visiting orders</span></a>
         {% endif  %}
@@ -211,10 +230,6 @@
         </div>
       </dl>
       </div>
-
-      {% endif  %}
-      {% endfor  %}
-      {% endfor  %}
 
       </div>
 

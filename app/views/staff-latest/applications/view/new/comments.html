@@ -5,6 +5,9 @@
 {% set bodyClasses = 'dps staff-v1' %}
 {% set homeurl="/staff-latest/" %}
 {% set selectedAppId = data['appType'] %}
+{% set selectedAppType = data['checkappType'] or 'Application details' %}
+{% set isClosed = data['actionRespond'] == 'Approved' or data['actionRespond'] == 'Declined' %}
+{% set isInProgress = data['newAppStatus'] == 'In progress' %}
 
 
 {% block content %}
@@ -30,15 +33,7 @@
   			</div>
   		</nav>
 
-      <span class="govuk-caption-xl">
-      {% for group, details in data['groupsAndGeneralApps'] %}
-        {% for app in details.apps %}
-          {% if app.app_id == data['appType'] %}
-        {{ app.app_type }}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-      </span>
+      <span class="govuk-caption-xl">{{ selectedAppType }}</span>
       <h1 class="govuk-heading-xl">
         Comments
       </h1>
@@ -49,6 +44,25 @@
   <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
 
+      {% if not isClosed %}
+      {% call govukInsetText({ classes: "govuk-!-margin-bottom-5" }) %}
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Action this application</h3>
+        <div class="govuk-button-group">
+          {% if not isInProgress %}
+          <a href="./mark-in-progress" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as in progress
+          </a>
+          {% endif %}
+          <a href="./forward" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Forward to another department
+          </a>
+          <a href="./action" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as closed
+          </a>
+        </div>
+      {% endcall %}
+      {% endif %}
+
 
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
         <ul class="moj-sub-navigation__list">
@@ -56,64 +70,51 @@
             <a class="moj-sub-navigation__link" href="./application">
               Application 
             </a>
+          </li>
           <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" aria-current="page" href="./comments">
               Comments
             </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./action">
-              Action and reply
-              </a>
-          </li>
-          <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./history">
               History
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./messages">
+              Messages
             </a>
           </li>
         </ul>
       </nav>
 
-      
       <h2 class="govuk-heading-m">Comments about this application</h2>
       <p class="govuk-body">Only staff will see these comments</p>
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-
-          {% if data['newComment'] or data['forwardReasons'] %}
-
-            {% if data['newComment'] %}
+          {% set hasNewFlowComments = data.newFlowComments | length %}
+          {% if hasNewFlowComments %}
+            {% for msg in data.newFlowComments %}
               <div class="app-message govuk-body">
                 <div class="app-messages-metadata">
-                  Comment by J. Smith | {{ 0 | getDate }} at 16:52
+                  Comment by {{ msg.from if msg.from else 'S. Staff' }}{% if msg.date %} | {{ msg.date }}{% endif %}
                 </div>
                 <div class="app-messages-content">
-                  {{ data['newComment'] }}
+                  {{ msg.text }}
                 </div>
               </div>
-            {% endif %}
-
-            {% if data['forwardReasons'] %}
-              <div class="app-message govuk-body">
-                <div class="app-messages-metadata">
-                  Forwarded to {{ data['appDept'] }} by J. Smith | {{ 0 | getDate }} at 16:52
-                </div>
-                <div class="app-messages-content">
-                  {{ data['forwardReasons'] }}
-                </div>
+            {% endfor %}
+          {% else %}
+            <div class="app-message govuk-body">
+              <div class="app-messages-content">
+                <p class="none">No comments yet</p>
               </div>
-            {% endif %}
-
-            {% else %}
-              <div class="app-message govuk-body">
-                <div class="app-messages-content">
-                  <p class="none">No comments yet</p>
-                </div>
-              </div>
+            </div>
           {% endif %}
-  
-      <form class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
+
+      <form class="govuk-!-margin-top-5 govuk-!-margin-bottom-5" action="/staff-latest/applications/view/new/comments" method="post">
         <div class="govuk-form-group">
           <label class="govuk-label govuk-label--s" for="newComment">
             Add a comment
@@ -129,7 +130,7 @@
 
       </form>
 
-    </div>
+        </div>
       </div>
 
       </div>

@@ -61,6 +61,16 @@
             </a>
           </li>
           <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./comments?url_id={{appID}}">
+              Comments
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
+            <a class="moj-sub-navigation__link" href="./history?url_id={{appID}}">
+              History
+            </a>
+          </li>
+          <li class="moj-sub-navigation__item">
             <a class="moj-sub-navigation__link" href="./messages?url_id={{appID}}">
               Messages
               {% if msgCount > 0 %}
@@ -69,11 +79,6 @@
                 <span class="govuk-visually-hidden">({{ msgCount }})</span>
               </span>
               {% endif %}
-            </a>
-          </li>
-          <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./history?url_id={{appID}}">
-              History
             </a>
           </li>
         </ul>

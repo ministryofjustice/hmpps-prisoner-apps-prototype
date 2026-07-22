@@ -5,6 +5,22 @@
 {% set phasebanner="yes" %}
 {% set bodyClasses = 'dps staff-v1' %}
 {% set homeurl="/staff-latest/" %}
+{% set selectedAppType = data['checkappType'] %}
+{% if not selectedAppType or selectedAppType == 'Application details' %}
+  {% if data['appType'] == 'app_0101' %}
+    {% set selectedAppType = 'Add an official PIN phone contact' %}
+  {% elseif data['appType'] == 'app_0102' %}
+    {% set selectedAppType = 'Add a social PIN phone contact' %}
+  {% elseif data['appType'] == 'app_0103' %}
+    {% set selectedAppType = 'Add emergency phone credit' %}
+  {% elseif data['appType'] == 'app_0104' %}
+    {% set selectedAppType = 'Remove a PIN phone contact' %}
+  {% elseif data['appType'] == 'app_0105' %}
+    {% set selectedAppType = 'Supply list of contacts' %}
+  {% elseif data['appType'] == 'app_0106' %}
+    {% set selectedAppType = 'Swap Visiting Orders (VOs) for PIN Credit' %}
+  {% endif %}
+{% endif %}
 
 
 {% block content %}
@@ -18,13 +34,7 @@
           <div class="govuk-grid-column-two-thirds">
             <div class="govuk-panel govuk-panel--confirmation">
               <div class="govuk-panel__body govuk-!-padding-bottom-3">
-                {% for group, details in data['groupsAndGeneralApps'] %}
-                {% for app in details.apps %}
-                {% if app.app_id == data['appType'] %}
-                {{ app.app_type }}
-                {% endif %}
-                {% endfor %}
-                {% endfor %}
+                {{ selectedAppType or 'Application' }}
               </div>
               <h1 class="govuk-panel__title">
                 Application submitted
@@ -42,14 +52,18 @@
             <p class="govuk-body">Or you can view:</p>
 
             <ul class="govuk-list govuk-list--bullet">
-              {% if data['appType'] == 'app_1003' %}
+              {% if data['appType'] == 'app_0102' %}
               <li><a href="{{homeurl}}applications/view/new-social-pin-contact/application.html">this application</a></li>
-              {% elseif data['appType'] == 'app_1002' %}
+              {% elseif data['appType'] == 'app_0101' %}
               <li><a href="{{homeurl}}applications/view/new-official-pin-contact/application.html">this application</a></li>
-              {% elseif data['appType'] == 'app_1001' %}
+              {% elseif data['appType'] == 'app_0103' %}
               <li><a href="{{homeurl}}applications/view/emergency-pin-credit/application.html">this application</a></li>
-              {% elseif data['appType'] == 'app_1004' %}
+              {% elseif data['appType'] == 'app_0104' %}
               <li><a href="{{homeurl}}applications/view/remove-pin-phone-contact/application.html">this application</a></li>
+              {% elseif data['appType'] == 'app_0105' %}
+              <li><a href="{{homeurl}}applications/view/supply-pin-contacts/application.html">this application</a></li>
+              {% elseif data['appType'] == 'app_0106' %}
+              <li><a href="{{homeurl}}applications/view/swap-vos-pin-credit/application.html">this application</a></li>
               {% else %} 
               <li><a href="{{homeurl}}applications/view/new/application.html">this application</a></li>
               {% endif %}

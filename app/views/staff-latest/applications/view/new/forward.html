@@ -18,7 +18,7 @@
 
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
-        <form class="form" action="{{homeurl}}applications/view/new/application">
+        <form class="form" method="post" action="{{homeurl}}applications/view/new/forward">
 
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="changedDept-hint">
@@ -50,7 +50,7 @@
           <div class="govuk-radios" data-module="govuk-radios">
             {% for departments in data['departments'] %}
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="{{ departments.department_id }}" name="departmentFilter" type="radio" value="{{ departments.department_id }}">
+              <input class="govuk-radios__input" id="{{ departments.department_id }}" name="departmentFilter" type="radio" value="{{ departments.department_id }}" {% if data['appDept'] == departments.department_name or data['appDept'] == departments.department_id %}checked{% endif %}>
               <label class="govuk-label govuk-radios__label" for="{{ departments.department_id }}">
                 {{ departments.department_name }}
               </label>

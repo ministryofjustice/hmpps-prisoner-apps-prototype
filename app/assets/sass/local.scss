@@ -62,3 +62,76 @@ body.launchpad footer > .govuk-width-container {
 .text-align-center {
   text-align: center;
 }
+
+body.moj-modal-open {
+  overflow: hidden;
+}
+
+.moj-modal {
+  align-items: center;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 20px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.moj-modal[hidden] {
+  display: none;
+}
+
+.moj-modal__overlay {
+  background: rgba(11, 12, 12, 0.75);
+  inset: 0;
+  position: absolute;
+}
+
+.moj-modal__dialog {
+  background: govuk-colour('white');
+  border: 6px solid govuk-colour('black');
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  max-width: 620px;
+  padding: 30px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.moj-modal__close {
+  background: govuk-colour('white');
+  border: 3px solid govuk-colour('black');
+  color: govuk-colour('black');
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+  height: 42px;
+  line-height: 1;
+  padding: 0;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 42px;
+}
+
+.moj-modal__close:focus {
+  @include govuk-focused-text;
+  box-shadow: 0 0 0 2px govuk-colour('black');
+  outline: 3px solid transparent;
+}
+
+.moj-modal__confirm-button,
+.moj-modal__confirm-button:link,
+.moj-modal__confirm-button:visited {
+  background-color: govuk-colour('green');
+  box-shadow: 0 2px 0 #002d18;
+}
+
+.moj-modal__confirm-button:hover {
+  background-color: #005a30;
+}
+
+.moj-modal__confirm-button:focus {
+  background-color: govuk-colour('green');
+  box-shadow: none;
+}
