@@ -66,13 +66,13 @@
             </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./history?url_id={{appID}}">
-              History
+            <a class="moj-sub-navigation__link" href="./messages?url_id={{appID}}">
+              Prisoner messages
             </a>
           </li>
           <li class="moj-sub-navigation__item">
-            <a class="moj-sub-navigation__link" href="./messages?url_id={{appID}}">
-              Prisoner messages
+            <a class="moj-sub-navigation__link" href="./history?url_id={{appID}}">
+              History
             </a>
           </li>
         </ul>
@@ -167,7 +167,7 @@
               </div>
               </dl>
             <div class="moj-button-action">
-              {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+              {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") or (app.decision == "Rejected") %}
               <a href="./reply?url_id={{appID}}" target="_blank" class="govuk-button govuk-!-margin-top-5">
                 Print reply
               </a>

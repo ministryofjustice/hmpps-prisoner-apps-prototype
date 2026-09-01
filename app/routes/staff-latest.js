@@ -382,7 +382,13 @@ router.post('/staff-latest/applications/view/app/comments', function (req, res) 
 router.post('/staff-latest/applications/view/app/action', function (req, res) {
   const appId = req.body.url_id
   const decision = req.body.actionRespond
-  const reason = req.body.decisionReason
+  const freeTextReason = req.body.decisionReason
+  const rejectedReason = req.body.rejectedReason
+  let reason = freeTextReason
+
+  if (decision === 'Rejected' && rejectedReason) {
+    reason = rejectedReason
+  }
 
   if (req.session.data.staffAppsDB && decision) {
     for (var i = 0; i < req.session.data.staffAppsDB.length; i++) {

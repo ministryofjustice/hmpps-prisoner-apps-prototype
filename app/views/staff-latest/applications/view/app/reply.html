@@ -30,6 +30,8 @@
             Your application has been
             {% if (data['actionRespond'] == 'Declined') or (app.decision == "Declined") %}
               declined.
+            {% elseif (data['actionRespond'] == 'Rejected') or (app.decision == "Rejected") %}
+              rejected.
             {% elseif (data['actionRespond'] == 'Approved') or (app.decision == "Approved") %}
               approved.
             {% endif %}
@@ -98,6 +100,8 @@
                 <dd class="govuk-summary-list__value">
                 {% if (data['actionRespond'] == 'Declined') or (app.decision == "Declined") %}
                   Declined
+                {% elseif (data['actionRespond'] == 'Rejected') or (app.decision == "Rejected") %}
+                  Rejected
                 {% elseif (data['actionRespond'] == 'Approved') or (app.decision == "Approved") %}
                   Approved
                 {% endif %}

@@ -54,7 +54,7 @@
           {% for app in data['staffAppsDB'] %}
           {% if app.app_id == appID  %}
 
-          {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+          {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") or (app.decision == "Rejected") %}
 
           <div id="response-approved" class="response-toggle form">
             <dl class="govuk-summary-list">
@@ -100,7 +100,7 @@
               </div>
             </dl>
             <div class="moj-button-action">
-              {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") %}
+              {% if (data['actionRespond']) or (app.decision == "Approved") or (app.decision == "Declined") or (app.decision == "Rejected") %}
               <a href="./reply?url_id={{appID}}" target="_blank" class="govuk-button">
                 Print reply
               </a>
@@ -114,6 +114,54 @@
           <p class="govuk-body-l">You can not forward or change this application when it has been closed.</p>
 
           <form class="form" method="post" action="{{homeurl}}applications/view/app/action?url_id={{appID}}">              {% from "govuk/components/radios/macro.njk" import govukRadios %}
+              {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+
+              {% set decisionReasonHtml %}
+              {{ govukCharacterCount({
+                name: "decisionReason",
+                id: "decisionReason",
+                hint: {
+                  text: "This action and its reason will be seen by the prisoner."
+                },
+                maxlength: 1000,
+                threshold: 75,
+                label: {
+                  text: "Reason",
+                  classes: "govuk-label--s",
+                  isPageHeading: false
+                }
+              }) }}
+              {% endset %}
+
+              {% set rejectedReasonHtml %}
+              {{ govukRadios({
+                idPrefix: "rejectedReason",
+                name: "rejectedReason",
+                fieldset: {
+                  legend: {
+                    text: "Reason for rejection",
+                    classes: "govuk-fieldset__legend--s"
+                  }
+                },
+                items: [
+                  {
+                    value: "Prisoner used the wrong app",
+                    text: "Prisoner used the wrong app",
+                    checked: checked("rejectedReason", "Prisoner used the wrong app")
+                  },
+                  {
+                    value: "Prisoner has already sent this app",
+                    text: "Prisoner has already sent this app",
+                    checked: checked("rejectedReason", "Prisoner has already sent this app")
+                  },
+                  {
+                    value: "Prisoner sent an abusive app",
+                    text: "Prisoner sent an abusive app",
+                    checked: checked("rejectedReason", "Prisoner sent an abusive app")
+                  }
+                ]
+              }) }}
+              {% endset %}
 
               {{ govukRadios({
                 idPrefix: "actionRespond",
@@ -129,32 +177,31 @@
                   {
                     value: "Approved",
                     text: "Approved",
-                    checked: checked("actionRespond", "Approved")
+                    checked: checked("actionRespond", "Approved"),
+                    conditional: {
+                      html: decisionReasonHtml
+                    }
                   },
                   {
                     value: "Declined",
                     text: "Declined",
-                    checked: checked("actionRespond", "Declined")
+                    checked: checked("actionRespond", "Declined"),
+                    conditional: {
+                      html: decisionReasonHtml
+                    }
+                  },
+                  {
+                    value: "Rejected",
+                    text: "Rejected",
+                    checked: checked("actionRespond", "Rejected"),
+                    conditional: {
+                      html: rejectedReasonHtml
+                    },
+                    hint: {
+                      text: "Use this for wrong, duplicate and abusive apps"
+                    }
                   }
                 ]
-              }) }}
-
-
-              {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
-
-              {{ govukCharacterCount({
-                name: "decisionReason",
-                id: "decisionReason",
-                hint: {
-                  text: "This action and its reason will be seen by the prisoner."
-                },
-                maxlength: 1000,
-                threshold: 75,
-                label: {
-                  text: "Reason",
-                  classes: "govuk-label--s",
-                  isPageHeading: false
-                }
               }) }}
               
               <div class="govuk-form-group govuk-visually-hidden">

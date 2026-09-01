@@ -106,6 +106,7 @@ $(document).ready(function () {
         var closedSelected = $('#status-closed').is(':checked');
         var includeApproved = $('#status-approved').is(':checked');
         var includeDeclined = $('#status-declined').is(':checked');
+        var includeRejected = $('#status-rejected').is(':checked');
 
         // If none selected, show all
         if (!newSelected && !inProgressSelected && !closedSelected) {
@@ -125,10 +126,11 @@ $(document).ready(function () {
             }
 
             if (closedSelected && status === 'closed') {
-                if (!includeApproved && !includeDeclined) return true;
-                if (includeApproved && includeDeclined) return true;
+                if (!includeApproved && !includeDeclined && !includeRejected) return true;
+                if (includeApproved && includeDeclined && includeRejected) return true;
                 if (includeApproved && decision === 'approved') return true;
                 if (includeDeclined && decision === 'declined') return true;
+                if (includeRejected && decision === 'rejected') return true;
             }
 
             return false;
@@ -554,6 +556,7 @@ $(document).ready(function () {
             var subStatuses = [];
             if ($('#status-approved').is(':checked')) subStatuses.push('Approved');
             if ($('#status-declined').is(':checked')) subStatuses.push('Declined');
+            if ($('#status-rejected').is(':checked')) subStatuses.push('Rejected');
             if (subStatuses.length > 0) {
                 closedLabel += ' (' + subStatuses.join(', ') + ')';
             }
@@ -651,12 +654,12 @@ $(document).ready(function () {
                 $('#conditional-closed').addClass('govuk-checkboxes__conditional--hidden');
                 $('#conditional-closed').attr('aria-hidden', 'true');
                 // Uncheck the sub-checkboxes when closed is unchecked
-                $('#status-approved, #status-declined').prop('checked', false);
+                $('#status-approved, #status-declined, #status-rejected').prop('checked', false);
             }
         });
 
         // Closed sub-status checkboxes
-        $container.on('change', '#status-approved, #status-declined', function () {
+        $container.on('change', '#status-approved, #status-declined, #status-rejected', function () {
             // Don't refresh department and application type filters automatically
             // They will be refreshed when apply button is clicked
         });
@@ -763,7 +766,7 @@ $(document).ready(function () {
                 if (value === 'closed') {
                     $('#conditional-closed').addClass('govuk-checkboxes__conditional--hidden');
                     $('#conditional-closed').attr('aria-hidden', 'true');
-                    $('#status-approved, #status-declined').prop('checked', false);
+                    $('#status-approved, #status-declined, #status-rejected').prop('checked', false);
                 }
             } else if (type === 'checkbox') {
                 $container.find('input[value="' + value + '"]').prop('checked', false);
