@@ -13,3 +13,104 @@ body.dps.admin {
   }
 
 }
+
+.app-allowlist-alert {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.app-allowlist-alert--fade-out {
+  opacity: 0;
+}
+
+.app-allowlist-panel {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: govuk-spacing(4);
+  margin-bottom: govuk-spacing(6);
+  background-color: govuk-tint(govuk-colour("blue"), 85%);
+}
+
+.app-allowlist-panel__count {
+  margin-bottom: govuk-spacing(3);
+}
+
+.app-allowlist-panel__fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: govuk-spacing(4);
+}
+
+.app-allowlist-panel__field {
+  display: flex;
+  align-items: center;
+  gap: govuk-spacing(2);
+
+  .govuk-label {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+  .govuk-select {
+    margin-bottom: 0;
+  }
+}
+
+.app-allowlist-panel__button {
+  margin-bottom: 0;
+}
+
+.app-allowlist-row--selected {
+  background-color: govuk-tint(govuk-colour("yellow"), 85%);
+}
+
+.app-allowlist-table {
+  .app-allowlist-table__col--app-type {
+    width: 40%;
+  }
+
+  .app-allowlist-table__col--active {
+    width: 20%;
+  }
+
+  .app-allowlist-table__col--department {
+    width: 40%;
+  }
+}
+
+// Shrink the checkbox touch target to match its visible box so it doesn't
+// overflow the table cell (removes top whitespace and oversized hover ring)
+.govuk-table__header--checkbox,
+.govuk-table__cell--checkbox {
+  width: 40px;
+  padding-right: govuk-spacing(2);
+  white-space: nowrap;
+
+  .govuk-checkboxes__item {
+    margin-bottom: 0;
+  }
+
+  .govuk-checkboxes__input {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+  }
+
+  .govuk-checkboxes__label {
+    max-width: none;
+    padding: 0;
+
+    &::before {
+      top: 0;
+      left: 0;
+    }
+
+    &::after {
+      // Box top shifted from 10px to 0, so shift the check mark to match
+      top: 7px;
+      left: 6px;
+    }
+  }
+}

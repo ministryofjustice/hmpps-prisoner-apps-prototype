@@ -1,0 +1,192 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Manage settings" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+
+<div class="govuk-width-container">
+
+  <nav aria-label="breadcrumb">
+    <div class="govuk-breadcrumbs">
+      <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="{{homeurl}}applications/">Applications</a>
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <span class="govuk-caption-xl">Applications</span>
+  <h1 class="govuk-heading-xl">
+    {{pageName}}
+  </h1>
+</div>
+
+<div class="dps-content">
+  <div class="govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <nav class="moj-side-navigation" aria-label="Side navigation">
+          <p class="moj-side-navigation__title">App groups</p>
+          <ul class="moj-side-navigation__list">
+            {% for groupKey, group in data.appGroupsTypes %}
+            <li class="moj-side-navigation__item">
+              <a href="#{{ groupKey }}">{{ group.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="govuk-grid-column-three-quarters">
+        {% if allowlistSuccess %}
+        <div class="moj-alert moj-alert--success app-allowlist-alert" role="region" aria-label="success: Settings updated" id="allowlist-success-alert">
+          <div>
+            <svg class="moj-alert__icon" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" height="30" width="30">
+              <path d="M11.2869 24.6726L2.00415 15.3899L4.62189 12.7722L11.2869 19.4186L25.3781 5.32739L27.9958 7.96369L11.2869 24.6726Z" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="moj-alert__content">
+            Settings updated
+          </div>
+        </div>
+        {% endif %}
+
+        <form method="post" action="/staff-admin/applications/allowlisting" id="allowlist-form">
+        <div class="app-allowlist-panel" id="allowlist-panel" hidden>
+          <p class="govuk-body govuk-!-font-weight-bold app-allowlist-panel__count">
+            You have chosen <span id="allowlist-selected-count">0</span> apps to manage
+          </p>
+          <div class="app-allowlist-panel__fields">
+            <div class="app-allowlist-panel__field">
+              <label class="govuk-label" for="allowlist-active">Active</label>
+              <select class="govuk-select" id="allowlist-active" name="allowlist-active">
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="app-allowlist-panel__field">
+              <label class="govuk-label" for="allowlist-department">Department</label>
+              <select class="govuk-select" id="allowlist-department" name="allowlist-department">
+                <option value="">Select</option>
+                {% for department in data.departments %}
+                <option value="{{ department.department_name }}">{{ department.department_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="govuk-button app-allowlist-panel__button" data-module="govuk-button">
+              Save
+            </button>
+          </div>
+        </div>
+
+        {% set appAllowlist = data.appAllowlist or {} %}
+        {% for groupKey, group in data.appGroupsTypes %}
+        <h2 class="govuk-heading-m" id="{{ groupKey }}">{{ group.name }}</h2>
+        <table class="govuk-table app-allowlist-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header govuk-table__header--checkbox">
+                <div class="govuk-checkboxes govuk-checkboxes--small">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input select-all-checkbox" id="select-all-{{ groupKey }}" type="checkbox">
+                    <label class="govuk-label govuk-checkboxes__label" for="select-all-{{ groupKey }}">
+                      <span class="govuk-visually-hidden">Select all {{ group.name }} app types</span>
+                    </label>
+                  </div>
+                </div>
+              </th>
+              <th scope="col" class="govuk-table__header app-allowlist-table__col--app-type">App type</th>
+              <th scope="col" class="govuk-table__header app-allowlist-table__col--active">Active</th>
+              <th scope="col" class="govuk-table__header app-allowlist-table__col--department">Department</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            {% for app in group.apps %}
+            {% set override = appAllowlist[app.app_id] %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell govuk-table__cell--checkbox">
+                <div class="govuk-checkboxes govuk-checkboxes--small">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input row-checkbox" id="select-{{ app.app_id }}" name="selectedApps" value="{{ app.app_id }}" type="checkbox">
+                    <label class="govuk-label govuk-checkboxes__label" for="select-{{ app.app_id }}">
+                      <span class="govuk-visually-hidden">Select {{ app.app_type }}</span>
+                    </label>
+                  </div>
+                </div>
+              </td>
+              <td class="govuk-table__cell">{{ app.app_type }}</td>
+              <td class="govuk-table__cell">{{ override.active if override else 'No' }}</td>
+              <td class="govuk-table__cell">{{ override.department if override else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endfor %}
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  var allowlistPanel = document.getElementById('allowlist-panel')
+  var allowlistSelectedCount = document.getElementById('allowlist-selected-count')
+
+  function updateAllowlistRowHighlight (checkbox) {
+    var row = checkbox.closest('tr')
+    if (row) {
+      row.classList.toggle('app-allowlist-row--selected', checkbox.checked)
+    }
+  }
+
+  function updateAllowlistPanel () {
+    var checkedCount = document.querySelectorAll('.row-checkbox:checked').length
+    allowlistSelectedCount.textContent = checkedCount
+    allowlistPanel.hidden = checkedCount === 0
+  }
+
+  document.querySelectorAll('.row-checkbox').forEach(function (checkbox) {
+    checkbox.addEventListener('change', function () {
+      updateAllowlistRowHighlight(checkbox)
+      updateAllowlistPanel()
+    })
+  })
+
+  // Toggle all row checkboxes within a table when its header checkbox changes
+  document.querySelectorAll('.select-all-checkbox').forEach(function (selectAll) {
+    selectAll.addEventListener('change', function () {
+      var table = selectAll.closest('table')
+      table.querySelectorAll('.row-checkbox').forEach(function (checkbox) {
+        checkbox.checked = selectAll.checked
+        updateAllowlistRowHighlight(checkbox)
+      })
+      updateAllowlistPanel()
+    })
+  })
+
+  // Fade out and remove the success alert 5 seconds after the page loads
+  var allowlistSuccessAlert = document.getElementById('allowlist-success-alert')
+  if (allowlistSuccessAlert) {
+    setTimeout(function () {
+      allowlistSuccessAlert.classList.add('app-allowlist-alert--fade-out')
+      allowlistSuccessAlert.addEventListener('transitionend', function () {
+        allowlistSuccessAlert.remove()
+      })
+    }, 5000)
+  }
+</script>
+{% endblock %}
