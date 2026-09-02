@@ -6,8 +6,8 @@
 {% set homeurl="/staff-latest/" %}
 {% set selectedAppId = data['appType'] %}
 {% set selectedAppType = data['checkappType'] or 'Application details' %}
-{% set isClosedApproved = data['actionRespond'] == 'Approved' %}
-{% set isClosedDeclined = data['actionRespond'] == 'Declined' %}
+{% set isClosed = data['actionRespond'] == 'Approved' or data['actionRespond'] == 'Declined' %}
+{% set isInProgress = data['newAppStatus'] == 'In progress' %}
 
 {% block content %}
 
@@ -43,6 +43,25 @@
 
   <div class="govuk-grid-row govuk-width-container govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-full govuk-!-padding-right-9 govuk-!-padding-left-0">
+      {% if not isClosed %}
+      {% call govukInsetText({ classes: "govuk-!-margin-bottom-5" }) %}
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Action this application</h3>
+        <div class="govuk-button-group">
+          {% if not isInProgress %}
+          <a href="./mark-in-progress" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as in progress
+          </a>
+          {% endif %}
+          <a href="./forward" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Forward to another department
+          </a>
+          <a href="./action" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-2" data-module="govuk-button--secondary">
+            Mark as closed
+          </a>
+        </div>
+      {% endcall %}
+      {% endif %}
+
       <nav class="moj-sub-navigation" aria-label="Sub navigation">
         <ul class="moj-sub-navigation__list">
           <li class="moj-sub-navigation__item">
