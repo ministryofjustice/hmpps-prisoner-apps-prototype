@@ -99,6 +99,7 @@ require('./routes/prisoner-latest.js')(router);
 require('./routes/prisoner-mvp.js')(router);
 require('./routes/staff-latest.js')(router);
 require('./routes/staff-admin.js')(router);
+require('./routes/staff-view.js')(router);
 
 function addApplicationToSession(req, application) {
   if (!req.session.data.sessionApplications) {

@@ -1,0 +1,55 @@
+{% extends "layouts/dps.html" %}
+
+{% set pageName="Choose a user" %}
+{% set version="latest" %}
+{% set phasebanner="yes" %}
+{% set bodyClasses = 'dps staff-v1' %}
+{% set homeurl="/staff-latest/" %}
+
+{% block content %}
+<div class="govuk-width-container">
+  <nav aria-label="breadcrumb">
+    <div class="govuk-breadcrumbs">
+      <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="{{homeurl}}">Digital Prisons Services</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+          <a class="govuk-breadcrumbs__link" href="/sandbox/staff-view/select-user">Staff view</a>
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <span class="govuk-caption-xl">Staff view</span>
+  <h1 class="govuk-heading-xl">Choose a user</h1>
+
+  <form method="post" novalidate>
+    {% if errorMessage %}
+    <p class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> {{ errorMessage }}
+    </p>
+    {% endif %}
+
+    <div class="govuk-form-group{% if errorMessage %} govuk-form-group--error{% endif %}">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          Who are you viewing the applications page as?
+        </legend>
+        <div class="govuk-radios" data-module="govuk-radios">
+          {% for user in users %}
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="user-{{ loop.index }}" name="user" type="radio" value="{{ user.name }}">
+            <label class="govuk-label govuk-radios__label" for="user-{{ loop.index }}">
+              {{ user.name }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </fieldset>
+    </div>
+
+    <button type="submit" class="govuk-button" data-module="govuk-button">View</button>
+  </form>
+</div>
+{% endblock %}

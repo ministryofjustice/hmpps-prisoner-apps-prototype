@@ -64,6 +64,12 @@ $(document).ready(function () {
             allApplicationsData = [...sessionApplications, ...allApplicationsData];
         }
 
+        if (Array.isArray(window.allowedApplicationTypes)) {
+            allApplicationsData = allApplicationsData.filter(function (application) {
+                return window.allowedApplicationTypes.includes(application.app_type);
+            });
+        }
+
         console.log('Total applications:', allApplicationsData.length);
         console.log('Departments:', departmentsData.length);
         console.log('Application types:', applicationTypesData.length);
