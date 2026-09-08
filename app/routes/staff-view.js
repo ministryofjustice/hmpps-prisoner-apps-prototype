@@ -2,8 +2,8 @@ const staffViewUsers = require('../data/staff-view-users.json')
 const appGroupsTypes = require('../data/app_groups_types.json')
 
 module.exports = function (router) {
-  function getUser(userName) {
-    return staffViewUsers.find(user => user.name === userName)
+  function getUser(userId) {
+    return staffViewUsers.find(user => user.id === userId || user.name === userId)
   }
 
   function getAllowedApplicationTypes(user) {
@@ -35,7 +35,7 @@ module.exports = function (router) {
       })
     }
 
-    res.redirect('/sandbox/staff-view/?user=' + encodeURIComponent(selectedUser.name))
+    res.redirect('/sandbox/staff-view/?user=' + encodeURIComponent(selectedUser.id || selectedUser.name))
   })
 
   router.get('/sandbox/staff-view/', function (req, res) {

@@ -2,7 +2,7 @@
 
 {% set pageName="View all applications in your prison" %}
 {% if selectedUser %}
-  {% set pageName="View all applications in your prison as " ~ selectedUser.name %}
+  {% set pageName="View all applications in your prison as " ~ (selectedUser.display_name or selectedUser.name) %}
 {% endif %}
 {% set version="latest" %}
 {% set phasebanner="yes" %}

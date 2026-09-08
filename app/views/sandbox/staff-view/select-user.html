@@ -39,9 +39,9 @@
         <div class="govuk-radios" data-module="govuk-radios">
           {% for user in users %}
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="user-{{ loop.index }}" name="user" type="radio" value="{{ user.name }}">
+            <input class="govuk-radios__input" id="user-{{ loop.index }}" name="user" type="radio" value="{{ user.id or user.name }}">
             <label class="govuk-label govuk-radios__label" for="user-{{ loop.index }}">
-              {{ user.name }}
+              {{ user.display_name or user.name }}
             </label>
           </div>
           {% endfor %}
