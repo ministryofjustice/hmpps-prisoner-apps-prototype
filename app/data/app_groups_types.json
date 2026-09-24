@@ -80,7 +80,7 @@
         "app_type": "Money (general enquiry)"
       }
     ],
-    "description": "Balances, court fines, transfers and charitable gifts.",
+    "description": "Make court fines, transfers and charitable gifts.",
     "group_full": "Money - Balances, court fines, transfers and charitable gifts."
   },
   "group_04": {
@@ -108,92 +108,136 @@
     "group_full": "Gym - Join the gym or book a session or course."
   },
   "group_05": {
+    "name": "Healthcare",
+    "image": "healthcare.png",
+    "apps": [
+      {
+        "app_id": "app_0501",
+        "app_type": "Doctor appointment"
+      },
+      {
+        "app_id": "app_0502",
+        "app_type": "Dentist appointment"
+      },
+      {
+        "app_id": "app_0503",
+        "app_type": "Disability request"
+      },
+      {
+        "app_id": "app_0504",
+        "app_type": "Maternity and Mother and Baby Liaison Officer (PMBLO)"
+      },
+      {
+        "app_id": "app_0505",
+        "app_type": "Medications and prescriptions (pharmacy)"
+      },
+      {
+        "app_id": "app_0506",
+        "app_type": "Neurodivergent request"
+      },
+      {
+        "app_id": "app_0507",
+        "app_type": "Nurse appointment"
+      },
+      {
+        "app_id": "app_0508",
+        "app_type": "Optician appointment"
+      },
+      {
+        "app_id": "app_0509",
+        "app_type": "Referral to Mental Health Team (IMHT)"
+      },
+      {
+        "app_id": "app_0510",
+        "app_type": "Vaccination question"
+      },
+      {
+        "app_id": "app_0511",
+        "app_type": "Healthcare (general enquiry)"
+      }
+    ],
+    "description": "Book medical appointments, prescriptions, vaccinations and mental health referrals.",
+    "group_full": "Healthcare - Medical, wellbeing and healthcare support."
+  },
+  "group_06": {
     "name": "Incentives (IEP)",
     "image": "incentives-iep.png",
     "apps": [
       {
-        "app_id": "app_0501",
+        "app_id": "app_0601",
         "app_type": "Appeal an incentives decision"
       },
       {
-        "app_id": "app_0502",
+        "app_id": "app_0602",
         "app_type": "Apply for status increase"
       },
       {
-        "app_id": "app_0503",
+        "app_id": "app_0603",
         "app_type": "Incentives (IEP general enquiry)"
       }
     ],
     "description": "Ask about appeals and apply to increase your incentive status.",
     "group_full": "Incentives (IEP) - Ask about appeals and apply to increase your incentive status."
   },
-  "group_06": {
-    "name": "Jobs, courses, activities",
+  "group_07": {
+    "name": "Jobs, courses, education, activities",
     "image": "jobs-courses-activities.png",
     "apps": [
       {
-        "app_id": "app_0601",
+        "app_id": "app_0701",
         "app_type": "Apply for education course"
       },
       {
-        "app_id": "app_0602",
+        "app_id": "app_0702",
         "app_type": "Apply for prison job"
       },
       {
-        "app_id": "app_0603",
+        "app_id": "app_0703",
         "app_type": "Be a Samaritans' Listener"
       },
       {
-        "app_id": "app_0604",
+        "app_id": "app_0704",
         "app_type": "Be a Shannon Trust reading mentor"
       },
       {
-        "app_id": "app_0605",
+        "app_id": "app_0705",
         "app_type": "Contact activity hub staff"
       },
       {
-        "app_id": "app_0606",
+        "app_id": "app_0706",
         "app_type": "Contact education staff"
       },
       {
-        "app_id": "app_0607",
+        "app_id": "app_0707",
         "app_type": "Duke of Edinburgh Award"
       },
       {
-        "app_id": "app_0608",
+        "app_id": "app_0708",
         "app_type": "Wages"
       },
       {
-        "app_id": "app_0609",
+        "app_id": "app_0709",
         "app_type": "Jobs, courses, activities (general enquiry)"
       }
     ],
-    "description": "Prison jobs, education, wages, being a Listener and more.",
+    "description": "Get prison jobs, education, courses, wages, be a Listener and more.",
     "group_full": "Jobs, courses, activities - Prison jobs, education, wages, being a Listener and more."
   },
-  "group_07": {
-    "name": "Programmes",
+  "group_08": {
+    "name": "Programmes, interventions, psychology",
     "image": "programmes.png",
     "apps": [
       {
-        "app_id": "app_0701",
-        "app_type": "Programmes (general enquiry)"
-      }
-    ],
-    "description": "Courses to help with behaviour, violence reduction and anger management.",
-    "group_full": "Programmes - Courses to help with behaviour, violence reduction and anger management."
-  },
-  "group_08": {
-    "name": "Interventions",
-    "image": "interventions.png",
-    "apps": [
-      {
         "app_id": "app_0801",
-        "app_type": "Interventions (general enquiry)"
+        "app_type": "Programmes and interventions (general enquiry)"
+      },
+      {
+        "app_id": "app_0802",
+        "app_type": "Psychology (general enquiry)"
       }
     ],
-    "description": "Therapy, support meetings and help with substance misuse and gambling.",
-    "group_full": "Interventions - Therapy, support meetings and help with substance misuse and gambling."
+    "description": "Support with violence reduction, anger management, therapy and meetings, substance misuse and gambling.",
+    "group_full": "Programmes - Courses to help with behaviour, violence reduction and anger management."
   },
   "group_09": {
     "name": "Library",
@@ -432,7 +476,7 @@
         "app_type": "Safety (general enquiry)"
       }
     ],
-    "description": "Help with debt, bullying and distraction packs.",
+    "description": "Help with gangs, debt, bullying and distraction packs.",
     "group_full": "Safety - Help with debt, bullying and distraction packs."
   },
   "group_15": {
@@ -488,7 +532,7 @@
     "group_full": "Orders - Catalogue orders and returns, emergency vapes and newspapers."
   },
   "group_17": {
-    "name": "Visits and contact",
+    "name": "Visits, contact and family",
     "image": "visits-contact.png",
     "apps": [
       {
@@ -548,7 +592,7 @@
     "group_full": "Legal and immigration - Help with legal clinics, police contact and immigration enforcement questions."
   },
   "group_19": {
-    "name": "Diversity and Inclusion",
+    "name": "Diversity and inclusion",
     "image": "diversity-inclusion.png",
     "apps": [
       {
@@ -588,11 +632,11 @@
         "app_type": "Diversity and inclusion (general enquiry)"
       }
     ],
-    "description": "Mentoring, disability, LGBTQ+, veteran and race support and report an incident.",
+    "description": "Ask about mentoring, disability, LGBTQ+, veteran and race support, and report an incident.",
     "group_full": "Diversity and Inclusion - Mentoring, disability, LGBTQ+, veteran and race support and report an incident."
   },
   "group_20": {
-    "name": "Laptops",
+    "name": "Laptop help",
     "image": "laptops.png",
     "apps": [
       {
@@ -622,5 +666,57 @@
     ],
     "description": "Support with laptops, breakages, returns, passwords and Content Hub.",
     "group_full": "Laptops - Support with laptops, breakages, returns, passwords and Content Hub."
+  },
+  "group_21": {
+    "name": "[Name of prison] Life",
+    "image": "prison-life.png",
+    "apps": [
+      {
+        "app_id": "app_2101",
+        "app_type": "[Name of prison] Life (general enquiry)"
+      }
+    ],
+    "description": "Apply here for things going on in your prison, as seen on the Content Hub.",
+    "group_full": "[Name of prison] Life - Support and guidance about prison life and daily living."
+  },
+  "group_22": {
+    "name": "Independent Monitoring Board (IMB)",
+    "image": "imb.png",
+    "apps": [
+      {
+        "app_id": "app_2201",
+        "app_type": "Independent Monitoring Board IMB (general enquiry)"
+      }
+    ],
+    "description": "Voice your concerns about things happening around you.",
+    "group_full": "IMB - Support and questions about the Independent Monitoring Board."
+  },
+  "group_23": {
+    "name": "Kitchens",
+    "image": "kitchens.png",
+    "apps": [
+      {
+        "app_id": "app_2301",
+        "app_type": "Request specific diet"
+      },
+      {
+        "app_id": "app_2302",
+        "app_type": "Kitchens (general enquiry)"
+      }
+    ],
+    "description": "Ask about specific diets and general kitchen requests.",
+    "group_full": "Kitchens - Questions and support about kitchen and catering services."
+  },
+  "group_24": {
+    "name": "Governors",
+    "image": "governors.png",
+    "apps": [
+      {
+        "app_id": "app_2401",
+        "app_type": "Governors (general enquiry)"
+      }
+    ],
+    "description": "Request a visit with a governor or any other governor enquiries.",
+    "group_full": "Governors - Questions and requests relating to the governor's office."
   }
 }
