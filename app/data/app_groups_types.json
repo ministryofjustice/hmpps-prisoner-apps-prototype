@@ -401,7 +401,7 @@
   },
   "group_13": {
     "name": "Residential",
-    "image": "residential.png",
+    "image": "residential-v2.png",
     "apps": [
       {
         "app_id": "app_1301",
