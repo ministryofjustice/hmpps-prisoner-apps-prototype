@@ -161,7 +161,7 @@
   },
   "group_06": {
     "name": "Incentives (IEP)",
-    "image": "incentives-iep.png",
+    "image": "incentives-v2.png",
     "apps": [
       {
         "app_id": "app_0601",
@@ -261,7 +261,7 @@
   },
   "group_10": {
     "name": "Offender Management Unit (OMU)",
-    "image": "offender-management-unit.png",
+    "image": "omu-v2.png",
     "apps": [
       {
         "app_id": "app_1001",
@@ -317,7 +317,7 @@
   },
   "group_11": {
     "name": "Property",
-    "image": "property.png",
+    "image": "property-v2.png",
     "apps": [
       {
         "app_id": "app_1101",
@@ -437,7 +437,7 @@
   },
   "group_14": {
     "name": "Safety",
-    "image": "safety.png",
+    "image": "safety-office-v2.png",
     "apps": [
       {
         "app_id": "app_1401",
@@ -481,7 +481,7 @@
   },
   "group_15": {
     "name": "Security",
-    "image": "security.png",
+    "image": "security-v2.png",
     "apps": [
       {
         "app_id": "app_1501",
