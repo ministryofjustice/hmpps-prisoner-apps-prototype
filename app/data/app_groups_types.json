@@ -261,7 +261,7 @@
   },
   "group_10": {
     "name": "Offender Management Unit (OMU)",
-    "image": "omu-v2.png",
+    "image": "offender-management-unit-v2.png",
     "apps": [
       {
         "app_id": "app_1001",
